@@ -1,29 +1,56 @@
 # Sprint Challenge Instructions Template
 
-> Text like this that uses the `>` character (quoted block in Markdown) is commentary and instructions for you (the curriculum developer) to replace. They should not be left in your final result. Conversely, text not in a quote block is either a example for you to modify, or text that will usually be left as-is for most if not all sprint challenges.
-
 **Read these instructions carefully. Understand exactly what is expected _before_ starting this Sprint Challenge.**
 
-This challenge allows you to practice the concepts and techniques learned over the past sprint and apply them in a concrete project. This sprint explored **`<Sprint Subject Here>`**. During this sprint, you studied **`<High-level sprint topics here>`**. In your challenge this week, you will demonstrate your mastery of these skills by creating **`<describe project here>`**.
+This challenge allows you to practice the concepts and techniques learned over the past sprint and apply them in a concrete project. This sprint explored **how to build web services based on the REST (REpresentational State Transfer) architectural style**. During this sprint, you studied **Node.js and Express, server side routing, how to write Express middleware and how to deploy an API to Heroku**. In your challenge this week, you will demonstrate your mastery of these skills by **designing and creating a web API to manage the following resources: `Projects` and `Actions`**.
 
 This is an individual assessment. All work must be your own. Your challenge score is a measure of your ability to work independently using the material covered through this sprint. You need to demonstrate proficiency in the concepts and objectives introduced and practiced in preceding days.
 
-You are not allowed to collaborate during the sprint challenge. However, you are encouraged to follow the twenty-minute rule and seek support from your TL if you need direction. 
+You are not allowed to collaborate during the sprint challenge. However, you are encouraged to follow the twenty-minute rule and seek support from your TL if you need direction.
 
 _You have **three hours** to complete this challenge. Plan your time accordingly._
 
-
 ## Introduction
 
-> In this section, introduce the challenge,  with a high level explanation of the components of the project.
-> 
-> This section should include examples in the form of screenshots, screen recording GIFs, and/or links to an example.
+In meeting the minimum viable product (MVP) specifications listed below, your project should provide an API that has Create, Read, Update and Delete (CRUD) functionality for both `projects` and `actions`.
 
-In meeting the minimum viable product (MVP) specifications listed below, your project should look like the solution examples below:
+### Database Schemas
 
- [Sample Screenshot](https://tk-assets.lambdaschool.com/39a49225-8ac9-43da-aa90-514fd60ae99a_sprint-challenge-ui-home-example.png)
+The description of the structure and extra information about each _resource_ stored in the included database (`./data/lambda.db3`) is listed below.
 
-[Sample mobile example](https://tk-assets.lambdaschool.com/fbe7ebfc-a4c2-4a32-8929-bbd41fbc4f67_ScreenShot2020-03-25at11.03.41AM.png)
+#### Projects
+
+| Field       | Data Type | Metadata                                                                    |
+| ----------- | --------- | --------------------------------------------------------------------------- |
+| id          | number    | no need to provide it when creating projects, the database will generate it |
+| name        | string    | required.                                                                   |
+| description | string    | required.                                                                   |
+| completed   | boolean   | used to indicate if the project has been completed, not required            |
+
+#### Actions
+
+| Field       | Data Type | Metadata                                                                                         |
+| ----------- | --------- | ------------------------------------------------------------------------------------------------ |
+| id          | number    | no need to provide it when creating posts, the database will automatically generate it.          |
+| project_id  | number    | required, must be the id of an existing project.                                                 |
+| description | string    | up to 128 characters long, required.                                                             |
+| notes       | string    | no size limit, required. Used to record additional notes or requirements to complete the action. |
+| completed   | boolean   | used to indicate if the action has been completed, not required                                  |
+
+### Database Persistence Helpers
+
+The `/data/helpers` folder includes files you can use to manage the persistence of _project_ and _action_ data. These files are `projectModel.js` and `actionModel.js`. Both files publish the following api, which you can use to store, modify and retrieve each resource:
+
+**All these helper methods return a promise. Remember to use .then().catch() or async/await.**
+
+- `get()`: resolves to an array of all the resources contained in the database. If you pass an `id` to this method it will return the resource with that id if one is found.
+- `insert()`: calling insert passing it a resource object will add it to the database and return the newly created resource.
+- `update()`: accepts two arguments, the first is the `id` of the resource to update, and the second is an object with the `changes` to apply. It returns the updated resource. If a resource with the provided `id` is not found, the method returns `null`.
+- `remove()`: the remove method accepts an `id` as it's first parameter and, upon successfully deleting the resource from the database, returns the number of records deleted.
+
+The `projectModel.js` helper includes an extra method called `getProjectActions()` that takes a _project id_ as it's only argument and returns a list of all the _actions_ for the _project_.
+
+We have provided test data for all the resources.
 
 ### Commits
 
@@ -35,17 +62,13 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
-1. Describe semantic HTML 
+1. The core features of Node.js and Express and why they are useful.
+1. Understand and explain the use of Middleware?
+1. The basic principles of the REST architectural style.
+1. Understand and explain the use of Express Routers.
+1. Describe tooling used to manually test the correctness of an API.
 
-2. Understand when and how to use CSS reset
-
-3. Understand the use of the command line interface (CLI)
-
-4. Explain git commands and why git is valuable to a team of developers.
-
-5. Define mobile-first design in your own words, and the difference in layout types.
-
-You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade. 
+You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade.
 
 ## Instructions
 
@@ -62,55 +85,37 @@ You are expected to be able to answer questions in these areas. Your responses c
 
 ### Task 2: Project Requirements
 
-> This section should include requirements for the sprint challenge itself. The idea is to be explicit with the student about the things their project solution needs to implement, without telling them **how** to do any of these things. Be sure all learning objectives in your sprint challenge list are covered. 
+> This section should include requirements for the sprint challenge itself. The idea is to be explicit with the student about the things their project solution needs to implement, without telling them **how** to do any of these things. Be sure all learning objectives in your sprint challenge list are covered.
 
 Your finished project must include all of the following requirements:
 
-> (The following is an example):
+#### NPM Scripts
 
-#### Home Page
+- [ ] An _npm script_ named _"server"_ that uses `nodemon`to run the API server.
+- [ ] Use _nodemon_ as a development time dependency only that is not deployed to production.
+- [ ] An _npm script_ named _"start"_ that uses `node` to run the API server.
 
-[Review the provided design file for the home page](design/home.png).  Notice the navigation and header images are missing.
+#### Build an API
 
-* [ ] Uses Semantic HTML and CSS to create the missing navigation and header
-* [ ] The `About` navigation item must be linked to the [about.html](about.html) page
-* [ ] Your design must be responsive such that it is accessible on mobile(500px) and tablet(800 px) and matches the [mobile](design/mobile.png) wireframe. This functionality must be implemented using flexbox.
-* [ ] Uses all box model properties so that margins, borders, and padding match the wireframes
-* [ ] You must add responsive breakpoints to your code by using media queries
-* [ ] All 10 boxes on the home page are correctly styled with background colors using the guide below:
-
-
-* [ ] box1: `teal`
-* [ ] box2: `gold`
-* [ ] box3: `cadetblue`
-* [ ] box4: `coral`
-* [ ] box5: `crimson`
-* [ ] box6: `forestgreen`
-* [ ] box7: `darkorchid`
-* [ ] box8: `hotpink`
-* [ ] box9: `indigo`
-* [ ] box10: `dodgerblue`
+- [ ] Design and build endpoints for performing CRUD operations on _projects_ and _actions_. When adding an action, make sure the `project_id` provided belongs to an existing `project`. If you try to add an action with an `id` of 3 and there is no project with that `id` the database will return an error.
+- [ ] Add an endpoint for retrieving the list of actions for a project.
+- [ ] Use an HTTP client like `postman` or `insomnia` to test the API's endpoints.
+- [ ] Use Express Routers to organize the API's code.
 
 In your solution, it is essential that you follow best practices and produce clean and professional results. You will be scored on your adherence to proper code style and good organization. Schedule time to review, refine, and assess your work and perform basic professional polishing including spell-checking and grammar-checking on your work. It is better to submit a challenge that meets MVP than one that attempts too much and does not.
 
-### Task 3: Stretch Goals 
-
-> Include stretch goals in this section. These are additional things the student can do go beyond basic proficiency, and push their scores on the challenge up to a 3. Be clear that these are *not* required. Completing all of the tasks in the required section must be sufficient to  demonstrate proficiency of all sprint objectives, and earn a score of '2. 
-
-> Example stretch goals below:
+### Task 3: Stretch Goals
 
 After finishing your required elements, you can push your work further. These goals may or may not be things you have learned in this module but they build on the material you just studied. Time allowing, stretch your limits and see if you can deliver on the following optional goals:
 
-* [ ] Build a page of your choosing from the navigation items.  Come up with content and images that fit the theme.  
-* [ ] Introduce CSS animations to your site.
-* [ ] Build a contact page and create a form with several inputs of your choosing
+- [ ] Deploy the API to Heroku.
+- [ ] Configure the API to support environment variables.
+- [ ] Use middleware for validation of incoming data.
 
 ## Submission format
 
 Follow these steps for completing your project.
 
-- [ ] Submit a Pull-Request to merge <firstName-lastName> Branch into master (student's  Repo). **Please don't merge your own pull request**
+- [ ] Submit a Pull-Request to merge <firstName-lastName> Branch into master (student's Repo). **Please don't merge your own pull request**
 - [ ] Add your team lead as a reviewer on the pull-request
 - [ ] Your team lead will count the project as complete after receiving your pull-request
-
-
