@@ -1,6 +1,7 @@
 //TODO 5. Set up a router for the /api/projects route and export it (connect to the server)
 //TODO 6. Connect the projectsRouter to the projectModel 
 //TODO 7. Create validatePost middleware for obvious reasons
+//TODO 8. Set up the CRUD end points to view, add, edit or delete projects, and see the actions for a given project 
 const express = require("express"); 
 const projects = require("../data/helpers/projectModel"); 
 
@@ -16,6 +17,20 @@ router.get("/", (req, res) => {
         .then(projects => {
             console.log("success"); 
             res.status(200).json(projects);
+        })
+        .catch(err => {
+            res.status(500).json({ message: "Error retrieving resource" }); 
+        })
+});
+
+//! GET project by id !// 
+
+router.get("/:id", (req, res) => {
+    const id = req.params.id; 
+    projects.get(id)
+        .then(project => {
+            console.log("success"); 
+            res.status(200).json(project);
         })
         .catch(err => {
             res.status(500).json({ message: "Error retrieving resource" }); 
@@ -53,11 +68,9 @@ router.put("/:id", validatePost, (req, res) => {
 //! POST add a new project !// 
 //* passing in validatePost middleware to check that required fields are given *//
 
-router.post("/", validatePost, (req, res) => {
-    const name = req.body.name; 
-    const description = req.body.description; 
+router.post("/", validatePost, (req, res) => { 
     //? if I already define these in the middlware, do I have to do it here? Or can I grab them differently?
-    projects.insert({name, description})
+    projects.insert(req.body)
         .then(project => {
             res.status(201).json(project); 
         })
