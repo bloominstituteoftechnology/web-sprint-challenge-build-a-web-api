@@ -69,7 +69,8 @@ router.put("/:id", validatePost, (req, res) => {
 //* passing in validatePost middleware to check that required fields are given *//
 
 router.post("/", validatePost, (req, res) => { 
-    //? if I already define these in the middlware, do I have to do it here? Or can I grab them differently?
+    //? Q:if I already define these in the middlware, do I have to do it here? Or can I grab them differently?
+    //* A:I was trying to complete this in a 'React-y' way, instead only the req.body needs to be passed, no new object 
     projects.insert(req.body)
         .then(project => {
             res.status(201).json(project); 
