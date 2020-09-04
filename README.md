@@ -61,10 +61,30 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+
+Node allows us to write JavaScript on the server, which means context switching is minimized, and code is more easily shared between the client and server. Node is also single-threaded and asynchronous - removing complexity and taking full advantage of the processor it's running on. There are disadvantages associated with these advantages - every rose has its thorn. 
+The features of Express, like routing, middleware, and views allows us to further simplify common server functionality and keep our servers modular and easier to reason about. 
+
 1. Understand and explain the use of Middleware?
+
+Pieces of middlware are functions that have access to the request and response object given to us by Express, and the next() function. Next gives us access to the app's request-reponse cycle, which means developers can run things like validations in the middle. 
+
 1. The basic principles of the REST architectural style.
+
+REST is a set of principles - recommendations that we can follow, not standards that we must. To design a RESTful web api we keep a few principles in mind: 
+1. everything is a resource 
+2. a resource can be accessed through a unique URI
+3. resources can have multiple respresentations 
+4. communication is stateless and happens over protocol 
+5. resources are managed through HTTP methods 
+
 1. Understand and explain the use of Express Routers.
+
+Express routers allow us to modularize an app into multiple bite-sized pieces that are easier to read and to reason about. They separate the logic for one resources route and management from another. 
+
 1. Describe tooling used to manually test the correctness of an API.
+
+I believe this refers to using tools like Postman to test end points and HTTP method functionality. These tools allow us to manually use the end points we're designing in a development theater. 
 
 You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade.
 
