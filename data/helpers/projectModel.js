@@ -51,7 +51,9 @@ function update(id, changes) {
 function remove(id) {
   return db("projects")
     .where("id", id)
-    .del();
+    .del().then( _ => {
+      return get();
+    });
 }
 
 function getProjectActions(projectId) {
