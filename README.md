@@ -67,7 +67,7 @@ A web server can be seen as a function that takes in a request and outputs a res
 1. The basic principles of the REST architectural style.
 REST is an architectural style for network based software that requires stateless, cacheable, client-server communication via a uniform interface between components.
 1. Understand and explain the use of Express Routers.
- the application “listens” for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function.
+the application “listens” for requests that match the specified route(s) and method(s), and when it detects a match, it calls the specified callback function.
 1. Describe tooling used to manually test the correctness of an API.
 Postman is used to test API's
 You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade.
