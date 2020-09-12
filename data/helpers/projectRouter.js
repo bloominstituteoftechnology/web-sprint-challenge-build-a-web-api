@@ -2,7 +2,6 @@ const express = require("express");
 const projects = require("./projectModel.js");
 const router = express.Router();
 
-//get
 router.get("/:id", validateId, (req, res) => {
     projects.get(req.params.id)
         .then(project => {
@@ -14,7 +13,6 @@ router.get("/:id", validateId, (req, res) => {
         })
 })
 
-//post
 router.post("/", validateProject, (req, res) => {
     const project = req.params.id;
 
@@ -27,9 +25,28 @@ router.post("/", validateProject, (req, res) => {
         })
 })
 
-//delete
+router.delete("/:id", validateId, (req, res) => {
+    projects.remove(req.params.id)
+    .then(project => {
+        res.status(200).json(project);
+    })
+    .catch(error => {
+        console.log(error);
+    })
+})
 
-//put
+router.put("/:id", validateId, (req, res) => {
+    const id = req.params;
+    const data = req.body;
+
+    projects.update(id, data)
+        .then(project => {
+            res.status(200).json(project);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+})
 
 // custom middleware
 function validateId(req, res, next) {
@@ -45,7 +62,7 @@ function validateId(req, res, next) {
 }
 
 function validateProject(req, res, next) {
-    projects.get()
+    projects.get(req.params.id)
     .then(project => {
         if (req.name || req.description) {
             next();
