@@ -5,18 +5,16 @@ const router = express.Router();
 router.get("/:id", validateId, (req, res) => {
     projects.get(req.params.id)
         .then(project => {
-            res.status(200).json(project)
+            res.status(200).json({project})
         })
         .catch(error => {
             console.log(error);
-            res.status(404).json({ errorMessage: "Project ID not found" })
+            res.status(404).json({ errorMessage: "Project ID not found." })
         })
 })
 
 router.post("/", validateProject, (req, res) => {
-    const project = req.params.id;
-
-    projects.insert(project)
+    projects.insert(req.params.id)
         .then(project => {
             res.status(201).json(project);
         })
@@ -74,8 +72,6 @@ function validateProject(req, res, next) {
         console.log(error);
         res.status(500).json({ message: "Error retrieving the project" });
     })
-
-
 }
 
 module.exports = router;
