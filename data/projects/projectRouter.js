@@ -1,16 +1,15 @@
-const { json } = require("express");
 const express = require("express");
-const projectModel = require('./data/projectModel');
+const projectModel = require('../helpers/projectModel');
 
 const router = express.Router();
 
 //Create 
 router.post("/", (req, res) => {
-    const showInfo = req.body // where the insertion goes in -  as raw json
+    const projectInfo = req.body // where the insertion goes in -  as raw json
     projectModel
-        .insert(showInfo)
+        .insert(projectInfo)
         .then(() => {
-            res.status(201).json({ message: "your show was created!" })
+            res.status(201).json({ message: "your project was created!" })
         })
 })
 
@@ -23,7 +22,7 @@ router.get('/', (req, res) => {
         })
         .catch(error => {
             console.log(error);
-            res.status(500).json({ message: "Error retrieving shows" })
+            res.status(500).json({ message: "Error retrieving projects" })
         })
 })
 
@@ -31,19 +30,19 @@ router.get('/', (req, res) => {
 
 //Update 
 router.put("/:id", (req, res) => {
-    const showInfo = req.body;
+    const projectInfo = req.body;
     const { id } = req.params
     projectModel
-        .update(id, showInfo)
+        .update(id, projectInfo)
         .then(e => {
             if (e) {
-                res.status(200).json({ message: "The show has been updated!" })
+                res.status(200).json({ message: "The project has been updated!" })
             } else {
                 res.status(404).json({ message: "There is nothing to update" })
             }
         })
         .catch(error => {
-            res.status(500).json(error, "there was an error updating the show")
+            res.status(500).json(error, "there was an error updating the project")
         })
 
 })
@@ -54,17 +53,29 @@ router.delete("/:id", (req, res) => {
         .remove(req.params.id)
         .then(e => {
             if (e > 0) {
-                res.status(200).json({ message: "The show has been deleted" })
+                res.status(200).json({ message: "The project has been deleted" })
             } else {
-                res.status(404).json({ message: "Show cannot be found" })
+                res.status(404).json({ message: "project cannot be found" })
             }
         })
         .catch(error => {
             console.log(error);
-            res.status(500).json({ message: "Error deleting the show" })
+            res.status(500).json({ message: "Error deleting the project" })
         })
 })
 
+//get Project Actions 
+router.get("/:id/actions", (req, res) => {
+    projectModel
+        .getProjectActions(req.params.id)
+        .then(e => {
+            res.status(200).json(e)
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({ message: "Error retrieving actions for this show" })
+        })
+})
 
 
 

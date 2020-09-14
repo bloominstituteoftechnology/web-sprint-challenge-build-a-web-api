@@ -8,8 +8,8 @@ const { tokens } = require('morgan');
 //Routing
 //Middleware support
 //A simple API
-const showsRouter = require('./data/showsRouter')
-const showsRouter = require('./data/characters/characterRouter')
+const projectRouter = require('./data/projects/projectRouter')
+const actionsRouter = require('./data/actions/actionsRouter')
 
 const helmet = require('helmet');
 
@@ -30,7 +30,7 @@ morgan(function (tokens, req, res) {
         tokens.url(req, res),
         token.status(req, res),
         tokens.res(req, res, "content-length"), '_',
-        tokens['repsponse-time'](req, res), 'ms'
+        tokens['response-time'](req, res), 'ms'
     ].join('')
 })
 
@@ -49,7 +49,7 @@ server.get("/", (req, res) => {
     res.status(200).json({ message: "The server is online!" });
 });
 
-server.use("/api/shows", showsRouter);
-server.use("/api/character", characterRouter);
+server.use("/api/projects", projectRouter);
+server.use("/api/actions", actionsRouter);
 
 module.exports = server;

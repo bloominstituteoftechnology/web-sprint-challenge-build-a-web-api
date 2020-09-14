@@ -1,16 +1,15 @@
-const { json } = require("express");
 const express = require("express");
-const actionModel = require('../data/helpers/actionModel');
+const actionModel = require('../helpers/actionModel');
 
 const router = express.Router();
 
 //Create 
 router.post("/", (req, res) => {
-    const showInfo = req.body // where the insertion goes in -  as raw json
+    const actionInfo = req.body // where the insertion goes in -  as raw json
     actionModel
-        .insert(showInfo)
+        .insert(actionInfo)
         .then(() => {
-            res.status(201).json({ message: "your show was created!" })
+            res.status(201).json({ message: "your action was created!" })
         })
 })
 
@@ -23,7 +22,7 @@ router.get('/', (req, res) => {
         })
         .catch(error => {
             console.log(error);
-            res.status(500).json({ message: "Error retrieving shows" })
+            res.status(500).json({ message: "Error retrieving actions" })
         })
 })
 
@@ -31,19 +30,19 @@ router.get('/', (req, res) => {
 
 //Update 
 router.put("/:id", (req, res) => {
-    const showInfo = req.body;
+    const actionInfo = req.body;
     const { id } = req.params
     actionModel
-        .update(id, showInfo)
+        .update(id, actionInfo)
         .then(e => {
             if (e) {
-                res.status(200).json({ message: "The show has been updated!" })
+                res.status(200).json({ message: "The action has been updated!" })
             } else {
                 res.status(404).json({ message: "There is nothing to update" })
             }
         })
         .catch(error => {
-            res.status(500).json(error, "there was an error updating the show")
+            res.status(500).json(error, "there was an error updating the action")
         })
 
 })
@@ -54,14 +53,14 @@ router.delete("/:id", (req, res) => {
         .remove(req.params.id)
         .then(e => {
             if (e > 0) {
-                res.status(200).json({ message: "The show has been deleted" })
+                res.status(200).json({ message: "The action has been deleted" })
             } else {
-                res.status(404).json({ message: "Show cannot be found" })
+                res.status(404).json({ message: "action cannot be found" })
             }
         })
         .catch(error => {
             console.log(error);
-            res.status(500).json({ message: "Error deleting the show" })
+            res.status(500).json({ message: "Error deleting the action" })
         })
 })
 
