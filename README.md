@@ -61,10 +61,39 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
-1. Understand and explain the use of Middleware?
-1. The basic principles of the REST architectural style.
-1. Understand and explain the use of Express Routers.
-1. Describe tooling used to manually test the correctness of an API.
+
+Node.js allows the programmer to execute JavaScript code outside of a web browser, and Express is the framework Node.js uses to build web applications and APIs.
+
+Node.js is/has
+    * Asynchronous and event-driven - the API call doesn't wait for results and doesn't block other calls, instead moving directly to the next API call
+    * Single-threaded & Highly scalable - capable of handling large numbers of simultaneous connections
+    * Cross-platform - self explanatory 
+    * Access to NPM packages - open source projects to help developers save time
+    * Uses JavaScript - meaning both frontend and backend developers use the same language
+
+Express has
+    * Middleware - functions that get the request and response, perform operations on them, and either move into the next middleware, or return a response back to the client
+    * Routing - A way to select which request handler function is executed based on the URL and which HTTP method was used
+    * Convenience helpers - provide functionality out of the box with extension methods added to the request and response objects
+
+2. Understand and explain the use of Middleware?
+
+Everything in Express is middleware. It provides capabilities outside of what's offered by the operating system - data management, application services, messaging, authentication, and API management, etc. Middleware is used to build applications more efficiently. 
+
+3. The basic principles of the REST architectural style.
+
+    1. Addressable Resources - Every "thing" has an ID, and every object has its own specific URI
+    2. Uniform Interface - Following methods provided by protocol: GET, POST, PUT, and DELETE
+    3. Representation Oriented - Interact with services using representations of that service. Objects referenced by one URI have different formats available
+    5. Communicate Statelessly - Stateless applications are easier to scale
+
+4. Understand and explain the use of Express Routers.
+
+Routers are used to select which request handler function is executed based on the URL and which HTTP method was used. They are useful in helping to break up applications into smaller parts. In addition, each router can have its own middleware and routing.
+
+5. Describe tooling used to manually test the correctness of an API.
+
+Clients loaded with features that make testing APIs very easy. For example, you can't test DELETE requests in Google Chrome or other web browsers. They also allow for full control while making API requests.
 
 You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade.
 

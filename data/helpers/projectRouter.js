@@ -2,19 +2,19 @@ const express = require("express");
 const projects = require("./projectModel.js");
 const router = express.Router();
 
-router.get("/:id", validateId, (req, res) => {
+router.get("/", (req, res) => {
     projects.get(req.params.id)
         .then(project => {
-            res.status(200).json({project})
+            res.status(200).json(project)
         })
         .catch(error => {
             console.log(error);
-            res.status(404).json({ errorMessage: "Project ID not found." })
+            res.status(500).json({ errorMessage: "Error fetching project." })
         })
 })
 
 router.post("/", validateProject, (req, res) => {
-    projects.insert(req.params.id)
+    projects.insert(req.body)
         .then(project => {
             res.status(201).json(project);
         })
@@ -26,10 +26,15 @@ router.post("/", validateProject, (req, res) => {
 router.delete("/:id", validateId, (req, res) => {
     projects.remove(req.params.id)
     .then(project => {
-        res.status(200).json(project);
+        if (project > 0 ) {
+            res.status(200).json(project);
+        } else{
+            res.status(400).json({ message: "Project not found." })
+        }
     })
     .catch(error => {
         console.log(error);
+        res.status(500).json({ errorMessage: "Error deleting project." })
     })
 })
 
@@ -48,7 +53,7 @@ router.put("/:id", validateId, (req, res) => {
 
 // custom middleware
 function validateId(req, res, next) {
-    projects.get(req.params.id)
+    projects.getProjectActions(req.params.id)
     .then(project => {
         if(project) {
             req.project = project;

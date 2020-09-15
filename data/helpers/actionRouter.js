@@ -20,7 +20,7 @@ router.post("/", (req, res) => {
         })
         .catch(error => {
             console.log(error);
-            res.status(500).json({ errormMessage: "Error posting Action." });
+            res.status(500).json({ errorMessage: "Error posting Action." });
         })
 })
 
