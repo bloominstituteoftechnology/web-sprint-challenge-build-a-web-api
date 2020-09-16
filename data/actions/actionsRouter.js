@@ -3,7 +3,7 @@ const actionModel = require('../helpers/actionModel');
 
 const router = express.Router();
 
-//Create 
+//Create  - POST
 router.post("/", (req, res) => {
     const actionInfo = req.body // where the insertion goes in -  as raw json
     actionModel
@@ -11,9 +11,13 @@ router.post("/", (req, res) => {
         .then(() => {
             res.status(201).json({ message: "your action was created!" })
         })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({ message: "Error posting actions" })
+        })
 })
 
-//Read
+//Read - GET > Works!
 router.get('/', (req, res) => {
     actionModel
         .get(req.id)
@@ -28,14 +32,14 @@ router.get('/', (req, res) => {
 
 
 
-//Update 
+//Update - PUT
 router.put("/:id", (req, res) => {
     const actionInfo = req.body;
     const { id } = req.params
     actionModel
         .update(id, actionInfo)
-        .then(e => {
-            if (e) {
+        .then(action => {
+            if (action) {
                 res.status(200).json({ message: "The action has been updated!" })
             } else {
                 res.status(404).json({ message: "There is nothing to update" })
@@ -46,7 +50,9 @@ router.put("/:id", (req, res) => {
         })
 
 })
-//Delete 
+
+
+//Delete - DEL > Works!
 
 router.delete("/:id", (req, res) => {
     actionModel

@@ -1,19 +1,22 @@
 const express = require("express");
 const projectModel = require('../helpers/projectModel');
-
 const router = express.Router();
 
 //Create 
 router.post("/", (req, res) => {
-    const projectInfo = req.body // where the insertion goes in -  as raw json
+    //const projectInfo = req.body // where the insertion goes in  -  as raw json
     projectModel
-        .insert(projectInfo)
-        .then(() => {
-            res.status(201).json({ message: "your project was created!" })
+        .insert(req.body)
+        .then(project => {
+            res.status(201).json(project);
         })
-})
+        .catch(err => {
+            res.status(500).json({ message: "Something went wrong while adding the project!", err })
+        })
+});
 
-//Read
+//Read - Works
+
 router.get('/', (req, res) => {
     projectModel
         .get(req.id)
@@ -27,25 +30,26 @@ router.get('/', (req, res) => {
 })
 
 
-
 //Update 
+
 router.put("/:id", (req, res) => {
-    const projectInfo = req.body;
-    const { id } = req.params
+    // const projectInfo = req.body;
+    // const { id } = req.params
     projectModel
-        .update(id, projectInfo)
-        .then(e => {
-            if (e) {
+        .update(req.params.id, req.body)
+        .then(project => {
+            if (project) {
                 res.status(200).json({ message: "The project has been updated!" })
             } else {
                 res.status(404).json({ message: "There is nothing to update" })
             }
         })
         .catch(error => {
-            res.status(500).json(error, "there was an error updating the project")
+            res.status(500).json({ message: "there was an error updating the project"})
         })
-
 })
+
+
 //Delete 
 
 router.delete("/:id", (req, res) => {
@@ -64,7 +68,7 @@ router.delete("/:id", (req, res) => {
         })
 })
 
-//get Project Actions 
+//get Project Actions - Works
 router.get("/:id/actions", (req, res) => {
     projectModel
         .getProjectActions(req.params.id)
