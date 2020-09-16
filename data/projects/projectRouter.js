@@ -8,7 +8,7 @@ router.post("/", (req, res) => {
     projectModel
         .insert(req.body)
         .then(project => {
-            res.status(201).json(project);
+            res.status(200).send(project);
         })
         .catch(err => {
             res.status(500).json({ message: "Something went wrong while adding the project!", err })
@@ -35,6 +35,7 @@ router.get('/', (req, res) => {
 router.put("/:id", (req, res) => {
     // const projectInfo = req.body;
     // const { id } = req.params
+    console.log(req.body)
     projectModel
         .update(req.params.id, req.body)
         .then(project => {
