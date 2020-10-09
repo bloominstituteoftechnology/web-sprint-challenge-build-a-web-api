@@ -2,6 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 
 const routes = require('./resources/routes')
+const validadeError = require('./middlewares/error')
 const app = express()
 
 //Middleware
@@ -13,6 +14,6 @@ app.use(express.urlencoded({extended: true}))
 app.use('/', routes)
 
 // Server Error status code 500
-// app.use(validadeError)
+app.use(validadeError)
 
 module.exports = app
