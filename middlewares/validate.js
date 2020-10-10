@@ -3,6 +3,7 @@ const Joi = require('joi')
 const Actions = require('../data/helpers/actionModel')
 const Projects = require('../data/helpers/projectModel')
 const actionSchema = require('../validation/actionSchema')
+const projectSchema = require('../validation/projectSchema')
 
 const validateActionById = async (req, res, next) => {
   const {id} = req.params
@@ -78,10 +79,27 @@ const validateProjectId = async (req, res, next) => {
   }
 }
 
+const validateCreateProjectData = (req, res, next) => {
+  const result = projectSchema.validate(req.body)
+
+  if (Object.keys(req.body).length === 0)
+    return res.status(400).json({message: 'Body request may not be empty'})
+
+  if (result.error)
+    return res.status(400).json({message: result.error.details[0].message})
+
+  try {
+    next()
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   validateActionById,
   validateProjectsById,
   validadeAction,
   validateCreateActionData,
   validateProjectId,
+  validateCreateProjectData,
 }

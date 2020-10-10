@@ -45,7 +45,7 @@ const deleteAction = async (req, res, next) => {
   try {
     await Actions.remove(id)
     res.status(200).json({
-      message: `Post with the Id# ${id} has been removed`,
+      message: `Action with the Id# ${id} has been removed`,
       text: req.body.text,
     })
   } catch (error) {
