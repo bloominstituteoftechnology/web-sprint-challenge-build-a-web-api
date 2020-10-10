@@ -15,6 +15,7 @@ Go code!
 
 const express = require('express');
 const actionsRouter = require('./data/actionRouter');
+const projectsRouter = require('./data/projectRouter');
 
 const server = express()
 const port = process.env.PORT || 8000
@@ -22,6 +23,7 @@ const port = process.env.PORT || 8000
 server.use(express.json())
 
 server.use(actionsRouter);
+server.use(projectsRouter);
 
 server.listen(port, () => {
     console.log(`server is running at http://localhost:${port}`)
