@@ -1,5 +1,12 @@
 const Projects = require('../../data/helpers/projectModel')
 
+/**
+ * Show all Projects
+ *
+ * @param
+ * @method GET
+ * @route /api/projects
+ */
 const getProjects = async (req, res, next) => {
   try {
     const allProjects = await Projects.get()
@@ -9,6 +16,13 @@ const getProjects = async (req, res, next) => {
   }
 }
 
+/**
+ * Show all Projects by passing an ID
+ *
+ * @param $ID
+ * @method GET
+ * @route /api/projects
+ */
 const getProjectsById = async (req, res, next) => {
   const {id} = req.params
   try {
@@ -19,6 +33,13 @@ const getProjectsById = async (req, res, next) => {
   }
 }
 
+/**
+ * Create a new project
+ *
+ * @param
+ * @method POST
+ * @route /api/projects
+ */
 const createProject = async (req, res, next) => {
   try {
     const newProject = await Projects.insert(req.body)
@@ -26,6 +47,13 @@ const createProject = async (req, res, next) => {
   } catch (error) {}
 }
 
+/**
+ * Update a single project by passing an ID
+ *
+ * @param $ID
+ * @method PUT
+ * @route /api/projects/ @ID
+ */
 const updatedProject = async (req, res, next) => {
   const {id} = req.params
   try {
@@ -37,6 +65,14 @@ const updatedProject = async (req, res, next) => {
     next(error)
   }
 }
+
+/**
+ * Delete a single Project by passing an ID
+ *
+ * @param $ID
+ * @method DELETE
+ * @route /api/projects @ID
+ */
 
 const deleteProject = async (req, res, next) => {
   const {id} = req.params
@@ -50,6 +86,14 @@ const deleteProject = async (req, res, next) => {
     next(error)
   }
 }
+
+/**
+ * Get a list of actions for a single Project
+ *
+ * @param $PROJECT_ID
+ * @method GET
+ * @route /api/@PROJECT_ID /actions
+ */
 
 const getProjectByActions = async (req, res, next) => {
   const {id} = req.params

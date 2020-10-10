@@ -1,5 +1,12 @@
 const Actions = require('../../data/helpers/actionModel')
 
+/**
+ * Show all actions
+ *
+ * @param
+ * @Method GET
+ * @route /api/actions
+ */
 const getActions = async (req, res, next) => {
   try {
     const allActions = await Actions.get()
@@ -9,6 +16,13 @@ const getActions = async (req, res, next) => {
   }
 }
 
+/**
+ * Get all actions by an ID
+ *
+ * @param  $ID
+ * @Method GET
+ * @route /api/actions/ @ID
+ */
 const getActionsById = async (req, res, next) => {
   const {id} = req.params
   try {
@@ -19,6 +33,13 @@ const getActionsById = async (req, res, next) => {
   }
 }
 
+/**
+ * Create a new action
+ *
+ * @param
+ * @method POST
+ * @route /api/actions/
+ */
 const createAction = async (req, res, next) => {
   try {
     const newAction = await Actions.insert(req.body)
@@ -28,6 +49,13 @@ const createAction = async (req, res, next) => {
   }
 }
 
+/**
+ * Update an single action by passing an ID
+ *
+ * @param  $ID
+ * @method PUT
+ * @route /api/actions/ @ID
+ */
 const updateAction = async (req, res, next) => {
   const {id} = req.params
   try {
@@ -40,6 +68,13 @@ const updateAction = async (req, res, next) => {
   }
 }
 
+/**
+ * Delete an single  action by passing an ID
+ *
+ * @param  $id
+ * @method DELETE
+ * @route /api/actions/ @ID
+ */
 const deleteAction = async (req, res, next) => {
   const {id} = req.params
   try {
