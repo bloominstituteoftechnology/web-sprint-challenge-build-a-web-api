@@ -7,16 +7,20 @@ const ActionsController = require('./actions.controller.js')
 // Validation
 
 const validate = require('../../middlewares/validate')
-const {validateActionById} = require('../../middlewares/validate')
 
 router
   .route('/')
   .get(ActionsController.getActions)
-  .post(validate.validateCreateActionData, ActionsController.createAction)
+  .post(
+    validate.validateProjectId,
+    validate.validateCreateActionData,
+    ActionsController.createAction
+  )
 
 router
   .route('/:id')
   .get(validate.validateActionById, ActionsController.getActionsById)
+  .delete(validate.validateActionById, ActionsController.deleteAction)
   .put(
     validate.validateActionById,
     validate.validateCreateActionData,

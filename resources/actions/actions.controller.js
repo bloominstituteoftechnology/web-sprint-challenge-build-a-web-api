@@ -40,9 +40,23 @@ const updateAction = async (req, res, next) => {
   }
 }
 
+const deleteAction = async (req, res, next) => {
+  const {id} = req.params
+  try {
+    await Actions.remove(id)
+    res.status(200).json({
+      message: `Post with the Id# ${id} has been removed`,
+      text: req.body.text,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   getActions,
   getActionsById,
   createAction,
   updateAction,
+  deleteAction,
 }
