@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../data/helpers/projectModel");
+const actionsDb = require("../data/helpers/actionModel");
 
 router.get("/", (req, res) => {
     db.get().then(projects=>{
@@ -47,6 +48,15 @@ router.delete("/:id", (req,res)=>{
     }).catch(err=>{
         console.log(err);
     });
+});
+
+router.get("/:id/actions", (req, res)=>{
+    actionsDb.get().then(actions=>{
+        actions = actions.filter(action => action.project_id == req.params.id);
+        res.status(200).json(actions);
+    }).catch(err=>{
+        res.status(500).json({message: "A server error occurred"});
+    })
 });
 
 module.exports = router;
