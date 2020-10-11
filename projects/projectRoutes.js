@@ -44,7 +44,7 @@ router.put("/:id", (req, res)=>{
 router.delete("/:id", (req,res)=>{
     db.remove(req.params.id).then(projectId=>{
         if(projectId == 0) return res.status(404).json({message: "Project does not exist"});
-        res.status(200).json({message: `project with id ${projectId} deleted`});
+        res.status(200).json({message: `project with id ${req.params.id} deleted`});
     }).catch(err=>{
         console.log(err);
     });
