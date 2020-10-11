@@ -10,6 +10,16 @@ router.get("/", (req, res) => {
     });
 });
 
+router.post("/", (req, res)=>{
+    const {name, description} = req.body;
+    if(!name || !description) return res.status(400).json({message: "Name and description requried"});
+    db.insert(req.body).then(newProject=>{
+        res.status(201).json(newProject);
+    }).catch(err=>{
+        res.status(500).json({message: "A server error occurred"});
+    })
+});
+
 router.get("/:id", (req, res)=>{
     db.get(req.params.id).then(project=>{
         if(!project) return res.status(404).json({message: "Project doesn't exist"})
