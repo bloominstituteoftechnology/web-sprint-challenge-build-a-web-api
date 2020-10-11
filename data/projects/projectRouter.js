@@ -1,13 +1,12 @@
 const express = require('express')
-
+const actionDB = require('../actions/actionModel')
 const projectDb = require('./projectModel')
-const actionRouter = require('../actions/actionModel')
 const router = express.Router()
 
 router.use(express.json())
 
 router.get('/',  (req, res) => {
-    projectDb.get()
+    projectDb.get(req.id)
 
     .then((pro) => {
         res.status(200).json(pro)
@@ -20,7 +19,7 @@ router.get('/',  (req, res) => {
     })
 })
 
-router.post('/',  validateProject, (req, res) => {
+router.post('/:id',  validateProject, (req, res) => {
     const projectData = req.body
     if (!projectData.name || !projectData.description) {
         res.status(500).json({ message: "Name and Desc needed" });
