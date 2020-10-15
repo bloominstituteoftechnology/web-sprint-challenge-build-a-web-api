@@ -1,12 +1,14 @@
 require('dotenv').config()
 const express = require('express')
+const server = express()
+const port = process.env.PORT
+
+server.use(express.json())
 
 
-const port = process.env.PORT;
+const actionRoutes = require('./actions/actionRoutes')
+const projectRoutes = require('./projects/projectRoutes')
 
-const posts = require('./posts/posts-router')
-const server = express();
-server.use(express.json());
 
 server.get("/", (req, res) => {
 	res.json({
@@ -15,7 +17,9 @@ server.get("/", (req, res) => {
 })
 
 
-server.use('/', posts)
+
+server.use('/action', actionRoutes)
+server.use('/project', projectRoutes)
 
 server.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`)
