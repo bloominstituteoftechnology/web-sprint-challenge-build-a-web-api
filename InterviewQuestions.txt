@@ -1,0 +1,16 @@
+1. The core features of Node.js and Express and why they are useful.
+    Node allows developers to create and use server-type features in JavaScript. My understanding is that Node allows the JS loop to close from front-end to back-end. I personally think it's useful because it uses the same "language" as JS, and allows us to run server-like environments directly on the browser.  Express is a Node framework that allows the developers to handle requests with different HTTP and URLs.
+    
+2. Understand and explain the use of Middleware?
+    A middleware is basically a function that will receive the Request and Response objects, just like route handlers do. As a third argument you have another function which you should call once your middleware code completed.
+
+3. The basic principles of the REST architectural style.
+
+    GET − This is used to provide a read only access to a resource.
+    PUT − This is used to create a new resource.
+    DELETE − This is used to remove a resource.
+    POST − This is used to update a existing resource or create a new resource.
+
+4. Understand and explain the use of Express Routers.
+
+5. Describe tooling used to manually test the correctness of an API.
