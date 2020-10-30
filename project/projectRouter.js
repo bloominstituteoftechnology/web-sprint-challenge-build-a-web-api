@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 
 router.delete('/:id', (req, res) =>{
     Project.remove(req.params.id)
-    .then(() => res.status(200).json({ message: `User ${req.params.id} has been banished!`}))
+    .then(() => res.status(200).json({ message: `User ${req.params.id} has been cleared!`}))
     .catch(err => res.status(500).json(`${err}`))
 })
 
