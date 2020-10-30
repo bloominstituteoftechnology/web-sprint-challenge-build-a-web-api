@@ -20,22 +20,23 @@ router.get('/', (req, res) => {
 // @desc		Add a new action
 // @route		POST /
 router.post('/', (req, res) => {
-    Action.insert()
-    .then()
+    console.log(req.body)
+    Action.insert(req.body)
+    .then(action => res.status(202).json(action))
     .catch(error => res.status(500).json({message: `${error.message}; ${error.stack}`}))
 })
 // @desc		Update a action by id
 // @route		PUT /:id
 router.put('/:id', (req, res) => {
-    Action.update()
-        .then()
+    Action.update(req.params.id, req.body)
+        .then(action => res.status(202).json(action))
         .catch(error => res.status(500).json({message: `${error.message}; ${error.stack}`}))
 })
 // @desc		Remove a action by id
 // @route		DELETE /:id
 router.delete('/:id', (req, res) => {
-    Action.remove()
-    .then()
+    Action.remove(req.params.id)
+    .then(()=>{res.status(200).json({message: "Shaniqua don't act here no moe"})})
     .catch(error => res.status(500).json({message: `${error.message}; ${error.stack}`}))
 })
 

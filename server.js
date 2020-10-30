@@ -20,6 +20,4 @@ server.get('/', (req,res)=>{
     res.send("endpoint running")
  })
 
-
-
 module.exports = server
