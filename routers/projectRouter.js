@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
     .catch(error => {
       console.log(error)
       res.status(500).json({
-        message: "error adding project, please try again while whispering sweet nothings to the computer"
+        message: "error adding project, please try again"
       })
     })
 })
@@ -27,7 +27,7 @@ router.post('/:id/actions', (req, res) => {
     .catch(error => {
       console.log(error)
       res.status(500).json({
-        message: "error adding action, please try again while whispering sweet nothings to the computer"
+        message: "error adding action, please try again"
       })
     })
 })
@@ -40,7 +40,7 @@ router.get('/', (req, res) => {
     .catch(error => {
       console.log(error);
       res.status(500).json({
-        message: "error retrieving projects, please contact someone important"
+        message: "error retrieving projects, please contact someone that knows more than you"
       });
     });
 });
@@ -78,7 +78,7 @@ router.get('/actions', (req, res) => {
     })
     .catch(error => {
       console.log(error);
-      res.status(500).json({message: "actions actions not found"})
+      res.status(500).json({message: "action's actions not found"})
     });
 });
 
@@ -90,7 +90,7 @@ router.get('/actions/:id', (req, res) => {
     })
     .catch(error => {
       console.log(error);
-      res.status(500).json({message: "actions actions not found"})
+      res.status(500).json({message: "action's actions not found"})
     });
 });
 
@@ -98,15 +98,15 @@ router.delete('/:id', (req, res) => {
   Projects.remove(req.params.id)
   .then(count => {
     if (count > 0) {
-      res.status(200).json({ message: "the project been erased from history"})
+      res.status(200).json({ message: "Success deleting project"})
     } else {
-      res.status(404).json({message: "the project couldn't be found"})
+      res.status(404).json({message: "Could not find project"})
     }
   })
   .catch(error => {
     console.log(error)
     res.status(500).json({
-      message: "error removing project"
+      message: "Error deleting project"
     })
   })
 })
@@ -116,15 +116,15 @@ router.delete('/actions/:id', (req, res) => {
   Actions.remove(req.params.id)
   .then(count => {
     if (count > 0) {
-      res.status(200).json({ message: "the actions been erased from history"})
+      res.status(200).json({ message: "Success erasing actions"})
     } else {
-      res.status(404).json({message: "the actions couldn't be found"})
+      res.status(404).json({message: "Could not find actions"})
     }
   })
   .catch(error => {
     console.log(error)
     res.status(500).json({
-      message: "error removing actions"
+      message: "Error deleting actions"
     })
   })
 })
@@ -137,7 +137,7 @@ router.put('/:id', (req, res) => {
   .catch(error => {
     console.log(error)
     res.status(500).json({
-      message: "error updating project"
+      message: "Error updating project"
     })
   })
 });
@@ -151,7 +151,7 @@ router.put('/actions/:id', (req, res) => {
   .catch(error => {
     console.log(error)
     res.status(500).json({
-      message: "error updating actions"
+      message: "Error updating actions"
     })
   })
 });

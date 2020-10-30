@@ -6,7 +6,7 @@ const server = express();
 server.use(express.json());
 
 server.get('/', (req, res) => {
-  res.send(`<h2>OMG, it actually worked this time!</h2>`)
+  res.send(`<h2>ALL GOOD!  This Works!</h2>`)
 });
 
 // //endpoints
