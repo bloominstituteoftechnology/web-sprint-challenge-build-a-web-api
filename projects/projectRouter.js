@@ -19,12 +19,10 @@ router.get('/', (req, res) => {
         res.status(500).json({ message: `Can't ${err}`}))
 })
 
-router.get('/:id/actions', (req, res) => {
-    Project.getProjectActions()
-    .then(projects => 
-        res.status(200).json(projects))
-    .catch(error => 
-        res.status(500).json({ message: `${err}`}))
+router.get('/:id', (req, res) => {
+    Project.getById(req.params.id)
+    .then(post => res.status(200).json(post))
+    .catch(err => res.status(500).json(`${err}`))
 })
 
 router.post('/', (req, res) => {
@@ -45,11 +43,9 @@ router.put('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-    Project.delete()
-    .then(() => 
-    res.status(200).json({ message: `project is destroyed`}))
-    .catch(error => 
-        res.status(500).json({message: `${err}`}))
+    Project.remove(req.params.id)
+    .then(() => res.status(200).json({ message: `post ${req.params.id}  is destroyed`}))
+    .catch(err => res.status(500).json(`${err}`))
 })
 
 module.exports = router

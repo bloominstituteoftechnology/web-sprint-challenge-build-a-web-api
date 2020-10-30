@@ -17,15 +17,21 @@ router.get('/', (req, res) => {
     .then(actions => 
         res.status(200).json(actions))
     .catch(error => 
-        res.status(500).json({message: `Cannot get actions ${err}`}))
+        res.status(500).json({message: 'Cannot get actions' }))
 })
+
 
 
 router.post('/', (req, res) => {
-    Action.insert()
-    .then(updated => {res.status(200).json(updated)
-})
-    .catch(error => res.status(500).json({message: `${err}`}))
+    const newAction = { user_id: req.params.id, ...req.body}
+    Action.insert(newPost)
+    .then(post => {
+      res.status(200).json(post)
+    })
+    .catch(err => {
+    //   console.log(err)
+      res.status(500).json({message: "can't crete post"})
+    })
 })
 
 
@@ -33,17 +39,14 @@ router.put('/:id', (req, res) => {
     Action.update()
         .then()
         .catch(error => 
-            res.status(500).json({message: `${err}`}))
+            res.status(500).json({message: 'error'}))
 })
 
 
 router.delete('/:id', (req, res) => {
-    Action.remove()
-    .then(() => 
-    res.status(200).json({ message: `action is destroyed`}))
-    .catch(error => 
-        res.status(500).json({message: `${err}
-    `}))
+    Action.remove(req.params.id)
+    .then(() => res.status(200).json({ message: `post ${req.params.id}  is destroyed`}))
+    .catch(err => res.status(500).json(`${err}`))
 })
 
 module.exports = router 
