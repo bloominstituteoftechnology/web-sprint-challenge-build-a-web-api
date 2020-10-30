@@ -19,4 +19,4 @@ server.get('/', (req, res) => {
     res.send('endpoint legit')
 })
 
-module.exports = server
+module.exports = server 
