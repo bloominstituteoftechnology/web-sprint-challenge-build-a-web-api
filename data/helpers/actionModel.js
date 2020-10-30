@@ -9,24 +9,25 @@ module.exports = {
 };
 
 function get(id) {
-  let query = db('actions');
+  // let query = db('actions');
 
-  if (id) {
-    return query
-      .where('id', id)
-      .first()
-      .then((action) => {
-        if (action) {
-          return mappers.actionToBody(action);
-        } else {
-          return null;
-        }
-      });
-  } else {
-    return query.then((actions) => {
-      return actions.map((action) => mappers.actionToBody(action));
-    });
-  }
+  // if (id) {
+  //   return query
+  //     .where('id', id)
+  //     .first()
+  //     .then((action) => {
+  //       if (action) {
+  //         return mappers.actionToBody(action);
+  //       } else {
+  //         return null;
+  //       }
+  //     });
+  // } else {
+  //   return query.then((actions) => {
+  //     return actions.map((action) => mappers.actionToBody(action));
+  //   });
+  // }
+  return db('actions')
 }
 
 function insert(action) {
