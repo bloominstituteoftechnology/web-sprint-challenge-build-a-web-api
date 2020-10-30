@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
     .then((res) =>{
         res.status(200).json(res)
     })
-    .catch(err => res.status(500).json(`failure on backend ${err.message}`))
+    .catch(err => res.status(500).json(`failure to post ${err.message}`))
 })
 
 router.put('/:id', (req, res) =>{
@@ -31,7 +31,7 @@ router.put('/:id', (req, res) =>{
     .then((res)=>{
         res.status(200).json({message: `User ${req.params.id} has updated their post!`})
     })
-    .catch(err => res.status(500).json(`failure on backend ${err.message}`))
+    .catch(err => res.status(500).json(`failure to put ${err.message}`))
 })
 
 
