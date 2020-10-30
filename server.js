@@ -2,7 +2,7 @@ const express = require("express");
 
 const server = express();
 
-// const userRouter = require("./users/userRouter");
+const actionRouter = require("./data/helpers/actionRouter");
 
 //custom middleware
 
@@ -16,7 +16,7 @@ function logger(req, res, next) {
 
 server.use(express.json());
 server.use(logger);
-// server.use("/api", userRouter);
+server.use("/api", actionRouter);
 server.use((err, req, res, next) => {
   res.status(500).json({ message: "Something went wrong" });
 });
