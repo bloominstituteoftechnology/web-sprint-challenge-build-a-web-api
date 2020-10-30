@@ -61,10 +61,25 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+     Node allows you to create servers and apps, backends in javascript. Express is a minimal and flexible Node.js web application framework that provides a robust set of features to develop web and mobile applications.
+
 1. Understand and explain the use of Middleware?
+  A middleware is basically a function that will the receive the Request and Response objects, just like your route Handlers do.
+
 1. The basic principles of the REST architectural style.
+     The five principles of rest are: 
+        Contract first approach / Uniform Resource identifiers
+        Statelessness
+        Client-Server model
+        Caching
+        Layered architecture
+
 1. Understand and explain the use of Express Routers.
+    Routing refers to how an application’s endpoints (URIs) respond to client requests.
+
+
 1. Describe tooling used to manually test the correctness of an API.
+   Postman, Insomnia or httpie
 
 You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade.
 
