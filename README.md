@@ -47,7 +47,7 @@ The description of the structure and extra information about each _resource_ sto
 or requirements to complete the action. |
 
 | completed | boolean | used to indicate if the action has been completed, not
-required |
+descri required |
 
 ### Database Persistence Helpers
 
@@ -109,10 +109,11 @@ Your finished project must include all of the following requirements:
 
 #### Build an API
 
-- [ ] Design and build endpoints for performing CRUD operations on _projects_ and _actions_. When adding an action, make sure the `project_id` provided belongs to an existing `project`. If you try to add an action with an `id` of 3 and there is no project with that `id` the database will return an error.
+- [x] Design and build endpoints for performing CRUD operations on _projects_ and _actions_.
+- [x] When adding an action, make sure the `project_id` provided belongs to an existing `project`. If you try to add an action with an `id` of 3 and there is no project with that `id` the database will return an error.
 - [ ] Add an endpoint for retrieving the list of actions for a project.
-- [ ] Use an HTTP client like `postman` or `insomnia` to test the API's endpoints.
-- [ ] Use Express Routers to organize the API's code.
+- [x] Use an HTTP client like `postman` or `insomnia` to test the API's endpoints.
+- [x] Use Express Routers to organize the API's code.
 
 In your solution, it is essential that you follow best practices and produce clean and professional results. You will be scored on your adherence to proper code style and good organization. Schedule time to review, refine, and assess your work and perform basic professional polishing including spell-checking and grammar-checking on your work. It is better to submit a challenge that meets MVP than one that attempts too much and does not.
 

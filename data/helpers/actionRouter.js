@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 // @desc		Add a new action
 // @route		POST /
 router.post('/', (req, res) => {
-    console.log(req.body)
+    console.log(req.body.project_id)
     Action.insert(req.body)
     .then(action => res.status(202).json(action))
     .catch(error => res.status(500).json({message: `${error.message}; ${error.stack}`}))
