@@ -20,9 +20,8 @@ The description of the structure and extra information about each _resource_ sto
 
 #### Projects
 
-| Field                     | Data Type | Metadata                                          |
-| ------------------------- | --------- | ------------------------------------------------- |
-| id                        | number    | no need to provide it when creating projects, the |
+| Field | Data Type | Metadata ------------------- |
+| id | number | no need to provide it when creating projects, the |
 | database will generate it |
 
 | name | string | required. |
@@ -34,9 +33,8 @@ The description of the structure and extra information about each _resource_ sto
 
 #### Actions
 
-| Field                           | Data Type | Metadata                                                |
-| ------------------------------- | --------- | ------------------------------------------------------- |
-| id                              | number    | no need to provide it when creating posts, the database |
+| Field | Data Type | Metadata -------------------------- |
+| id | number | no need to provide it when creating posts, the database |
 | will automatically generate it. |
 
 | project_id | number | required, must be the id of an existing project. |

@@ -1,6 +1,7 @@
 const router = require('express').Router()
 
 const Project = require('./projectModel')
+const Actions = require('./actionModel')
 
 const currentTime = new Date().toDateString()
 
@@ -19,8 +20,9 @@ router.get('/', (req, res) => {
 // @desc		Get all projects actions
 // @route		GET /:id/actions
 router.get('/:id/actions', (req, res) => {
-    Project.getProjectActions()
-    .then()
+    
+    Project.getProjectActions(req.params.id)
+    .then(actions=> res.status(200).json(actions))
     .catch(error => res.status(500).json({message: `${error.message}; ${error.stack}`}))
 })
 // @desc		Add a new project
