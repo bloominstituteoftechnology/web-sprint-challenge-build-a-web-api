@@ -118,11 +118,35 @@ server.get('/api/actions/:actionID' , (req, res) => {
 server.post('/api/actions/:projectID' , (req, res) => {
     dbActions.insert({...req.body, project_id: req.params.projectID})
         .then(newAction => {
-            res.status(200).json(newAction)
+            res.status(201).json(newAction)
         })
         .catch(err => {
             res.status(500).json({
                 error: 'There was server error adding that action.'
+            })
+        })
+})
+
+server.put('/api/actions/:actionID' , (req, res) => {
+    dbActions.update(req.params.actionID, req.body)
+        .then(updatedAction => {
+            res.status(201).json(updatedAction)
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: 'There was server error updating that action.'
+            })
+        })
+})
+
+server.delete('/api/actions/:actionID' , (req, res) => {
+    dbActions.remove(req.params.actionID)
+        .then(deletedAction => {
+            res.status(200).json(deletedAction)
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: 'There was server error deleting that action.'
             })
         })
 })
