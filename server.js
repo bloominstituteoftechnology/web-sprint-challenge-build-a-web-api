@@ -2,6 +2,7 @@ const express = require('express');
 const server = express();
 
 const dbProject = require('./data/helpers/projectModel.js')
+const dbActions = require('./data/helpers/actionModel.js')
 
 server.use(express.json())
 
@@ -70,7 +71,7 @@ server.put('/api/projects/:id', (req, res) => {
         })
         .catch(err => {
             res.status(500).json({
-                error: 'There was a server error adding that project.'
+                error: 'There was a server error updating that project.'
             })
         })
 })
@@ -78,14 +79,52 @@ server.put('/api/projects/:id', (req, res) => {
 server.delete('/api/projects/:id', (req, res) => {
     dbProject.remove(req.params.id)
         .then(removedProject => {
-            res.status(201).json(removedProject)    
+            res.status(200).json(removedProject)    
         })
         .catch(err => {
             res.status(500).json({
-                error: 'There was a server error adding that project.'
+                error: 'There was a server error deleting that project.'
             })
         })
 })
 
+// --------------------------------- //
+// ACTIONS ENDPOINTS
+// --------------------------------- //
+server.get('/api/actions' , (req, res) => {
+    dbActions.get()
+        .then(allActions => {
+            res.status(200).json(allActions)
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: 'There was server error retrieving the actions data.'
+            })
+        })
+})
+
+server.get('/api/actions/:actionID' , (req, res) => {
+    dbActions.get(req.params.actionID)
+        .then(allActions => {
+            res.status(200).json(allActions)
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: 'There was server error retrieving that action data.'
+            })
+        })
+})
+
+server.post('/api/actions/:projectID' , (req, res) => {
+    dbActions.insert({...req.body, project_id: req.params.projectID})
+        .then(newAction => {
+            res.status(200).json(newAction)
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: 'There was server error adding that action.'
+            })
+        })
+})
 
 module.exports = server;
