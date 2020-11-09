@@ -1,4 +1,5 @@
 const express = require("express");
+
 const ActionModel = require("../data/helpers/actionModel");
 const router = express.Router();
 
@@ -6,7 +7,13 @@ const router = express.Router();
 router.get("/", (req, res) => {
   ActionModel.get(req.params.id)
     .then((actions) => {
-      res.status(200).json({ message: "List of Actions", Actions: actions });
+      if (actions) {
+        res
+          .status(200)
+          .json({ message: "List of Actions", Action_List: actions });
+      } else {
+        res.status(404).json({ message: `can't retrieve list of actions` });
+      }
     })
     .catch((error) => {
       console.log(error);
@@ -18,7 +25,10 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   ActionModel.get(req.params.id)
     .then((actions) => {
-      res.status(200).json({ message: "Action by Id", ActionById: actions });
+      if (actions) {
+        res.status(200).json({ message: "Action by Id", ActionById: actions });
+      } else
+        res.status(404).json({ message: `can't find id by #${req.params.id}` });
     })
     .catch((error) => {
       console.log(error);
@@ -28,20 +38,64 @@ router.get("/:id", (req, res) => {
 
 //POST /api/actions
 router.post("/", (req, res) => {
-  ActionModel.insert(req.params.body)
-    .then((postActions) => {
-      res
-        .status(201)
-        .json({ message: "new Action Created", actionCreated: postActions });
+  const newUser = req.body;
+  ActionModel.insert(newUser)
+    .then((postUser) => {
+      if (postUser) {
+        res
+          .status(201)
+          .json({ message: "new user posted", user_posted: postUser });
+      } else {
+        res.status(404).json({ message: `cant post a user, check req.body` });
+      }
     })
     .catch((error) => {
-      console.log(error);
-      res.status(500).json({ message: "Server Error: Cant post new action" });
+      res.status(500).json({
+        message: "500 error: something went wrong, cant not post action",
+      });
     });
 });
 
 //UPDATE /api/actions/:id
+router.put("/:id", (req, res) => {
+  const changes = req.body;
+  const { id } = req.params;
+  ActionModel.update(id, changes)
+    .then((updateAction) => {
+      if (updateAction) {
+        res.status(200).json({
+          message: "Success, user updated",
+          action_updated: updateAction,
+        });
+      } else {
+        res.status(404).json({ message: `cant update user, 404 error` });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "500 ERROR: something went wrong, Can not update action",
+      });
+    });
+});
 
 //DELETE /api/actions/:id
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  ActionModel.remove(id)
+    .then((removeUser) => {
+      if (removeUser) {
+        res
+          .status(200)
+          .json({ message: "Success, user deleted", user_deleted: removeUser });
+      } else {
+        res.status(404).json({ message: `cant update user, 404 error` });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "500 ERROR: something went wrong, Can not delete user",
+      });
+    });
+});
 
 module.exports = router;

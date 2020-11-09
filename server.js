@@ -12,9 +12,10 @@ server.use(helmet());
 server.get("/", (req, res) => {
   res.status(200).json({ message: "The server is online!" });
 });
-// Routers here
+
+//  ACTION AND PROJECT Routers here
 server.use("/api/actions", actionRouter);
-server.use("/api/characters", projectRouter);
+server.use("/api/projects", projectRouter);
 
 //export to index.js where it will listen for port
 module.exports = server;
