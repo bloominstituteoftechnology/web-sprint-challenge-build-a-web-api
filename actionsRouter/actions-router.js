@@ -1,4 +1,9 @@
 const express = require("express");
+const {
+  checkUserID,
+  deletePostID,
+  checkActionBodyData,
+} = require("../middleware/actions");
 
 const ActionModel = require("../data/helpers/actionModel");
 const router = express.Router();
@@ -22,22 +27,12 @@ router.get("/", (req, res) => {
 });
 
 //GET ID /api/actions/:id
-router.get("/:id", (req, res) => {
-  ActionModel.get(req.params.id)
-    .then((actions) => {
-      if (actions) {
-        res.status(200).json({ message: "Action by Id", ActionById: actions });
-      } else
-        res.status(404).json({ message: `can't find id by #${req.params.id}` });
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(500).json({ message: "Server Error: cant find action by ID" });
-    });
+router.get("/:id", checkUserID(), (req, res) => {
+  res.status(200).json({ message: "Action by Id", ActionById: req.actions });
 });
 
 //POST /api/actions
-router.post("/", (req, res) => {
+router.post("/", checkActionBodyData(), (req, res) => {
   const newUser = req.body;
   ActionModel.insert(newUser)
     .then((postUser) => {
@@ -57,7 +52,7 @@ router.post("/", (req, res) => {
 });
 
 //UPDATE /api/actions/:id
-router.put("/:id", (req, res) => {
+router.put("/:id", checkUserID(), (req, res) => {
   const changes = req.body;
   const { id } = req.params;
   ActionModel.update(id, changes)
@@ -79,23 +74,11 @@ router.put("/:id", (req, res) => {
 });
 
 //DELETE /api/actions/:id
-router.delete("/:id", (req, res) => {
-  const { id } = req.params;
-  ActionModel.remove(id)
-    .then((removeUser) => {
-      if (removeUser) {
-        res
-          .status(200)
-          .json({ message: "Success, user deleted", user_deleted: removeUser });
-      } else {
-        res.status(404).json({ message: `cant update user, 404 error` });
-      }
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: "500 ERROR: something went wrong, Can not delete user",
-      });
-    });
+//aded middleware checkuseID and dleetePOSTID
+router.delete("/:id", checkUserID(), deletePostID(), (req, res) => {
+  res
+    .status(200)
+    .json({ message: "Success, user deleted", user_deleted: req.removeUser });
 });
 
 module.exports = router;
