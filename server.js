@@ -14,8 +14,10 @@ server.use(helmet());
 //Can apply both short and long values to get a shorter or longer logger
 server.use(logger("short"));
 
+//testing the PORT.Env
 server.get("/", (req, res) => {
-  res.status(200).json({ message: "The server is online!" });
+  const modt = process.env.MOTD;
+  res.status(200).json({ message: "The server is online!", motd: motd });
 });
 
 //  ACTION AND PROJECT Routers here
