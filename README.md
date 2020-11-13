@@ -91,19 +91,19 @@ Your finished project must include all of the following requirements:
 
 - [ ] Design and build endpoints for performing CRUD operations on _actions_:
 
-  - `[GET]  /api/actions`
-  - `[GET]  /api/actions/:id`
-  - `[POST] /api/actions`
-  - `[PUT]  /api/actions`
-  - `[PUT]  /api/actions`
+  - `[GET]    /api/actions`
+  - `[GET]    /api/actions/:id`
+  - `[POST]   /api/actions`
+  - `[PUT]    /api/actions`
+  - `[DELETE] /api/actions`
 
 - [ ] Design and build endpoints for performing CRUD operations on _projects_:
 
-  - `[GET]  /api/projects`
-  - `[GET]  /api/projects/:id`
-  - `[POST] /api/projects`
-  - `[PUT]  /api/projects`
-  - `[PUT]  /api/projects`
+  - `[GET]    /api/projects`
+  - `[GET]    /api/projects/:id`
+  - `[POST]   /api/projects`
+  - `[PUT]    /api/projects`
+  - `[DELETE] /api/projects`
 
 - [ ] Add an endpoint for retrieving the list of actions for a project:
   - `[GET]  /api/projects/:id/actions`
