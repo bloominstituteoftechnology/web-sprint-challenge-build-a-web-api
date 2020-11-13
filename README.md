@@ -70,12 +70,12 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
 
 ### Task 1: Project Set Up
 
-- [ ] Create a forked copy of this project
+- [ ] Create a forked copy of this project.
 - [ ] Add your team lead as collaborator on Github
-- [ ] Clone your OWN version of the repository (Not Lambda's by mistake!)
+- [ ] Clone your OWN version of the repository (Not Lambda's by mistake!).
 - [ ] Create a new branch: git checkout -b `<firstName-lastName>`.
-- [ ] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly
-- [ ] Push commits: git push origin `<firstName-lastName>`
+- [ ] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly.
+- [ ] Push commits: git push origin `<firstName-lastName>`.
 
 ### Task 2: Project Requirements
 
@@ -106,9 +106,10 @@ Your finished project must include all of the following requirements:
   - `[DELETE] /api/projects`
 
 - [ ] Add an endpoint for retrieving the list of actions for a project:
-  - `[GET]  /api/projects/:id/actions`
+  - `[GET]    /api/projects/:id/actions`
 
-- [ ] When adding an action, make sure the `project_id` provided belongs to an existing `project`. If you try to add an action with an `id` of 3 and there is no project with that `id` the database will return an error.
+- [ ] When adding an action, make sure the `project_id` provided belongs to an existing `project`.
+- [ ] If you try to add an action with an `id` of 3 and there is no project with that `id` the database will return an error.
 - [ ] Use an HTTP client like `HTTPie`, `postman` or `insomnia` to test the API's endpoints.
 - [ ] Use Express Routers to organize the API's code.
 
