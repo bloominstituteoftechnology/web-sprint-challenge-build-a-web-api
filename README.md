@@ -111,7 +111,8 @@ Your finished project must include all of the following requirements:
 - [ ] When adding an action, make sure the `project_id` provided belongs to an existing `project`.
 - [ ] If you try to add an action with an `id` of 3 and there is no project with that `id` the database will return an error.
 - [ ] Use an HTTP client like `HTTPie`, `postman` or `insomnia` to test the API's endpoints.
-- [ ] Use Express Routers to organize the API's code.
+- [ ] Use Express Routers to organize your endpoints.
+- [ ] Your `server.js` and your Routers live inside the `/api` folder.
 
 ### Task 3: Stretch Goals
 
