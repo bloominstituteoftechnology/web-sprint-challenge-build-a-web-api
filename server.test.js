@@ -1,7 +1,7 @@
 const request = require('supertest')
-const db = require('../data/connection')
-const Action = require('../data/helpers/actionModel')
-const Project = require('../data/helpers/projectModel')
+const db = require('./data/dbConfig')
+const Action = require('./data/helpers/actionModel')
+const Project = require('./data/helpers/projectModel')
 const server = require('./api/server.js')
 
 const projectA = {
