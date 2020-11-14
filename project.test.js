@@ -1,3 +1,5 @@
+// 👉 You can run tests with `npm test`
+// DO NOT CHANGE THIS FILE!
 const request = require('supertest')
 const db = require('./data/dbConfig')
 const Action = require('./data/helpers/actionModel')
