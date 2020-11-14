@@ -72,9 +72,10 @@ describe('server', () => {
     describe('[PUT]', () => {
       it('responds with the updated action', async () => {
         const action = await Action.get(1)
+        const changes = { ...action, completed: true }
         expect(action.completed).toBe(false)
-        const res = await request(server).put('/api/actions/1').send({ ...action, completed: true })
-        expect(res.body.completed).toBe(true)
+        const res = await request(server).put('/api/actions/1').send(changes)
+        expect(res.body).toMatchObject(changes)
       })
       it('updates the action in the actions table', async () => {
         let action = await Action.get(1)
@@ -128,7 +129,7 @@ describe('server', () => {
       it('responds with the updated project', async () => {
         const changes = { ...projectA, completed: true }
         const res = await request(server).put('/api/projects/1').send(changes)
-        expect(res.body.completed).toBe(true)
+        expect(res.body).toMatchObject(changes)
       })
       it('updates the project in the projects table', async () => {
         const changes = { ...projectA, completed: true }
