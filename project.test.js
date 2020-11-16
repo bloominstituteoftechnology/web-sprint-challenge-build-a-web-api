@@ -32,6 +32,10 @@ beforeEach(async () => {
   await Action.insert(actionB)
 })
 
+it('sanity check', () => {
+  expect(true).not.toBe(false)
+})
+
 describe('server', () => {
   describe('actions endpoints', () => {
     describe('[GET] all', () => {
