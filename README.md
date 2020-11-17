@@ -92,18 +92,18 @@ A _"test"_ script already exists that can run tests against your code.
 #### Build an API
 
 - [ ] Inside `api/actionsRouter.js` build endpoints for performing CRUD operations on _actions_:
-  - `[GET] /api/actions`
-  - `[GET] /api/actions/:id`
-  - `[POST] /api/actions`
-  - `[PUT] /api/actions`
-  - `[DELETE] /api/actions`
+  - `[GET] /api/actions` sends an array of actions (or an empty array) as the body of the _response_.
+  - `[GET] /api/actions/:id` sends an action with the given `id` as the body of the _response_.
+  - `[POST] /api/actions` sends the newly created action as the body of the _response_.
+  - `[PUT] /api/actions` sends the updated action as the body of the _response_.
+  - `[DELETE] /api/actions` sends no _response_ body.
 
 - [ ] Inside `api/projectsRouter.js` build endpoints for performing CRUD operations on _projects_:
-  - `[GET] /api/projects`
-  - `[GET] /api/projects/:id`
-  - `[POST] /api/projects`
-  - `[PUT] /api/projects`
-  - `[DELETE] /api/projects`
+  - `[GET] /api/projects` sends an array of projects (or an empty array) as the body of the response.
+  - `[GET] /api/projects/:id` sends a project with the given `id` as the body of the _response_.
+  - `[POST] /api/projects` sends the newly created project as the body of the _response_.
+  - `[PUT] /api/projects` sends the updated project as the body of the _response_.
+  - `[DELETE] /api/projects` sends no _response_ body.
 
 - [ ] Inside `api/projectsRouter.js` add an endpoint for retrieving the list of actions for a project:
   - `[GET] /api/projects/:id/actions`
