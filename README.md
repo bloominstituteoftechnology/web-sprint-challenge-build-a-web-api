@@ -83,24 +83,26 @@ Your finished project must include all of the following requirements:
 
 #### NPM Scripts
 
-- [ ] An _npm script_ named _"start"_ that uses `node` to run the API server
-- [ ] An _npm script_ named _"server"_ that uses `nodemon`to run the API server
-- [ ] Use _nodemon_ as a development time dependency only that is not deployed to production
+A _"test"_ script already exists that can run tests against your code.
+
+- [ ] Write an _npm script_ named _"start"_ that uses `node` to run the API server.
+- [ ] Write an _npm script_ named _"server"_ that uses `nodemon`to run the API server.
+- [ ] Use _nodemon_ as a development time dependency only that is not deployed to production.
 
 #### Build an API
 
 - [ ] Inside `api/actionsRouter.js` build endpoints for performing CRUD operations on _actions_:
-  - `[GET]    /api/actions`
-  - `[GET]    /api/actions/:id`
-  - `[POST]   /api/actions`
-  - `[PUT]    /api/actions`
+  - `[GET] /api/actions`
+  - `[GET] /api/actions/:id`
+  - `[POST] /api/actions`
+  - `[PUT] /api/actions`
   - `[DELETE] /api/actions`
 
 - [ ] Inside `api/projectsRouter.js` build endpoints for performing CRUD operations on _projects_:
-  - `[GET]    /api/projects`
-  - `[GET]    /api/projects/:id`
-  - `[POST]   /api/projects`
-  - `[PUT]    /api/projects`
+  - `[GET] /api/projects`
+  - `[GET] /api/projects/:id`
+  - `[POST] /api/projects`
+  - `[PUT] /api/projects`
   - `[DELETE] /api/projects`
 
 - [ ] Inside `api/projectsRouter.js` add an endpoint for retrieving the list of actions for a project:
