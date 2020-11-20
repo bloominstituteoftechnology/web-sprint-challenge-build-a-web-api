@@ -4,7 +4,7 @@
     "description": "Node API Challenge",
     "main": "index.js",
     "scripts": {
-        "test": "cross-env NODE_ENV=testing jest --watch --verbose --detectOpenHandles --runInBand --silent"
+        "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand --silent"
     },
     "repository": {
         "type": "git",
