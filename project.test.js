@@ -1,5 +1,4 @@
-// 👉 You can run tests with `npm test`
-// DO NOT CHANGE THIS FILE!
+// 👉 You can run these tests in your terminal by executing `npm test`
 const request = require('supertest')
 const db = require('./data/dbConfig')
 const Action = require('./data/helpers/actionModel')
@@ -31,13 +30,20 @@ beforeEach(async () => {
   await Action.insert(actionA)
   await Action.insert(actionB)
 })
+afterAll(async (done) => {
+  await db.destroy()
+  done()
+})
 
 it('sanity check', () => {
   expect(true).not.toBe(false)
 })
 
 describe('server.js', () => {
-  describe('-------------------- actions endpoints', () => {
+  // 👉 ACTIONS
+  // 👉 ACTIONS
+  // 👉 ACTIONS
+  describe('actions endpoints', () => {
     describe('[GET] /api/actions', () => {
       it('sends back all actions that exist', async () => {
         const res = await request(server).get('/api/actions')
@@ -125,7 +131,11 @@ describe('server.js', () => {
       })
     })
   })
-  describe('-------------------- projects endpoints', () => {
+
+  // 👉 PROJECTS
+  // 👉 PROJECTS
+  // 👉 PROJECTS
+  describe('projects endpoints', () => {
     describe('[GET] /api/projects', () => {
       it('sends back all projects that exist', async () => {
         const res = await request(server).get('/api/projects')
