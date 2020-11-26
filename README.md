@@ -129,4 +129,4 @@ After finishing your required elements, you can push your work further. These go
 
 Follow these steps for completing your project.
 
-- [ ] Submit a Pull-Request to merge `<firstName-lastName>` Branch into master (student's Repo).
+- [ ] Submit a Pull-Request to merge `<firstName-lastName>` Branch into main (student's Repo).
