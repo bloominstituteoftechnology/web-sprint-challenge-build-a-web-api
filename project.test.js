@@ -25,10 +25,10 @@ beforeAll(async () => {
 beforeEach(async () => {
   await db('actions').truncate()
   await db('projects').truncate()
-  await Project.insert(projectA)
-  await Project.insert(projectB)
-  await Action.insert(actionA)
-  await Action.insert(actionB)
+  await db('projects').insert(projectA)
+  await db('projects').insert(projectB)
+  await db('actions').insert(actionA)
+  await db('actions').insert(actionB)
 })
 afterAll(async (done) => {
   await db.destroy()
