@@ -1,9 +1,9 @@
 // 👉 You can run these tests in your terminal by executing `npm test`
 const request = require('supertest')
 const db = require('./data/dbConfig')
-const Action = require('./data/helpers/actionModel')
-const Project = require('./data/helpers/projectModel')
-const server = require('./api/server.js')
+const Action = require('./api/actions/actions-model')
+const Project = require('./api/projects/projects-model')
+const server = require('./api/server')
 
 const projectA = {
   name: 'a', description: 'b', completed: false,

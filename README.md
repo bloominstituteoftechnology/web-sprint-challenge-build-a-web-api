@@ -8,13 +8,11 @@ This is an individual assessment. All work must be your own. Your challenge scor
 
 You are not allowed to collaborate during the sprint challenge. However, you are encouraged to follow the twenty-minute rule and seek support if you need direction.
 
-Review the folder structure of this project. _Do not **move or rename any of the files** that are already included in this project._
-
 _You have **three hours** to complete this challenge. Plan your time accordingly._
 
 ## Introduction
 
-In meeting the minimum viable product (MVP) specifications listed below, your project should provide an API that has Create, Read, Update and Delete (CRUD) functionality for both `projects` and `actions`. All necessary libraries are already installed in the project.
+In meeting the minimum viable product (MVP) specifications listed below, your project should provide an API that has Create, Read, Update and Delete (CRUD) functionality for both `projects` and `actions`.
 
 ### Database Schemas
 
@@ -25,23 +23,23 @@ The description of the structure and extra information about each _resource_ sto
 | Field       | Data Type | Metadata                                                                    |
 | ----------- | --------- | --------------------------------------------------------------------------- |
 | id          | number    | no need to provide it when creating projects, the database will generate it |
-| name        | string    | required.                                                                   |
-| description | string    | required.                                                                   |
+| name        | string    | required                                                                    |
+| description | string    | required                                                                    |
 | completed   | boolean   | used to indicate if the project has been completed, not required            |
 
 #### Actions
 
 | Field       | Data Type | Metadata                                                                                         |
 | ----------- | --------- | ------------------------------------------------------------------------------------------------ |
-| id          | number    | no need to provide it when creating posts, the database will automatically generate it.          |
-| project_id  | number    | required, must be the id of an existing project.                                                 |
-| description | string    | up to 128 characters long, required.                                                             |
-| notes       | string    | no size limit, required. Used to record additional notes or requirements to complete the action. |
+| id          | number    | no need to provide it when creating posts, the database will automatically generate it           |
+| project_id  | number    | required, must be the id of an existing project                                                  |
+| description | string    | up to 128 characters long, required                                                              |
+| notes       | string    | no size limit, required. Used to record additional notes or requirements to complete the action  |
 | completed   | boolean   | used to indicate if the action has been completed, not required                                  |
 
 ### Database Persistence Helpers
 
-The `/data/helpers` folder includes files you can use to manage the persistence of _project_ and _action_ data. These files are `projectModel.js` and `actionModel.js`. Both files publish the following api, which you can use to store, modify and retrieve each resource:
+The project includes models you can use to manage the persistence of _project_ and _action_ data. These files are `api/projects/projects-model.js` and `api/actions/actions-model.js`. Both files publish the following api, which you can use to store, modify and retrieve each resource:
 
 **All these helper methods return a promise. Remember to use .then().catch() or async/await.**
 
@@ -50,34 +48,34 @@ The `/data/helpers` folder includes files you can use to manage the persistence 
 - `update()`: accepts two arguments, the first is the `id` of the resource to update, and the second is an object with the `changes` to apply. It returns the updated resource. If a resource with the provided `id` is not found, the method returns `null`.
 - `remove()`: the remove method accepts an `id` as it's first parameter and, upon successfully deleting the resource from the database, returns the number of records deleted.
 
-The `projectModel.js` helper includes an extra method called `getProjectActions()` that takes a _project id_ as it's only argument and returns a list of all the _actions_ for the _project_.
+The `projects-model.js` includes an extra method called `getProjectActions()` that takes a _project id_ as its only argument and returns a list of all the _actions_ for the _project_.
 
 We have provided test data for all the resources.
-
-### Commits
-
-Commit your code regularly and meaningfully. This helps both you (in case you ever need to return to old code for any number of reasons) and your team lead as the evaluate your solution.
 
 ## Interview Questions
 
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
-1. Understand and explain the use of Middleware?
+1. Understand and explain the use of Middleware.
 1. The basic principles of the REST architectural style.
 1. Understand and explain the use of Express Routers.
 1. Describe tooling used to manually test the correctness of an API.
 
 ## Instructions
 
+### Project Structure and Dependencies
+
+- [ ] Do not move or rename existing files or folders.
+- [ ] All necessary libraries are already installed in the project.
+
 ### Task 1: Project Set Up
 
 - [ ] Create a forked copy of this project.
-- [ ] Add your team lead as collaborator on Github
 - [ ] Clone your OWN version of the repository (Not Lambda's by mistake!).
-- [ ] Create a new branch: git checkout -b `<firstName-lastName>`.
-- [ ] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly.
-- [ ] Push commits: git push origin `<firstName-lastName>`.
+- [ ] Create a new branch: `git checkout -b <firstName-lastName>`.
+- [ ] Implement the project on your newly created `<firstName-lastName>` branch.
+- [ ] Commit & push your code regularly and meaningfully.
 
 ### Task 2: Project Requirements
 
@@ -85,7 +83,7 @@ Your finished project must include all of the following requirements:
 
 #### NPM Scripts
 
-A _"test"_ script already exists that can run tests against your code.
+A _"test"_ script already exists you can use to run tests against your code.
 
 - [ ] Write an _npm script_ named _"start"_ that uses `node` to run the API server.
 - [ ] Write an _npm script_ named _"server"_ that uses `nodemon`to run the API server.
@@ -93,33 +91,33 @@ A _"test"_ script already exists that can run tests against your code.
 
 #### Build an API
 
-- [ ] Inside `api/actionsRouter.js` build endpoints for performing CRUD operations on _actions_:
+- [ ] Inside `api/actions/actions-router.js` build endpoints for performing CRUD operations on _actions_:
   - `[GET] /api/actions` sends an array of actions (or an empty array) as the body of the _response_.
   - `[GET] /api/actions/:id` sends an action with the given `id` as the body of the _response_.
   - `[POST] /api/actions` sends the newly created action as the body of the _response_.
   - `[PUT] /api/actions` sends the updated action as the body of the _response_.
   - `[DELETE] /api/actions` sends no _response_ body.
 
-- [ ] Inside `api/projectsRouter.js` build endpoints for performing CRUD operations on _projects_:
+- [ ] Inside `api/projects/projects-router.js` build endpoints for performing CRUD operations on _projects_:
   - `[GET] /api/projects` sends an array of projects (or an empty array) as the body of the response.
   - `[GET] /api/projects/:id` sends a project with the given `id` as the body of the _response_.
   - `[POST] /api/projects` sends the newly created project as the body of the _response_.
   - `[PUT] /api/projects` sends the updated project as the body of the _response_.
   - `[DELETE] /api/projects` sends no _response_ body.
 
-- [ ] Inside `api/projectsRouter.js` add an endpoint for retrieving the list of actions for a project:
-  - `[GET] /api/projects/:id/actions`
+- [ ] Inside `api/projects/projects-router.js` add an endpoint for retrieving the list of actions for a project:
+  - `[GET] /api/projects/:id/actions` sends an array of actions (or an empty array) as the body of the response.
 
 - [ ] When adding an action, make sure the `project_id` provided belongs to an existing `project`.
 - [ ] If you try to add an action with an `id` of 3 and there is no project with that `id` the database will return an error.
-- [ ] Use an HTTP client like `HTTPie`, `postman` or `insomnia` to test the API's endpoints.
+- [ ] Use an HTTP client like `HTTPie`, `Postman` or `Insomnia` to test the API's endpoints.
 - [ ] Use Express Routers to organize your endpoints.
 - [ ] Your `server.js` file lives inside the `api` folder.
 - [ ] Your `index.js` file lives at the root of the project.
 
 ### Task 3: Stretch Goals
 
-After finishing your required elements, you can push your work further. These goals may or may not be things you have learned in this module but they build on the material you just studied. Time allowing, stretch your limits and see if you can deliver on the following optional goals:
+After finishing your required elements, you can push your work further. These goals may or may not be things you have learned in this module but they build on the material you just studied. Time allowing and **on a different branch**, stretch your limits and see if you can deliver on the following optional goals:
 
 - [ ] Deploy the API to Heroku.
 - [ ] Configure the API to support environment variables.
@@ -127,6 +125,7 @@ After finishing your required elements, you can push your work further. These go
 
 ## Submission format
 
-Follow these steps for completing your project.
+There are two possible ways to submit this project to Canvas. Lambda Staff will let you know which one applies:
 
-- [ ] Submit a Pull-Request to merge `<firstName-lastName>` Branch into main (student's Repo).
+1. Submitting a pull request to merge `<firstName-lastName>` branch into `main`.
+2. Setting up your fork on Github to submit via Codegrade and pushing commits to your branch.
