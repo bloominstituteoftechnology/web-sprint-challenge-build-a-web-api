@@ -17,12 +17,15 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     const { id } = req.params
-    if(!id){
-        res.status(404).json({ error: err.message })
-    }
+   
     Project.get(id)
         .then(project => {
-            res.status(200).json(project)
+            if(id){
+                res.status(200).json(project)
+            }
+            else{
+                res.status(404).json({ error: err.message })
+            }
         })
         .catch(err => {
             console.log(err)
@@ -52,7 +55,7 @@ router.put('/:id', (req, res) => {
     Project.update(id, changes)
         .then(project => {
             if(req.body.name && req.body.description){
-                res.status(200).json(project)
+                res.status(200).json(changes)
             }
             else{
                 res.status(400).json({ errorMessage: 'missing required field'})

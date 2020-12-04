@@ -19,11 +19,16 @@ router.get('/:id', (req, res) => {
     const { id } = req.params
     Action.get(id)
         .then(action => {
-            res.status(200).json(action)
+            if(id){
+                res.status(200).json(action)
+            }
+            else{
+                res.status(404).json({ error: err.message })
+            }
         })
         .catch(err => {
             console.log(err)
-            res.status(404).json({ error: err.message })
+            res.status(500).json({ error: err.message })
         })
 })
 
@@ -45,16 +50,19 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     const { id } = req.params
     const changes = req.body
-    if(!req.body.project_id || !req.body.description || !req.body.notes){
-        res.status(400).json({ errorMessage: 'missing required field'} )
-    }
+    
     Action.update(id, changes)
         .then(action => {
-            res.status(200).json(changes)
+            if(req.body.project_id && req.body.description && req.body.notes){
+                res.status(200).json(changes)
+            }
+            else{
+                res.status(400).json({ errorMessage: 'missing required field'} )
+            }
         })
         .catch(err => {
             console.log(err)
-            res.status(400).json({ error: err.message })
+            res.status(500).json({ error: err.message })
         })
 })
 
@@ -62,11 +70,16 @@ router.delete('/:id', (req, res) => {
     const { id } = req.params
     Action.remove(id)
         .then(action => {
-            res.status(200).json({ message: "action deleted"})
+            if(id){
+                res.status(200).json({ message: "action deleted"})
+            }
+            else{
+                res.status(404).json({ errorMessage: 'could not found an action with the id'})
+            }
         })
         .catch(err => {
             console.log(err)
-            res.status(404).json({ message: 'action could not be deleted'})
+            res.status(500).json({ message: 'action could not be deleted'})
         })
 })
 
