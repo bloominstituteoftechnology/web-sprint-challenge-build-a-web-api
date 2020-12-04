@@ -8,41 +8,27 @@ module.exports = {
   remove,
 };
 
-function get(id) {
-  // let query = db('actions');
-
-  // if (id) {
-  //   return query
-  //     .where('id', id)
-  //     .first()
-  //     .then((action) => {
-  //       if (action) {
-  //         return mappers.actionToBody(action);
-  //       } else {
-  //         return null;
-  //       }
-  //     });
-  // } else {
-  //   return query.then((actions) => {
-  //     return actions.map((action) => mappers.actionToBody(action));
-  //   });
-  // }
+function get() {
   return db('actions')
+}
+
+function getbyid(id){
+  return db("actions").where({ id }).first();
 }
 
 function insert(action) {
   return db('actions')
     .insert(action, 'id')
-    .then(([id]) => get(id));
+    .then(([id]) => getbyid(id));
 }
 
 function update(id, changes) {
   return db('actions')
-    .where('id', id)
+    .where({ id })
     .update(changes)
-    .then((count) => (count > 0 ? get(id) : null));
+    .then((count) => (count > 0 ? getbyid(id) : null));
 }
 
 function remove(id) {
-  return db('actions').where('id', id).del();
+  return db("actions").where({ id }).del();
 }

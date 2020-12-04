@@ -10,53 +10,42 @@ module.exports = {
 };
 
 function get(id) {
-  // let query = db("projects as p");
-
-  // if (id) {
-  //   query.where("p.id", id).first();
-
-  //   const promises = [query, getProjectActions(id)]; // [ projects, actions ]
-
-  //   return Promise.all(promises).then(function(results) {
-  //     let [project, actions] = results;
-
-  //     if (project) {
-  //       project.actions = actions;
-
-  //       return mappers.projectToBody(project);
-  //     } else {
-  //       return null;
-  //     }
-  //   });
-  // } else {
-  //   return query.then(projects => {
-  //     return projects.map(project => mappers.projectToBody(project));
-  //   });
-  // }
   return db('projects')
 }
 
+function getbyid(id){
+  return db("projects").where({ id }).first();
+}
+
 function insert(project) {
-  return db("projects")
-    .insert(project, "id")
-    .then(([id]) => get(id));
+  try {
+    const [id] = await db("projects").insert(project, "id");
+
+    return getbyid(id);
+  } catch (error) {
+    throw error;
+  }
 }
 
 function update(id, changes) {
-  return db("projects")
-    .where("id", id)
-    .update(changes)
-    .then(count => (count > 0 ? get(id) : null));
+  const count = await db("projects").where({ id }).update(changes)
+    if (count) {
+      return db('projects').where({ id }).first()
+    } else {
+      return Promise.resolve(null)
+    }
 }
 
 function remove(id) {
-  return db("projects")
-    .where("id", id)
-    .del();
+  const project = await db('projects').where({ id }).first()
+    if (!project) return Promise.resolve(null)
+    await db("projects").where({ id }).del()
+    return Promise.resolve(task)
 }
 
 function getProjectActions(projectId) {
-  return db("actions")
-    .where("project_id", projectId)
-    .then(actions => actions.map(action => mappers.actionToBody(action)));
+  return db("actions as a")
+    .join('projects as p', 'a.project_id', 'p.id')
+    .select('p.name', 'a.description', 'a.notes')
+    .where('p.id', projectId)
 }
