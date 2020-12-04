@@ -52,7 +52,7 @@ router.put('/:id', (req, res) => {
     })
     .catch(err => {
       console.log(err)
-      res.status(404).json({ message: err.message });
+      res.status(4040.json({ message: err.message });
     });
 });
 
@@ -64,7 +64,7 @@ router.delete('/:id', (req, res) => {
     })
     .catch(err => {
       console.log(err)
-      res.status(500).json({ message: '500: Oops, action could not be destroyed.' });
+      res.status(404).json({ message: '404: Oops, action could not be destroyed.' });
     });
 });
 
