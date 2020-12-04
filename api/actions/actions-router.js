@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
         .catch(err => {
             console.log(err)
             res.status(500).json({ errorMessage: 'error adding the action'})
-        })
+        })    
     })
 
 router.put('/:id', (req, res) => {
