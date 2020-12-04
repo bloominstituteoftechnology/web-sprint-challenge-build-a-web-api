@@ -20,7 +20,13 @@ router.get('/:id', (req, res) => {
     const { id } = req.params
     Projects.get(id)
         .then(data => {
-            res.status(200).json(data)
+            if (!data) {
+                res.status(404).json({
+                    message: 'This id does not exist'
+                })
+            } else {
+                res.status(200).json(data)
+            }
         })
         .catch(error => {
             console.log(error)
@@ -28,7 +34,7 @@ router.get('/:id', (req, res) => {
         })
 });
 
-router.post('/', (req, res) => {
+router.post('/', [validateProject], (req, res) => {
     Projects.insert(req.body)
         .then(data => {
             res.status(201).json(data);
@@ -42,7 +48,7 @@ router.post('/', (req, res) => {
         });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', [validateProject], (req, res) => {
     Projects.update(req.params.id, req.body)
         .then(data => {
             res.status(200).json(data);
@@ -59,12 +65,18 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     Projects.remove(req.params.id)
         .then(data => {
-            res.status(200).json({ message: 'The project has been nuked' });
+            if (data) {
+                res.status(204).end();
+            } else {
+                res.status(404).json({
+                    message: `Cannot delete this one!`
+                })
+            }
         })
         .catch(error => {
             console.log(error);
             res.status(500).json({
-                message: 'Error removing the hub',
+                message: 'Error removing the projects',
             });
         });
 });
@@ -84,6 +96,15 @@ router.get('/:id/actions', (req, res) => {
         })
 });
 
+function validateProject(req, res, next) {
+    if (!req.body.name || !req.body.description) {
+        res.status(400).json({
+            message: 'Please provide name and description'
+        })
+    } else {
+        next();
+    }
+}
 
 module.exports = router;
 
