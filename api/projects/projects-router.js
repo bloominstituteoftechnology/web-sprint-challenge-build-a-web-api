@@ -15,16 +15,17 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const { id } = req.params
-  if(!id){
-    res.status(404).json({ message: '404: Error' })
-}
   ProjectModel.get(id)
     .then(projects => {
-      res.status(200).json(projects)
+      if(projects){
+        res.status(200).json(projects)
+      } else {
+        res.status(404).json({ message: 'Error' })
+    }
     })
     .catch(err => {
       console.log(err)
-      res.status(500).json({ message: err.message });
+      res.status(404).json({ message: err.message });
     });
 });
 
@@ -48,7 +49,7 @@ router.put('/:id', (req, res) => {
   const change = req.body
   ProjectModel.update(id, change)
     .then(projects => {
-      if (req.body.name && req.body.description) {
+      if (req.body.name && req.body.description && req.body.completed) {
         res.status(200).json(projects)
       }
       else {
@@ -74,7 +75,7 @@ router.delete('/:id', (req, res) => {
     })
     .catch(err => {
       console.log(err)
-      res.status(404).json({ message: '500: Project could not be destroyed.' });
+      res.status(500).json({ message: '500: Project could not be destroyed.' });
     });
 });
 

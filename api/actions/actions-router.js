@@ -17,11 +17,16 @@ router.get('/:id', (req, res) => {
   const { id } = req.params
   Actionmodel.get(id)
     .then(actions => {
-      res.status(200).json(actions)
+      if(actions){
+        res.status(200).json(actions)
+    }
+    else{
+        res.status(404).json({ message: '404:Error' })
+    }
     })
     .catch(err => {
       console.log(err)
-      res.status(500).json({ message: err.message });
+      res.status(404).json({ message: err.message });
     });
 });
 
@@ -43,16 +48,17 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
   const { id } = req.params
   const change = req.body
-  if (!req.body.project_id || !req.body.description || !req.body.notes) {
-    res.status(400).json({ message: '400: Missing required information!' });
-  }
   Actionmodel.update(id, change)
     .then(actions => {
-      res.status(200).json(change)
+      if (req.body.project_id && req.body.description && req.body.notes && req.body.completed){
+        res.status(200).json(actions)
+    } else {
+      res.status(400).json({ message: 'Missing required info!' })
+    }
     })
     .catch(err => {
       console.log(err)
-      res.status(404).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     });
 });
 
@@ -60,7 +66,11 @@ router.delete('/:id', (req, res) => {
   const { id } = req.params
   Actionmodel.remove(id)
     .then(actions => {
-      res.status(200).json({ message: "Success: Action destroyed!" });
+      if (actions) {
+        res.status(200).json({ message: "Success: Action destroyed!" });
+      } else {
+        res.status(404).json({ message: '404: Could not destroy action with the id'})
+      }
     })
     .catch(err => {
       console.log(err)
