@@ -74,10 +74,10 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
 - [ ] Create a forked copy of this project.
 - [ ] Clone your OWN version of the repository (Not Lambda's by mistake!).
 - [ ] Create a new branch: `git checkout -b <firstName-lastName>`.
-- [ ] Implement the project on your newly created `<firstName-lastName>` branch.
+- [ ] Implement MVP on your newly created `<firstName-lastName>` branch.
 - [ ] Commit & push your code regularly and meaningfully.
 
-### Task 2: Project Requirements
+### Task 2: Project Requirements (MVP)
 
 Your finished project must include all of the following requirements:
 
@@ -129,5 +129,5 @@ After finishing your required elements, you can push your work further. These go
 
 There are two possible ways to submit this project to Canvas. Lambda Staff will let you know which one applies:
 
-1. Submitting a pull request to merge `<firstName-lastName>` branch into `main`.
-2. Setting up your fork on Github to submit via Codegrade and pushing commits to your branch.
+1. Submitting a pull request to merge `<firstName-lastName>` (or `stretch` if you finished any stretch goals) branch into `main`.
+2. Setting up your fork settings on Github to submit via Codegrade by pushing commits to your `<firstName-lastName>` branch.
