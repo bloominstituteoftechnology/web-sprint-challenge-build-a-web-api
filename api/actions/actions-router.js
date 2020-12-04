@@ -52,7 +52,7 @@ router.put('/:id', (req, res) => {
     })
     .catch(err => {
       console.log(err)
-      res.status(4040.json({ message: err.message });
+      res.status(404).json({ message: err.message });
     });
 });
 
