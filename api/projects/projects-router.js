@@ -1,4 +1,5 @@
 // Write your "projects" router here!
+console.log('this is a test')
 const express = require('express');
 const ProjectModel = require('./projects-model');
 const router = express.Router();
