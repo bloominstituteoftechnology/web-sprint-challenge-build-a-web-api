@@ -5,7 +5,7 @@ const Action = require('./api/actions/actions-model')
 const Project = require('./api/projects/projects-model')
 const server = require('./api/server')
 
-jest.setTimeout(50)
+jest.setTimeout(200)
 
 const projectA = {
   name: 'a', description: 'b', completed: false,
@@ -59,7 +59,7 @@ describe('server.js', () => {
         expect(res.body).toHaveLength(0)
       })
     })
-    describe('[GET] /api/actions/:id', async () => {
+    describe('[GET] /api/actions/:id', () => {
       it('sends back the action with given id', async () => {
         const res1 = await request(server).get('/api/actions/1')
         const res2 = await request(server).get('/api/actions/2')
