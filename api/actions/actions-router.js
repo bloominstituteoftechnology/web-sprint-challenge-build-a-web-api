@@ -9,14 +9,14 @@ router.get('/', (req, res) => {
       if (actions) {
         res
           .status(200)
-          .json({ message: 'List of Actions', Action_List: actions });
+          .json({ message: 'Here is a list of Actions', Action_List: actions });
       } else {
         res.status(404).json({ message: `can't retrieve list of actions` });
       }
     })
     .catch((error) => {
       console.log(error);
-      res.status(500).json({ message: 'Can not get List of actions' });
+      res.status(500).json({ message: 'Could not get list of actions' });
     });
 });
 
