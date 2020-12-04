@@ -117,7 +117,9 @@ A _"test"_ script already exists you can use to run tests against your code.
 
 ### Task 3: Stretch Goals
 
-After finishing your required elements, you can push your work further. These goals may or may not be things you have learned in this module but they build on the material you just studied. Time allowing and **on a different branch**, stretch your limits and see if you can deliver on the following optional goals:
+**IMPORTANT:** Work on stretch goals on a **different branch**. You can branch off `<firstName-lastName>` by executing `git checkout -b stretch`.
+
+After finishing your required elements, you can push your work further. These goals may or may not be things you have learned in this module but they build on the material you just studied. Time allowing, stretch your limits and see if you can deliver on the following optional goals:
 
 - [ ] Deploy the API to Heroku.
 - [ ] Configure the API to support environment variables.
