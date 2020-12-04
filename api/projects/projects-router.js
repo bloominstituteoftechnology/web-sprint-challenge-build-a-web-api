@@ -73,7 +73,7 @@ router.get('/projectRouters', (req, res) => {
     res.status(500).json({ message: 'Project ID needed!' });
   } else {
     project
-      .getProjectActions(project_id)
+      .getProjectRouters(project_id)
       .then((success) => {
         res.status(200).json({ success });
       })
