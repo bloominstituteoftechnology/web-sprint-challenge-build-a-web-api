@@ -17,13 +17,16 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     const { id } = req.params
+    if(!id){
+        res.status(404).json({ error: err.message })
+    }
     Project.get(id)
         .then(project => {
             res.status(200).json(project)
         })
         .catch(err => {
             console.log(err)
-            res.status(404).json({ error: err.message })
+            res.status(500).json({ error: err.message })
         })
 })
 
@@ -61,13 +64,16 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     const { id } = req.params
+    if(!id){
+        res.status(404).json({ message: 'No id is found'})
+    }
     Project.remove(id)
     .then(project => {
         res.status(200).json({ message: "project deleted"})
     })
     .catch(err => {
         console.log(err)
-        res.status(404).json({ message: 'project could not be deleted'})
+        res.status(500).json({ message: 'project could not be deleted'})
     })
 })
 
