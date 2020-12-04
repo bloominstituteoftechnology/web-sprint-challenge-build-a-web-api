@@ -20,7 +20,7 @@ router.get('/:id', (req, res) => {
    
     Project.get(id)
         .then(project => {
-            if(id){
+            if(project){
                 res.status(200).json(project)
             }
             else{
@@ -55,7 +55,7 @@ router.put('/:id', (req, res) => {
     Project.update(id, changes)
         .then(project => {
             if(req.body.name && req.body.description){
-                res.status(200).json(changes)
+                res.status(200).json(project)
             }
             else{
                 res.status(400).json({ errorMessage: 'missing required field'})

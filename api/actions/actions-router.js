@@ -19,7 +19,7 @@ router.get('/:id', (req, res) => {
     const { id } = req.params
     Action.get(id)
         .then(action => {
-            if(id){
+            if(action){
                 res.status(200).json(action)
             }
             else{
@@ -54,7 +54,7 @@ router.put('/:id', (req, res) => {
     Action.update(id, changes)
         .then(action => {
             if(req.body.project_id && req.body.description && req.body.notes){
-                res.status(200).json(changes)
+                res.status(200).json(action)
             }
             else{
                 res.status(400).json({ errorMessage: 'missing required field'} )
@@ -70,7 +70,7 @@ router.delete('/:id', (req, res) => {
     const { id } = req.params
     Action.remove(id)
         .then(action => {
-            if(id){
+            if(action){
                 res.status(200).json({ message: "action deleted"})
             }
             else{
