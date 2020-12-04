@@ -42,17 +42,17 @@ router.post('/', (req, res) => {
   
 router.put('/:id', (req, res) => {
   const { id } = req.params
-  const changes = req.body
+  const change = req.body
   if (!req.body.project_id || !req.body.description || !req.body.notes) {
     res.status(400).json({ message: '400: Missing required information!' });
   }
-  Actionmodel.update(id, changes)
+  Actionmodel.update(id, change)
     .then(actions => {
-      res.status(200).json(actions)
+      res.status(200).json(change)
     })
     .catch(err => {
       console.log(err)
-      res.status(500).json({ message: err.message });
+      res.status(404).json({ message: err.message });
     });
 });
 

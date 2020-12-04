@@ -21,7 +21,7 @@ router.get('/:id', (req, res) => {
     })
     .catch(err => {
       console.log(err)
-      res.status(500).json({ message: err.message });
+      res.status(404).json({ message: err.message });
     });
 });
 
@@ -42,17 +42,17 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   const { id } = req.params
-  const changes = req.body
+  const change = req.body
   if (!req.body.name || !req.body.description) {
     res.status(400).json({ message: 'Missing required information!' });
   }
-  ProjectModel.update(id, changes)
+  ProjectModel.update(id, change)
     .then(projects => {
-      res.status(200).json(projects)
+      res.status(200).json(change)
     })
     .catch(err => {
       console.log(err)
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     });
 });
 
@@ -64,7 +64,7 @@ router.delete('/:id', (req, res) => {
     })
     .catch(err => {
       console.log(err)
-      res.status(500).json({ message: '500: Project could not be destroyed.'});
+      res.status(404).json({ message: '500: Project could not be destroyed.'});
     });
 });
 
