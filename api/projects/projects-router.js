@@ -54,7 +54,7 @@ router.put('/:id', (req, res) => {
 
     Project.update(id, changes)
         .then(project => {
-            if(req.body.name && req.body.description){
+            if(req.body.name && req.body.description && req.body.completed){
                 res.status(200).json(project)
             }
             else{

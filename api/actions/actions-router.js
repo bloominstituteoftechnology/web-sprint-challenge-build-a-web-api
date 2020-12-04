@@ -53,7 +53,7 @@ router.put('/:id', (req, res) => {
     
     Action.update(id, changes)
         .then(action => {
-            if(req.body.project_id && req.body.description && req.body.notes){
+            if(req.body.project_id && req.body.description && req.body.notes && req.body.completed){
                 res.status(200).json(action)
             }
             else{
