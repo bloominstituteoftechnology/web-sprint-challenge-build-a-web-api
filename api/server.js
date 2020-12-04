@@ -1,9 +1,18 @@
 const express = require('express');
 const server = express();
-
+const morgan = require('morgan');
+const helmet = require('helmet')
 const actionsRouter = require('./actions/actions-router')
 const projectsRouter = require('./projects/projects-router')
+const cors = require('cors');
 
+server.use((req, res, next) => {
+    next();
+})
+
+server.use(cors());
+server.use(helmet());
+server.use(morgan('dev'));
 server.use(express.json());
 server.use('/api/actions', actionsRouter)
 server.use('/api/projects', projectsRouter)
