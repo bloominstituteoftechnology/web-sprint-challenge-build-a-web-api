@@ -73,7 +73,7 @@ router.post('/', (req, res) => {
         });
       } else {
         res
-          .status(404)
+          .status(400)
           .json({ message: `Can't post project, error${newPost}` });
       }
     })
@@ -94,7 +94,7 @@ router.put('/:id', (req, res) => {
           project_updated: updateProject,
         });
       } else {
-        res.status(404).json({ message: `Cant update project, 404 error` });
+        res.status(400).json({ message: `Cant update project, 404 error` });
       }
     })
     .catch((error) => {

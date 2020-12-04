@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
           .status(201)
           .json({ message: 'New user posted', user_posted: postUser });
       } else {
-        res.status(404).json({ message: `Cant post a user, check req.body` });
+        res.status(400).json({ message: `Cant post a user, check req.body` });
       }
     })
     .catch((error) => {
