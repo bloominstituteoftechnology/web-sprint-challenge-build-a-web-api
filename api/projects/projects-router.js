@@ -48,13 +48,15 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     const { id } = req.params
     const changes = req.body
-    if(!req.body.name || !req.body.description){
-        res.status(400).json({ errorMessage: 'missing required field'})
-    }
 
     Project.update(id, changes)
         .then(project => {
-            res.status(200).json(changes)
+            if(req.body.name && req.body.description){
+                res.status(200).json(project)
+            }
+            else{
+                res.status(400).json({ errorMessage: 'missing required field'})
+            }
         })
         .catch(err => {
             console.log(err)
@@ -64,12 +66,14 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     const { id } = req.params
-    if(!id){
-        res.status(404).json({ message: 'No id is found'})
-    }
     Project.remove(id)
     .then(project => {
-        res.status(200).json({ message: "project deleted"})
+        if(project){
+            res.status(200).json({ message: "project deleted"})
+        }
+        else{
+            res.status(404).json({ message: 'No id is found'})
+        }
     })
     .catch(err => {
         console.log(err)
