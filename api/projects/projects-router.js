@@ -1,17 +1,18 @@
 // Write your "projects" router here!
 const express = require('express');
+const projectData = require('./projects-model');
 const router = express.Router();
-const project = require('./projects-model');
+
+router.use(express.json())
 
 router.get('/', (req, res) => {
-  project
-    .get()
+  projectData.get()
     .then((success) => {
       res.status(200).json({ success });
     })
     .catch((err) => {
       console.log(err);
-      res.status(404).json({ message: 'Can not get project.' });
+      res.status(500).json({ message: 'Can not get project.' });
     });
 });
 
@@ -19,7 +20,7 @@ router.post('/', (req, res) => {
   if (!req.body.name || !req.body.description) {
     res.status(500).json({ message: 'Name and description required.' });
   } else {
-    project
+    projectData
       .insert(req.body)
       .then((success) => {
         res.status(201).json({ success });
@@ -37,7 +38,7 @@ router.put('/:id', (req, res) => {
   if (!id || !changes) {
     res.status(500).json({ message: 'ID and changes required.'});
   } else {
-    project
+    projectData
       .update(id, changes)
       .then((success) => {
         res.status(201).json({ success });
@@ -54,7 +55,7 @@ router.delete('/:id', (req, res) => {
   if (!id) {
     res.status(500).json({ message: 'ID required!'});
   } else {
-    project
+    projectData
       .remove(id)
       .then((success) => {
         res.status(200).json({ message: 'User successfully removed.', success });
@@ -66,22 +67,29 @@ router.delete('/:id', (req, res) => {
   }
 });
 
-router.get('/projectRouters', (req, res) => {
-  const { project_id } = req.body;
-  console.log(project_id);
-  if (!project_id) {
-    res.status(500).json({ message: 'Project ID needed!' });
-  } else {
-    project
-      .getProjectRouters(project_id)
-      .then((success) => {
-        res.status(200).json({ success });
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(404).json({ message: 'Something went wrong! Error!' });
-      });
-  }
-});
+// router.get('/projectRouters', (req, res) => {
+//   const { project_id } = req.body;
+//   console.log(project_id);
+//   if (!project_id) {
+//     res.status(500).json({ message: 'Project ID needed!' });
+//   } else {
+//     projectData
+//       .getProjectRouters(project_id)
+//       .then((success) => {
+//         res.status(200).json({ success });
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//         res.status(404).json({ message: 'Something went wrong! Error!' });
+//       });
+//   }
+// });
+router.get('/:id/actions', (req, res) => {
+  projectData.getProjectActions()
+  .then(success => 
+      res.status(200).json(success))
+  .catch(err => 
+      res.status(500).json({ message: 'There was an error'}))
+})
 
 module.exports = router; 
