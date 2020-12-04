@@ -1,3 +1,11 @@
+const server = require('./api/server.js');
+
+
+console.log('web 36 rocks')
+
+server.listen(4000, () => {
+  console.log('\n* Server Running on http://localhost:4000 *\n');
+});
 /*
 play this: https://www.youtube.com/watch?v=d-diB65scQU
 

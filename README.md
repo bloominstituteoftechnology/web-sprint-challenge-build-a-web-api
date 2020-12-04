@@ -66,16 +66,16 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
 
 ### Project Structure and Dependencies
 
-- [ ] Do not move or rename existing files or folders.
-- [ ] All necessary libraries are already installed in the project.
+- [x] Do not move or rename existing files or folders.
+- [x] All necessary libraries are already installed in the project.
 
 ### Task 1: Project Set Up
 
-- [ ] Create a forked copy of this project.
-- [ ] Clone your OWN version of the repository (Not Lambda's by mistake!).
-- [ ] Create a new branch: `git checkout -b <firstName-lastName>`.
-- [ ] Implement the project on your newly created `<firstName-lastName>` branch.
-- [ ] Commit & push your code regularly and meaningfully.
+- [x] Create a forked copy of this project.
+- [x] Clone your OWN version of the repository (Not Lambda's by mistake!).
+- [x] Create a new branch: `git checkout -b <firstName-lastName>`.
+- [x] Implement the project on your newly created `<firstName-lastName>` branch.
+- [x] Commit & push your code regularly and meaningfully.
 
 ### Task 2: Project Requirements
 
@@ -85,35 +85,35 @@ Your finished project must include all of the following requirements:
 
 A _"test"_ script already exists you can use to run tests against your code.
 
-- [ ] Write an _npm script_ named _"start"_ that uses `node` to run the API server.
-- [ ] Write an _npm script_ named _"server"_ that uses `nodemon`to run the API server.
-- [ ] Use _nodemon_ as a development time dependency only that is not deployed to production.
+- [x] Write an _npm script_ named _"start"_ that uses `node` to run the API server.
+- [x] Write an _npm script_ named _"server"_ that uses `nodemon`to run the API server.
+- [x] Use _nodemon_ as a development time dependency only that is not deployed to production.
 
 #### Build an API
 
-- [ ] Inside `api/actions/actions-router.js` build endpoints for performing CRUD operations on _actions_:
+- [x] Inside `api/actions/actions-router.js` build endpoints for performing CRUD operations on _actions_:
   - `[GET] /api/actions` sends an array of actions (or an empty array) as the body of the _response_.
   - `[GET] /api/actions/:id` sends an action with the given `id` as the body of the _response_.
   - `[POST] /api/actions` sends the newly created action as the body of the _response_.
-  - `[PUT] /api/actions` sends the updated action as the body of the _response_.
-  - `[DELETE] /api/actions` sends no _response_ body.
+  - `[PUT] /api/actions/:id` sends the updated action as the body of the _response_.
+  - `[DELETE] /api/actions/:id` sends no _response_ body.
 
-- [ ] Inside `api/projects/projects-router.js` build endpoints for performing CRUD operations on _projects_:
+- [x] Inside `api/projects/projects-router.js` build endpoints for performing CRUD operations on _projects_:
   - `[GET] /api/projects` sends an array of projects (or an empty array) as the body of the response.
   - `[GET] /api/projects/:id` sends a project with the given `id` as the body of the _response_.
   - `[POST] /api/projects` sends the newly created project as the body of the _response_.
-  - `[PUT] /api/projects` sends the updated project as the body of the _response_.
-  - `[DELETE] /api/projects` sends no _response_ body.
+  - `[PUT] /api/projects/:id` sends the updated project as the body of the _response_.
+  - `[DELETE] /api/projects/:id` sends no _response_ body.
 
-- [ ] Inside `api/projects/projects-router.js` add an endpoint for retrieving the list of actions for a project:
+- [x] Inside `api/projects/projects-router.js` add an endpoint for retrieving the list of actions for a project:
   - `[GET] /api/projects/:id/actions` sends an array of actions (or an empty array) as the body of the response.
 
 - [ ] When adding an action, make sure the `project_id` provided belongs to an existing `project`.
 - [ ] If you try to add an action with an `id` of 3 and there is no project with that `id` the database will return an error.
-- [ ] Use an HTTP client like `HTTPie`, `Postman` or `Insomnia` to test the API's endpoints.
-- [ ] Use Express Routers to organize your endpoints.
-- [ ] Your `server.js` file lives inside the `api` folder.
-- [ ] Your `index.js` file lives at the root of the project.
+- [x] Use an HTTP client like `HTTPie`, `Postman` or `Insomnia` to test the API's endpoints.
+- [x] Use Express Routers to organize your endpoints.
+- [x] Your `server.js` file lives inside the `api` folder.
+- [x] Your `index.js` file lives at the root of the project.
 
 ### Task 3: Stretch Goals
 
