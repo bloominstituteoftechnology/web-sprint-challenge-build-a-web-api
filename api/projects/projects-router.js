@@ -23,7 +23,7 @@ router.get('/:id', (req, res) => {
         })
         .catch(err => {
             console.log(err)
-            res.status(500).json({ error: err.message })
+            res.status(404).json({ error: err.message })
         })
 })
 
@@ -51,11 +51,11 @@ router.put('/:id', (req, res) => {
 
     Project.update(id, changes)
         .then(project => {
-            res.status(200).json(project)
+            res.status(200).json(changes)
         })
         .catch(err => {
             console.log(err)
-            res.status(500).json({ error: err.message })
+            res.status(400).json({ error: err.message })
         })
 })
 
@@ -67,7 +67,7 @@ router.delete('/:id', (req, res) => {
     })
     .catch(err => {
         console.log(err)
-        res.status(500).json({ message: 'project could not be deleted'})
+        res.status(404).json({ message: 'project could not be deleted'})
     })
 })
 

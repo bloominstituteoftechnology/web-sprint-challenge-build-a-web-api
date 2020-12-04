@@ -23,7 +23,7 @@ router.get('/:id', (req, res) => {
         })
         .catch(err => {
             console.log(err)
-            res.status(500).json({ error: err.message })
+            res.status(404).json({ error: err.message })
         })
 })
 
@@ -50,7 +50,7 @@ router.put('/:id', (req, res) => {
     }
     Action.update(id, changes)
         .then(action => {
-            res.status(200).json(action)
+            res.status(200).json(changes)
         })
         .catch(err => {
             console.log(err)
