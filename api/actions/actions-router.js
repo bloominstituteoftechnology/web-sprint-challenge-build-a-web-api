@@ -1,5 +1,5 @@
 const express = require('express')
-
+// these are actions
 const Actions = require('./actions-model')
 
 const middlewares = require('../.././middlewares/middlewares')
