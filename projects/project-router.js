@@ -96,4 +96,15 @@ router.delete('/:id', (req,res,next) => {
             next(err)
         })
 })
+
+router.get('/:id/actions', (req,res,next) => {
+    project.getProjectActions(req.params.id)
+        .then((action) => {
+            res.json(action)
+        })
+        .catch((err) => {
+            console.log(err)
+           next(err)
+        })
+})
 module.exports = router
