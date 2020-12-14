@@ -34,7 +34,7 @@ router.post('/', validateAction(), (req, res) => {
         })
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', validateActionID(), (req, res) => {
     const { id } = req.params;
 
     actions.update(id, req.body)
@@ -50,9 +50,21 @@ router.put('/:id', (req, res) => {
         })
 });
 
+router.delete('/:id', validateActionID(), (req, res) => {
+    const { id } = req.params;
+
+    actions.remove(id)
+        .then(result => {
+            res.status(200).json({ message: "Action deleted."})
+        })
+        .catch(() => {
+            res.status(500).json({ message: "There has been an error with the database." });
+        });
+});
+
 /* MIDDLEWARE */
 function validateAction(req, res, next) {
-    return function(req, res, next) {
+    return function (req, res, next) {
         if (!req.body || !req.body.project_id || !req.body.description || !req.body.notes) {
             return res.status(204).json({ message: "Missing required field." });
         }
@@ -60,7 +72,26 @@ function validateAction(req, res, next) {
         req.action = req.body;
         next();
     };
-}
+};
+
+function validateActionID(req, res, next) {
+    return function (req, res, next) {
+        const { id } = req.params;
+
+        actions.get(id)
+            .then((result) => {
+                if (result <= 0) {
+                    return res.status(404).json({ message: "No action with specified ID." })
+                }
+
+                req.action = result;
+                next();
+            })
+            .catch(() => {
+                res.status(500).json({ message: "There has been an error with the database." });
+            });
+    };
+};
 
 // EXPORT
 module.exports = router;
