@@ -57,10 +57,25 @@ We have provided test data for all the resources.
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+    Node.js is a runtime environment (a program that runs other programs) that was extracted from Chrome by Ryan Dahl in 2009. It lets us run JS without a browser.
+    Express is an NPM library. It's a framework that sits on top of http.
+    It takes care a lot of boiler plate functions so we don’t have to write them.
+
 1. Understand and explain the use of Middleware.
+    Middleware is an array of functions that get executed in the order they are introduced into the server code.
+
 1. The basic principles of the REST architectural style.
+    Representational State Transfer (REST) - A convention, or agreed-upon recommendation, for naming and organizing API endpoints.
+    - Endpoints should have a single resource per endpoint.
+    - Think of everything as a resource (user, comment, etc)
+    - Each resource should have a unique URL.
+    - URLs should utilize HTTP methods for operations.
+
 1. Understand and explain the use of Express Routers.
+    Using routing we can map incoming requests to the appropriate request handler based on the URL and HTTP Method used. Routing makes building RESTful Web APIs a breeze. We can have a single URL per resource and execute different code based on the HTTP Method/Verb used.
+
 1. Describe tooling used to manually test the correctness of an API.
+    Insomnia is a free cross-platform desktop application that takes the pain out of interacting with HTTP-based APIs. Insomnia combines an easy-to-use interface with advanced functionality like authentication helpers, code generation, and environment variables. There is also the option to subscribe to a paid plan to gain access to encrypted data sync and team collaboration.
 
 ## Instructions
 
