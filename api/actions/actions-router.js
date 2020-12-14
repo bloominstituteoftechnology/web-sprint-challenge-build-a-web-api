@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', validateAction(), (req, res) => {
-    actions.insert(req.action)
+    actions.insert(req.body)
         .then(result => {
             res.status(201).json(result);
         })
@@ -63,18 +63,17 @@ router.delete('/:id', validateActionID(), (req, res) => {
 });
 
 /* MIDDLEWARE */
-function validateAction(req, res, next) {
+function validateAction (req, res, next) {
     return function (req, res, next) {
         if (!req.body || !req.body.project_id || !req.body.description || !req.body.notes) {
             return res.status(204).json({ message: "Missing required field." });
         }
 
-        req.action = req.body;
         next();
     };
 };
 
-function validateActionID(req, res, next) {
+function validateActionID (req, res, next) {
     return function (req, res, next) {
         const { id } = req.params;
 
