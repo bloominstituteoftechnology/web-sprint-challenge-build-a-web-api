@@ -1,6 +1,3 @@
-/* IMPORTS */
-require('dotenv').config();
-
 const server = require('./api/server');
 const actionsRouter = require('./api/actions/actions-router');
 const projectsRouter = require('./api/projects/projects-router');
