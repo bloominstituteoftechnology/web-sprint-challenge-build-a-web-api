@@ -1,5 +1,6 @@
 const express = require('express');
 const actions = require('./actions-model');
+const projects = require('../projects/projects-model');
 
 const router = express.Router();
 
@@ -24,7 +25,18 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.post('/', validateAction(), (req, res) => {
+router.post('/', validateAction(), async (req, res) => {
+    // CHECK TO MAKE SURE THAT PROJECT_ID BELONGS TO AN EXISTING PROJECT
+    try {
+        const project = await projects.get(req.body.project_id);
+        if (!project || project.length <= 0) {
+            return res.status(404).json({ message: "No project with that specified ID." })
+        }
+
+    } catch {
+        res.status(500).json({ message: "There has been an error with the database." });
+    }
+
     actions.insert(req.body)
         .then(result => {
             res.status(201).json(result);
@@ -39,10 +51,6 @@ router.put('/:id', validateActionID(), (req, res) => {
 
     actions.update(id, req.body)
         .then(changes => {
-            if (!changes) {
-                return res.status(404).json({ message: "No aciton with specified ID." });
-            }
-
             res.status(201).json(changes);
         })
         .catch(() => {
@@ -54,7 +62,7 @@ router.delete('/:id', validateActionID(), (req, res) => {
     const { id } = req.params;
 
     actions.remove(id)
-        .then(result => {
+        .then(() => {
             res.status(200).json({ message: "Action deleted."})
         })
         .catch(() => {
@@ -66,7 +74,7 @@ router.delete('/:id', validateActionID(), (req, res) => {
 function validateAction (req, res, next) {
     return function (req, res, next) {
         if (!req.body || !req.body.project_id || !req.body.description || !req.body.notes) {
-            return res.status(204).json({ message: "Missing required field." });
+            return res.status(400).json({ message: "Missing required field." });
         }
 
         next();

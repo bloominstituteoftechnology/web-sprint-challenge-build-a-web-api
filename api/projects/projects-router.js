@@ -18,10 +18,15 @@ router.get('/:id', validateProjectID(), async (req, res) => {
     res.status(200).json(req.project);
 });
 
+/* This endpoint is for retrieving ONLY the actions of a specified project */
+router.get('/:id/actions', validateProjectID(), async (req, res) => {
+    res.status(200).json(req.project.actions);
+});
+
 router.post('/', validateProject(), async (req, res) => {
     try {
-        const newPost = await projects.insert(req.body);
-        res.status(201).json(newPost);
+        const newProject = await projects.insert(req.body);
+        res.status(201).json(newProject);
     } catch {
         res.status(500).json({ message: "There has been an error with the database." });
     }
@@ -31,9 +36,8 @@ router.put('/:id', validateProjectID(), async (req, res) => {
     const { id } = req.params;
 
     try {
-        const updatedPost = await projects.update(id, req.body);
-        console.log(updatedPost);
-        res.status(200).json(updatedPost);
+        const updatedProject = await projects.update(id, req.body);
+        res.status(202).json(updatedProject);
     } catch {
         res.status(500).json({ message: "There has been an error with the database." });
     }
@@ -54,7 +58,7 @@ router.delete('/:id', validateProjectID(), async (req, res) => {
 function validateProject (req, res, next) {
     return function (req, res, next) {
         if (!req.body.name || !req.body.description) {
-            return res.status(202).json({ message: "Missing required field." })
+            return res.status(400).json({ message: "Missing required field." })
         }
 
         next();
