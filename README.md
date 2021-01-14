@@ -6,9 +6,7 @@ This challenge allows you to practice the concepts and techniques learned over t
 
 This is an individual assessment. All work must be your own. Your challenge score is a measure of your ability to work independently using the material covered through this sprint. You need to demonstrate proficiency in the concepts and objectives introduced and practiced in preceding days.
 
-You are not allowed to collaborate during the sprint challenge. However, you are encouraged to follow the twenty-minute rule and seek support if you need direction.
-
-_You have **three hours** to complete this challenge. Plan your time accordingly._
+You are not allowed to collaborate during the sprint challenge. However, you are encouraged to follow the twenty-minute rule and seek support by dropping a :wave: in your help channel when needed.
 
 ## Introduction
 
@@ -52,22 +50,7 @@ The `projects-model.js` includes an extra method called `getProjectActions()` th
 
 We have provided test data for all the resources.
 
-## Interview Questions
-
-Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
-
-1. The core features of Node.js and Express and why they are useful.
-1. Understand and explain the use of Middleware.
-1. The basic principles of the REST architectural style.
-1. Understand and explain the use of Express Routers.
-1. Describe tooling used to manually test the correctness of an API.
-
 ## Instructions
-
-### Project Structure and Dependencies
-
-- [ ] Do not move or rename existing files or folders.
-- [ ] All necessary libraries are already installed in the project.
 
 ### Task 1: Project Set Up
 
@@ -115,6 +98,13 @@ A _"test"_ script already exists you can use to run tests against your code.
 - [ ] Your `server.js` file lives inside the `api` folder.
 - [ ] Your `index.js` file lives at the root of the project.
 
+**Notes:**
+
+- You are welcome to create additional files for middlewares, but **do not move or rename existing files** or folders.
+- In your solution, it is essential that you follow best practices and produce clean and professional results.
+- Schedule time to review, refine, and assess your work and perform basic professional polishing including spell-checking and grammar-checking on your work.
+- It is better to submit a challenge that meets MVP than one that attempts too much and does not.
+
 ### Task 3: Stretch Goals
 
 **IMPORTANT:** Work on stretch goals on a **different branch**. You can branch off `<firstName-lastName>` by executing `git checkout -b stretch`.
@@ -130,4 +120,14 @@ After finishing your required elements, you can push your work further. These go
 There are two possible ways to submit this project to Canvas. Lambda Staff will let you know which one applies:
 
 1. Submitting a pull request to merge `<firstName-lastName>` (or `stretch` if you finished any stretch goals) branch into `main`.
-2. Setting up your fork settings on Github to submit via Codegrade by pushing commits to your `<firstName-lastName>` branch.
+2. Setting up your fork on Github to submit via Codegrade by pushing commits to your `<firstName-lastName>` branch.
+
+## Interview Questions
+
+Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
+
+1. The core features of Node.js and Express and why they are useful.
+1. Understand and explain the use of Middleware.
+1. The basic principles of the REST architectural style.
+1. Understand and explain the use of Express Routers.
+1. Describe tooling used to manually test the correctness of an API.
