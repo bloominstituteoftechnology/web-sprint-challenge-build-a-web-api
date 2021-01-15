@@ -32,9 +32,7 @@ const checkProjectId = async (req, res, next) => {
 };
 
 const validateAction = (req, res, next) => {
-    if (!req.body) {
-        res.status(400).json({ error: 'Missing body'});
-    } else if (!req.body.description || !req.body.notes || !req.body.project_id) {
+    if (!req.body.description || !req.body.notes || !req.body.project_id) {
         res.status(400).json({ error: 'Missing content in the body' });
     } else {
         next();
@@ -42,10 +40,7 @@ const validateAction = (req, res, next) => {
 };
 
 const validateProject = (req, res, next) => {
-    console.log(req.body);
-    if (!req.body) {
-        res.status(400).json({ error: 'Missing body'});
-    } else if (!req.body.description || !req.body.name || !req.body.completed) {
+    if (!req.body.description || !req.body.name || !req.body.completed) {
         res.status(400).json({ error: 'Missing content in the body' });
     } else {
         next();
