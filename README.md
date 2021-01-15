@@ -74,7 +74,7 @@ A _"test"_ script already exists you can use to run tests against your code.
 
 #### Build an API
 
-- [ ] Inside `api/actions/actions-router.js` build endpoints for performing CRUD operations on _actions_:
+- [x] Inside `api/actions/actions-router.js` build endpoints for performing CRUD operations on _actions_:
   - `[GET] /api/actions` sends an array of actions (or an empty array) as the body of the _response_.
   - `[GET] /api/actions/:id` sends an action with the given `id` as the body of the _response_.
   - `[POST] /api/actions` sends the newly created action as the body of the _response_.
@@ -91,12 +91,12 @@ A _"test"_ script already exists you can use to run tests against your code.
 - [ ] Inside `api/projects/projects-router.js` add an endpoint for retrieving the list of actions for a project:
   - `[GET] /api/projects/:id/actions` sends an array of actions (or an empty array) as the body of the response.
 
-- [ ] When adding an action, make sure the `project_id` provided belongs to an existing `project`.
-- [ ] If you try to add an action with an `id` of 3 and there is no project with that `id` the database will return an error.
-- [ ] Use an HTTP client like `HTTPie`, `Postman` or `Insomnia` to test the API's endpoints.
-- [ ] Use Express Routers to organize your endpoints.
-- [ ] Your `server.js` file lives inside the `api` folder.
-- [ ] Your `index.js` file lives at the root of the project.
+- [x] When adding an action, make sure the `project_id` provided belongs to an existing `project`.
+- [x] If you try to add an action with an `id` of 3 and there is no project with that `id` the database will return an error.
+- [x] Use an HTTP client like `HTTPie`, `Postman` or `Insomnia` to test the API's endpoints.
+- [x] Use Express Routers to organize your endpoints.
+- [x] Your `server.js` file lives inside the `api` folder.
+- [x] Your `index.js` file lives at the root of the project.
 
 **Notes:**
 
