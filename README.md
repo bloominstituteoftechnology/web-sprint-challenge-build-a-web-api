@@ -127,8 +127,8 @@ There are two possible ways to submit this project to Canvas. Lambda Staff will 
 
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
-1. The core features of Node.js and Express and why they are useful.
-1. Understand and explain the use of Middleware.
-1. The basic principles of the REST architectural style.
-1. Understand and explain the use of Express Routers.
-1. Describe tooling used to manually test the correctness of an API.
+1. The core features of Node.js and Express and why they are useful. A: Node.js allows JavaScript to be run on the backend. Express is a framework for node that makes sending and receiving HTTP easier.
+1. Understand and explain the use of Middleware. A:Middleware is reusable functions that parse and validate HTTP data before it reaches the router.
+1. The basic principles of the REST architectural style. A: REST is a style where everything is a resource, everything is available via a unique URI, communication happens over a stateless protocol, and resource management happens via HTTP methods.
+1. Understand and explain the use of Express Routers. A: Express routers allow a single source to handle multiple types of resources via unique URLS.
+1. Describe tooling used to manually test the correctness of an API. A: Postman and HTTPie are tools you can use to manually check APIs.
