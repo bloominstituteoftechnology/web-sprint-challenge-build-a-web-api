@@ -1,4 +1,5 @@
 const Action = require('../actions/actions-model');
+const Project = require('../projects/projects-model');
 
 const checkActionId = async (req, res, next) => {
     const id = req.params.id;
@@ -15,6 +16,21 @@ const checkActionId = async (req, res, next) => {
     }
 };
 
+const checkProjectId = async (req, res, next) => {
+    const id = req.params.id;
+    try {
+        const project = await Project.get(id);
+        if (!project) {
+            res.status(404).json({ error: `Project with id ${id} not found` });
+        } else {
+            req.project = project;
+            next();
+        }
+    } catch (err) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
 const validateAction = (req, res, next) => {
     if (!req.body) {
         res.status(400).json({ error: 'Missing body'});
@@ -23,7 +39,18 @@ const validateAction = (req, res, next) => {
     } else {
         next();
     }
-}
+};
+
+const validateProject = (req, res, next) => {
+    console.log(req.body);
+    if (!req.body) {
+        res.status(400).json({ error: 'Missing body'});
+    } else if (!req.body.description || !req.body.name || !req.body.completed) {
+        res.status(400).json({ error: 'Missing content in the body' });
+    } else {
+        next();
+    }
+};
 
 const serverError = (err, req, res, next) => {
     res.status(500).json({
@@ -36,6 +63,8 @@ const serverError = (err, req, res, next) => {
 module.exports = {
     checkActionId,
     validateAction,
+    checkProjectId,
+    validateProject,
 
     serverError
 }
