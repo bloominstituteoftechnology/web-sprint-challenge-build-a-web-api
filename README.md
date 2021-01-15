@@ -54,11 +54,11 @@ We have provided test data for all the resources.
 
 ### Task 1: Project Set Up
 
-- [ ] Create a forked copy of this project.
-- [ ] Clone your OWN version of the repository (Not Lambda's by mistake!).
-- [ ] Create a new branch: `git checkout -b <firstName-lastName>`.
-- [ ] Implement MVP on your newly created `<firstName-lastName>` branch.
-- [ ] Commit & push your code regularly and meaningfully.
+- [x] Create a forked copy of this project.
+- [x] Clone your OWN version of the repository (Not Lambda's by mistake!).
+- [x] Create a new branch: `git checkout -b <firstName-lastName>`.
+- [x] Implement MVP on your newly created `<firstName-lastName>` branch.
+- [x] Commit & push your code regularly and meaningfully.
 
 ### Task 2: Project Requirements (MVP)
 
@@ -68,9 +68,9 @@ Your finished project must include all of the following requirements:
 
 A _"test"_ script already exists you can use to run tests against your code.
 
-- [ ] Write an _npm script_ named _"start"_ that uses `node` to run the API server.
-- [ ] Write an _npm script_ named _"server"_ that uses `nodemon`to run the API server.
-- [ ] Install _nodemon_ as a development dependency only that would not be used in production.
+- [x] Write an _npm script_ named _"start"_ that uses `node` to run the API server.
+- [x] Write an _npm script_ named _"server"_ that uses `nodemon`to run the API server.
+- [x] Install _nodemon_ as a development dependency only that would not be used in production.
 
 #### Build an API
 
