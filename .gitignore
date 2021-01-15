@@ -91,3 +91,5 @@ typings/
 
 # test db
 test.db3
+
+.vscode
