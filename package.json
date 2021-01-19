@@ -4,7 +4,9 @@
     "description": "Node API Challenge",
     "main": "index.js",
     "scripts": {
-        "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand --silent"
+        "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand --silent",
+        "start": "node index.js",
+        "server": "nodemon index.js"
     },
     "repository": {
         "type": "git",
