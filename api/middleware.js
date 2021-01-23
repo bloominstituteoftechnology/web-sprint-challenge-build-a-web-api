@@ -1,5 +1,5 @@
-const dbProjects = require("./projects-model");
-const dbActions = require("./actions-model");
+const dbProjects = require("./projects/projects-model");
+const dbActions = require("./actions/actions-model");
 
 function validateProjectId(req, res, next) {
   const { id } = req.params;
