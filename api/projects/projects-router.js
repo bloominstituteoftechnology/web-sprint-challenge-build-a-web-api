@@ -26,8 +26,8 @@ router.get("/:id", validateProjectId, async (req, res) => {
 router.get("/:id/actions", validateProjectId, async (req, res) => {
   const { id } = req.params;
   try {
-    const project = await db.get(id);
-    res.status(201).json(project.actions);
+    const actions = await db.getProjectActions(id);
+    res.status(201).json(actions);
   } catch {
     res.status(500).json({ messege: "Server issues" });
   }
