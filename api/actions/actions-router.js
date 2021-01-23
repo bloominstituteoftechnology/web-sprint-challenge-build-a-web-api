@@ -42,17 +42,11 @@ router.post("/", async (req, res) => {
 router.put("/:id", validateActionId, async (req, res) => {
   const action = req.body;
   const { id } = req.params;
-  if (action) {
-    try {
-      const updatedAction = await db.update({ id, action });
-      res.status(201).json(updatedAction);
-    } catch {
-      res.status(500).json({ messege: "Server issues" });
-    }
-  } else {
-    res
-      .status(400)
-      .json({ messege: "Incomplete informartion for the request" });
+  try {
+    const updatedAction = await db.update(id, action);
+    res.status(201).json(updatedAction);
+  } catch {
+    res.status(500).json({ messege: "Server issues" });
   }
 });
 

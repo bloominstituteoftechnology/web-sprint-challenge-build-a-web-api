@@ -23,6 +23,16 @@ router.get("/:id", validateProjectId, async (req, res) => {
   }
 });
 
+router.get("/:id/actions", validateProjectId, async (req, res) => {
+  const { id } = req.params;
+  try {
+    const project = await db.get(id);
+    res.status(201).json(project.actions);
+  } catch {
+    res.status(500).json({ messege: "Server issues" });
+  }
+});
+
 router.post("/", async (req, res) => {
   const project = req.body;
   if (project) {
@@ -42,18 +52,14 @@ router.post("/", async (req, res) => {
 router.put("/:id", validateProjectId, async (req, res) => {
   const project = req.body;
   const { id } = req.params;
-  if (action) {
-    try {
-      const updatedProject = await db.update({ id, project });
-      res.status(201).json(updatedProject);
-    } catch {
-      res.status(500).json({ messege: "Server issues" });
-    }
-  } else {
-    res
-      .status(400)
-      .json({ messege: "Incomplete informartion for the request" });
+  try {
+    const updatedProject = await db.update(id, project);
+    res.status(201).json(updatedProject);
+  } catch {
+    res.status(500).json({ messege: "Server issues" });
   }
+
+  res.status(400).json({ messege: "Incomplete informartion for the request" });
 });
 
 router.delete("/:id", validateProjectId, async (req, res) => {
