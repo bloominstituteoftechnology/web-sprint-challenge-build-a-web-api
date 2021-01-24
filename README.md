@@ -71,6 +71,7 @@ A _"test"_ script already exists you can use to run tests against your code.
 - [ ] Write an _npm script_ named _"start"_ that uses `node` to run the API server.
 - [ ] Write an _npm script_ named _"server"_ that uses `nodemon`to run the API server.
 - [ ] Install _nodemon_ as a development dependency only that would not be used in production.
+Nodemon not working
 
 #### Build an API
 
