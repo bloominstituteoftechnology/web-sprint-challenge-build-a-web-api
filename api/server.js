@@ -10,10 +10,10 @@ server.use(express.json());
 server.use('/api/actions', actionsRouter);
 server.use('/api/projects', projectsRouter);
 
+// default get
 server.get('/' ,(req,res) => {
     res.json({message: "Sprint MVP"})
 })
-// Complete your server here!
-// Do NOT `server.listen()` inside this file!
+
 
 module.exports = server;
