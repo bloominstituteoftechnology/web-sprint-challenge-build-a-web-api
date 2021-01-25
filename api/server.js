@@ -35,7 +35,7 @@ server.use('/api/actions',actionsRouterPipe,actionRouter)
   
     res.send(`
       <h2>Actions ${nameInsert} </h2>
-      <p>Welcome do ${req.headers['actions']} in a project </p>
+      <p>Welcome to ${req.headers['actions']} in a project </p>
     `);
   });
   

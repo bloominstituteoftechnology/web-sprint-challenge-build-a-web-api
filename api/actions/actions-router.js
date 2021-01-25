@@ -2,7 +2,7 @@
 const express = require('express')
 
 const Actions = require('./actions-model');
-const { checkNew, checkNewId} = require('../middleware/index.js')
+const { checkNew, checkNewId,validatePost} = require('../middleware/index.js')
 const router = express.Router();
 
 // router.use((req,res,next) =>{
@@ -11,16 +11,20 @@ const router = express.Router();
 // })
 
 // Endpoints
-router.get('/',checkNew,(req,res,next) =>{
-    Actions.get(req.query)
+router.get('/', (req,res,next) =>{
+    console.log('get / ',req)
+    Actions.getActionsdb('/',validatePost, (req,res,next))
         .then( a =>{
+            console.log(req.body,a);
             res.status(200).json(a);
+            // next();
         })
         .catch( er =>{
+            next();
             console.log(er);
-            res.status(500).json({
-                message: 'Error retrieving the actions'
-            });
+            // res.status(500).json({
+            //     message: 'Error retrieving the actions'
+            // });
         });
 });
 
