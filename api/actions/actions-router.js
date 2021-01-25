@@ -5,7 +5,7 @@ const Actions = require("../actions/actions-model")
 
 const router = express.Router();
 
-router.use(express.json());
+
 
 
 router.get("/api/actions", (req,res) => {
@@ -74,3 +74,5 @@ router.delete('/api/actions/:id', (req,res) => {
 })
 
 //[DELETE] /api/actions/:id` sends no _response_ body.
+
+module.exports = router;

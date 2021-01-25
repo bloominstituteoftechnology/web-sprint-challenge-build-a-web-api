@@ -13,7 +13,7 @@ I need this code, but don't know where, perhaps should make some middleware, don
 Go code!
 */
 
-const server = require('./api/server.js');
+const server = require('./api/server');
 
 const PORT = 5000;
 

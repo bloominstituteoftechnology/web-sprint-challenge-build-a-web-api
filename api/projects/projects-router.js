@@ -81,3 +81,5 @@ router.get("/api/projects", (req,res) => {
             res.status(500).json({error: 'Cannot delete Project'})
         })
     })
+
+    module.exports = router;
