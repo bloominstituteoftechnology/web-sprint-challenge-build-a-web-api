@@ -15,6 +15,6 @@ server.get('/' ,(req,res) => {
     res.json({message: "Sprint MVP"})
 })
 
-// mvp
+
 
 module.exports = server;
