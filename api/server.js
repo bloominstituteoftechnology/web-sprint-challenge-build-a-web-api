@@ -2,7 +2,7 @@ const express = require('express');
 const server = express();
 server.use(express.json())
 
-const actionRouter = require('./actions-router.js')
+const actionRouter = require('./actions/actions-router.js')
 
 const projectsRouter = require('./projects-router.js')
 
