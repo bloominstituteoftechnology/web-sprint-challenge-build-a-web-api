@@ -128,7 +128,12 @@ There are two possible ways to submit this project to Canvas. Lambda Staff will 
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+  Node.js functions as a development server which will automatically rerun any newly saved code. It can keep a database up to date and query it any way needed. Express is a very lightweight, fast, and efficient server. This can be used with helmet and middleware for better security and debugging purposes. 
 1. Understand and explain the use of Middleware.
+  Middleware is used between the request and the api endpoint. When middleware is used like this you can further debug the endpoint with additional endpoint error exceptions given the end user's response object wheither it was successfull or not. 
 1. The basic principles of the REST architectural style.
+
 1. Understand and explain the use of Express Routers.
+  Express routers are used to communicate to the api endpoint so a request or response object can be used. 
 1. Describe tooling used to manually test the correctness of an API.
+  
