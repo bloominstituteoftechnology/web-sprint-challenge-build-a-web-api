@@ -5,6 +5,7 @@ const Actions = require('./actions-model.js');
 
 const router = express.Router();
 
+// CRUD ENDPOINTS
 
 router.get('/' ,async (req, res) => {
 //sends an array of actions (or an empty array) as the body of the response.

@@ -3,8 +3,11 @@
 const express = require('express');
 
 const Projects = require('./projects-model');
+const Actions = require('../actions/actions-model')
 
 const router = express.Router();
+
+// CRUD ENDPOINTS
 
 router.get('/' , async (req, res) => {
 
@@ -71,6 +74,25 @@ router.delete('/:id' , async (req, res) => {
 
     } catch (err){
         res.status(500).json({error: "there was an error"})
+    }
+})
+
+// [GET] /api/projects/:id/actions 
+
+router.get("/:id/actions", async (req, res) => {
+    try{
+        const actions = await Actions.get(req.id);
+        const projects = await Projects.get(req.id);
+        if(!projects){
+            res.status(404).json({message: "conditions not met"})
+        } else if (actions === 3 && !projects) {
+            res.status(500).json({message: "could not meet conditions"})
+        } else {
+            res.status(200).json({actions})
+        }     
+
+    } catch(err) {
+        res.status(500).json({error: "there was an error with the request"})
     }
 })
 
