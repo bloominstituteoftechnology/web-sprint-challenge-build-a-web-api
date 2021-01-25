@@ -1,4 +1,4 @@
-const Hubs = require('../actions/actions-model.js');
+const Actions = require('../actions/actions-model.js');
 
 function checkId(req, res, next) {
   console.log('middleware checking id',res)

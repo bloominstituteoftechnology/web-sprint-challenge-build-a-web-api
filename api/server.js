@@ -21,7 +21,7 @@ server.use((req, res, next) => {
 
 const actionsRouterPipe = [logger,logger,logger]
 
-// server.use('/api/actions',actionsRouterPipe,actionRouter)
+server.use('/api/actions',actionsRouterPipe,actionRouter)
 
 // Method Logger
 // function methodLogger(req,res,next){
