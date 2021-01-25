@@ -12,3 +12,23 @@ I need this code, but don't know where, perhaps should make some middleware, don
 
 Go code!
 */
+const express = require('express');
+const projectsRouter = require('./Routers/ProjectsRouter');
+const actionsRouter = require('./Routers/ActionsRouter');
+const server = express();
+
+server.use(express.json());
+
+// hook up routers to server
+server.use('/api/projects/actions', actionsRouter);
+server.use('/api/projects', projectsRouter);
+
+// return default response
+server.get('/', (req, res) => {
+  res.send({ message: 'Welcome' });
+});
+
+//port used is 9000
+server.listen(9000, () => {
+  console.log('server is running on http://localhost:4000');
+});
