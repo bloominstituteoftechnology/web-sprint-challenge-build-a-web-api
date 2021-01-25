@@ -19,6 +19,7 @@ router.get('/:id' , async (req, res)=>{
 });
 
 
+
 router.put('/', (req,res)=>{
     res.status(200).json({message: `${req.method}`})
 });
@@ -56,4 +57,4 @@ function validateProjectID(){
     }
 }
 
-module.exports = router;
+module.exports = router, validateProjectID;
