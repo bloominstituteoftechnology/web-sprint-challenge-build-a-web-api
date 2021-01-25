@@ -129,7 +129,19 @@ There are two possible ways to submit this project to Canvas. Lambda Staff will 
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
-1. Understand and explain the use of Middleware.
-1. The basic principles of the REST architectural style.
-1. Understand and explain the use of Express Routers.
-1. Describe tooling used to manually test the correctness of an API.
+The core feature of Node.js is that it allows javascript to be written in an enviroment that is not a web browser. 
+The core features of Express are that it allows middleware to respond to HTTP requests and provides a routing table to based on the different HTTP methods.
+
+2. Understand and explain the use of Middleware.
+Middleware are functions that execute to the express server. Each middleware has access to HTTP request and response. It can either pass along to another middleware function or end the life cycle of the express server.
+
+3. The basic principles of the REST architectural style.
+The basic principles of representational state transfer or rest are that it is stateless, it supports JSON, it is simple to implement.
+
+4. Understand and explain the use of Express Routers.
+Express routers are used to organize and keep our code DRY. It seperates out your routes as your project grows and allows you to import middleware that you would otherwise repeate in each router file.
+
+5. Describe tooling used to manually test the correctness of an API.
+You can use a service such as an HTTP client like `HTTPie`, `Postman` or `Insomnia` to test the API's endpoints. Or you can enter in the endpoints into your url to see if the correct data is displaying in your browser. 
+
+

@@ -1,13 +1,14 @@
 const express = require('express');
-
+const server = express();
+server.use(express.json())
 
 const actionRouter = requrie('./actions-router.js')
 
 const projectsRouter = requrie('./projects-router.js')
 
-const server = express();
 
-server.use(express.json())
+
+
 
 server.use('/actions', actionRouter);
 
