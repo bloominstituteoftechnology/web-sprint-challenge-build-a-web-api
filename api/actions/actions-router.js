@@ -11,7 +11,7 @@ router.get('/' ,async (req, res) => {
 //sends an array of actions (or an empty array) as the body of the response.
     
     try {
-        const action = await Actions.get(req.id);
+        const action = await Actions.get(req.params.id);
        res.status(200).json(action)
     } catch (err){
         res.status(500).json({error: "there was an error"})
@@ -21,12 +21,12 @@ router.get('/' ,async (req, res) => {
 router.get('/:id' ,async(req, res) => {
     // sends an action with the given id as the body of the response.
     try {
-        const action = await Actions.get(req.id);
+        const action = await Actions.get(req.params.id);
 
-        if(!action) {
-            res.status(404).json({message: "the user was not found"})
-        } else {
+        if(action.length > 0) {
             res.status(200).json({action})
+        } else {
+            res.status(404).json({message: "the user was not found"})
         }
 
     } catch (err){
@@ -36,11 +36,12 @@ router.get('/:id' ,async(req, res) => {
 router.post('/' ,async(req, res) => {
     //sends the newly created action as the body of the response.
     try {
-        const action = await Actions.insert(req.action);
-        if(!action) {
-            res.status(404).json({message: "was not able to create"})
-        } else {
+        const action = await Actions.insert(req.body);
+        if(action) {
             res.status(201).json({action});
+        } else {
+            res.status(404).json({message: "was not able to create"})
+           
         }
 
     } catch (err){
@@ -50,13 +51,14 @@ router.post('/' ,async(req, res) => {
 
 router.put('/:id' ,async(req, res) => {
     //sends the updated action as the body of the response.
-    
+    const changes = req.body
     try {
-        const action = await  Actions.update(req.id, req.changes)
-        if(!action){
-            res.status(404).json({message: "was not able to update"})
-        } else {
+        const action = await  Actions.update(req.params.id, changes)
+        if(action){
             res.status(200).json({action})
+        } else {
+            res.status(404).json({message: "was not able to update"})
+            
         }
 
     } catch (err){
@@ -67,7 +69,7 @@ router.put('/:id' ,async(req, res) => {
 router.delete('/:id' ,async(req, res) => {
     //sends no response body
     try {
-        const action = await Actions.remove(req.id);
+        const action = await Actions.remove(req.params.id);
         if(action > 0) {
             res.status(200).json({message: "removed"})
         } else {
