@@ -22,7 +22,7 @@ router.get('/:id' ,async(req, res) => {
     try {
         const action = await Actions.get(req.id);
 
-        if(!users) {
+        if(!action) {
             res.status(404).json({message: "the user was not found"})
         } else {
             res.status(200).json({action})
