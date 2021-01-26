@@ -28,6 +28,29 @@ router.get('/', (req,res,next) =>{
         });
 });
 
+router.get('/:id', (req, res,next) => {
+    // do your magic!
+    // this needs a middleware to verify post id
+    Actions.get(req.params.id,checkNewId,(req,res,next))
+      .then(p =>{
+        console.log('gettingid',p,req.params.id)
+        try{
+          if(p !== undefined){
+  
+            res.status(200).json(p)
+            }else{
+              res.status(404).json({message:'post not found 404 as undefined'})
+            }
+        }catch(e){
+          
+          res.status(500).json({message: '500 error /:id posts-router.js possible Disconection',errormsg:e })
+        }
+        
+      })
+      .catch( er =>{
+        next(er)
+      })
+  });
 
 
 router.use((error, req, res, next) => {
