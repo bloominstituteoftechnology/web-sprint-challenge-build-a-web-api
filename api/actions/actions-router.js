@@ -42,10 +42,11 @@ router.post('/', (req,res) => {
     
     if(!createAction.project_id || !createAction.notes || !createAction.description ) {
         res.status(400).json({error: "Needs a project id, notes, or description"})
+        return;
     }else{
     Actions.insert(createAction)
     .then((action) => {
-        res.status(201).json(action)
+        res.status(201).json(createAction)
     })
     .catch(error => {
         res.status(500).json({error: 'Cannot create action'})
@@ -66,7 +67,7 @@ router.put('/:id`', (req,res) => {
     }else{
     Actions.update(id,updateActions)
     .then((action)=> {
-        res.status(200).json(action)
+        res.status(200).json(updateActions)
     })
     .catch(error => {
         res.status(500).json({error: 'Cannot update action'})
