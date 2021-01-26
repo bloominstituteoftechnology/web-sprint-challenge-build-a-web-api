@@ -43,7 +43,7 @@ function validatePost(req, res, next) {
 
 function checkNew(req, res, next) {
     console.log('middleware checking new ',req)
-    res.set('actions', 'true')
+    // res.set('actions', 'true')
   // check that req body has correct shape
   // if req.body legit, proceed
   // otherwise send back a 400 error

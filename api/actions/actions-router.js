@@ -39,11 +39,11 @@ router.get('/:id', (req, res,next) => {
   
             res.status(200).json(p)
             }else{
-              res.status(404).json({message:'post not found 404 as undefined'})
+              res.status(404).json({message:'action not found 404 as undefined'})
             }
         }catch(e){
           
-          res.status(500).json({message: '500 error /:id posts-router.js possible Disconection',errormsg:e })
+          res.status(500).json({message: '500 error /:id actions-router.js possible Disconection',errormsg:e })
         }
         
       })
@@ -51,6 +51,22 @@ router.get('/:id', (req, res,next) => {
         next(er)
       })
   });
+
+//localhost:4000/api/actions/?id=1&project_id=1&description=Fork and Clone Repository&notes=RepoURL=https://github.com/LambdaSchool/Sprint-Challenge-Node-Express&completed=0
+router.post('/', validatePost, (req,res,next) =>{
+
+    Actions.insert(res.body)
+        .then(at => {
+            res.status(201).json(at);
+            // next(at);
+        })
+        .catch(er =>{
+            next(er)
+        }) 
+
+
+})
+
 
 
 router.use((error, req, res, next) => {
