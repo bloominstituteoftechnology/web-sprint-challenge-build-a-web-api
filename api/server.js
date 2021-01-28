@@ -42,7 +42,16 @@ server.use('/api/actions',actionsRouterPipe,actionRouter)
 
 
 
+server.post('/', async (req,res) =>{
+  const p = (req.body) ? `${req.body}` : '';
+try{
 
+  res.send(`p at post ${p}`);
+}catch(e){
+  res.statusCode = 500;
+  res.statusMessage.json(error,e);
+}
+})
 
 
 module.exports = server;

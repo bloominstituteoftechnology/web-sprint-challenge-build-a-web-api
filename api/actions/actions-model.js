@@ -2,6 +2,8 @@ const db = require('../../data/dbConfig.js');
 const mappers = require('../../data/helpers/mappers');
 
 module.exports = {
+  insertPost,
+ 
   getActionsdb,
   get,
   insert,
@@ -35,9 +37,25 @@ function get(id) {
   }
 }
 
+async function getById(id) {
+  // return Promise.resolve('getById wired')
+  const [post] = await db('actions').where({id});
+  return post;
+}
+
+async function insertPost(action) {
+  
+  // return db('actions')
+  //   .insert({action}, 'id')
+  //   .then(([id]) => get(id));
+  const [res] = await db('actions').insert(action);
+  const act = await getById(res);
+  return act;
+}
+
 function insert(action) {
   return db('actions')
-    .insert(action, 'id')
+    .insert({action}, 'id')
     .then(([id]) => get(id));
 }
 

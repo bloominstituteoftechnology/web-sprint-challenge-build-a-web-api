@@ -53,19 +53,52 @@ router.get('/:id', (req, res,next) => {
   });
 
 //localhost:4000/api/actions/?id=1&project_id=1&description=Fork and Clone Repository&notes=RepoURL=https://github.com/LambdaSchool/Sprint-Challenge-Node-Express&completed=0
-router.post('/', validatePost, (req,res,next) =>{
+// router.post('/',   (req,res,next) =>{
 
-    Actions.insert(res.body)
-        .then(at => {
-            res.status(201).json(at);
-            // next(at);
-        })
-        .catch(er =>{
-            next(er)
-        }) 
+//     Actions.insert(req.body,validatePost, (req,res,next))
+//         .then(at => {
+
+//             res.status(201).json(at);
+//             // next(at);
+//         })
+//         .catch(er =>{
+//             next(er)
+//         }) 
 
 
+// })
+
+/*
+"insert into `actions` (`completed`, `description`, `notes`, 
+`project_id`) values ('1', 'aaaa', 'assaSprint-Challenge-Node-Express', 
+' 7') - SQLITE_CONSTRAINT: FOREIGN KEY constraint failed",
+"insert into `actions` (`action`) values ({\"project_id\":\" 7\",
+\"description\":\"aaaa\",\"notes\":\"assaSprint-Challenge-Node-Express\",
+\"completed\":\"1\"}) - SQLITE_ERROR: table actions has no column named action"
+
+.returning() is not supported by sqlite3 and will not have any effect.
+(node:492921) UnhandledPromiseRejectionWarning: Error: insert into `actions` (`action`) values ({"project_id":" 7","description":"aaaa","notes":"assaSprint-Challenge-Node-Express","completed":"1"}) - SQLITE_ERROR: table actions has no column named action
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:492921) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 2)
+(node:492921) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+*/
+
+router.post('/', validatePost, async (req,res,next) =>{
+
+  const body = req.body;
+  console.log(body)
+  try{
+    const dta = await  Actions.insertPost(body)
+    // res.json(dta);
+    next(dta)
+  }catch(e){
+    next(e)
+  }
 })
+
+
+
+
 
 
 

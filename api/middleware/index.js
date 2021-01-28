@@ -26,17 +26,17 @@ function validatePost(req, res, next) {
     // do your magic!
     const  project_id = req.body
     try{
-      console.log(req.body)
+      console.log('inside validatepost',req.body)
   
-      if (project_id){
+      if (res.body !== undefined){
         next();
       } else{
         res.status(400).json({
-          message: "ValidatePost 400 missing required text field"
+          message: "ValidatePost 400 missing required fields"+res.body
         })
       }
     } catch(er){
-      res.status(500).json({ message: "missing post data" })
+      res.status(500).json({ message: "missing post data",er })
     }
   }
 
