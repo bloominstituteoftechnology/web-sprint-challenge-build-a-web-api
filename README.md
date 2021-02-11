@@ -61,7 +61,7 @@ A _"test"_ script already exists you can use to run tests against your code.
 - [ ] Inside `api/projects/projects-router.js` add an endpoint for retrieving the list of actions for a project:
   - `[GET] /api/projects/:id/actions` sends an array of actions (or an empty array) as the body of the response.
 
-- [ ] The `completed` fields are stored in the db as a 1/0. Make sure to transform them to true/false before sending them back to the client.
+- [ ] Both Projects and Actions have an optional `completed` property (see Database Schemas below). In both cases it's a boolean stored in the database as a 1 or a 0. Make sure to transform the raw `completed` values obtained from the db to `true` or `false`, before sending them back to the client.
 - [ ] When adding an action, make sure the `project_id` provided belongs to an existing `project`.
 - [ ] If you try to add an action with an `id` of 3 and there is no project with that `id` the database will return an error.
 - [ ] Use an HTTP client like `HTTPie`, `Postman` or `Insomnia` to test the API's endpoints.
