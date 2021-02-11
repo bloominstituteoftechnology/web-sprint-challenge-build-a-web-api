@@ -6,7 +6,7 @@ This challenge allows you to practice the concepts and techniques learned over t
 
 In your challenge this week, you will demonstrate your mastery of these skills by designing and creating a web API to manage the following resources: `Projects` and `Actions`.
 
-This is an individual assessment. All work must be your own. All projects will be submitted to codegrade for automated review. You will also be given feedback by code reviewers the Monday after challenge submissions. For more information on the review process [click here](https://www.notion.so/lambdaschool/How-to-View-Feedback-in-CodeGrade-c5147cee220c4044a25de28bcb6bb54a).
+This is an individual assessment. All work must be your own. All projects will be submitted to Codegrade for automated review. You will also be given feedback by code reviewers the Monday after challenge submissions. For more information on the review process [click here](https://www.notion.so/lambdaschool/How-to-View-Feedback-in-CodeGrade-c5147cee220c4044a25de28bcb6bb54a).
 
 You are not allowed to collaborate during the sprint challenge. However, you are encouraged to follow the twenty-minute rule and seek support by dropping a :wave: in your help channel when needed.
 
@@ -129,8 +129,8 @@ After finishing your required elements, you can push your work further. These go
 
 - [ ] Submit via Codegrade by pushing commits to your `<firstName-lastName>` branch on Github.
 - [ ] Create a pull-request to merge `<firstName-lastName>` branch into main.
-- [ ] Check codegrade for automated feedback.
-- [ ] Check codegrade on Monday following the Sprint Challenge for reviewer feedback.
+- [ ] Check Codegrade for automated feedback.
+- [ ] Check Codegrade on Monday following the Sprint Challenge for reviewer feedback.
 - [ ] New commits will be evaluated by Codegrade if pushed _before_ the sprint challenge deadline.
 
 ## Interview Questions
