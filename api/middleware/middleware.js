@@ -19,10 +19,13 @@ async function validateProjectId (req, res, next){
 
 function validateProject(req, res, next) {
     const { name, description } = req.body
+    const projectId = req.body.project_id
     try{
         if(!name || ! description){
             res.status(400).json({message: 'Missing project data'})
-        } else {
+        } else if(!Projects.get(projectId)){
+        res.status(400).json({message: 'Project with that id does not exist'})
+        } else{
             next()
         }
     } catch(error) {
