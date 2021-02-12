@@ -39,7 +39,7 @@ async function validateActionId(req, res, next){
     try{
         const action = await Actions.get(id)
         if(!action){
-            res.status(400).json({message: 'Action not found'})
+            res.status(404).json({message: 'Action not found'})
         } else {
             req.action = action
             next()
