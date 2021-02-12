@@ -12,10 +12,11 @@ I need this code, but don't know where, perhaps should make some middleware, don
 
 Go code!
 */
-
+//eslint-disable-next-line
+const dotenv = require('dotenv').config()
 const server = require('./api/server')
 
-const PORT = 5000
+const PORT = process.env.PORT || 5000
 
 server.listen(PORT, () =>{
     console.log(`\n* Server Running on http://localhost:${PORT} *\n`)
