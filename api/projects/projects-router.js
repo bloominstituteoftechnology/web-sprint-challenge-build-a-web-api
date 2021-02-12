@@ -1,5 +1,6 @@
 const express = require('express');
 
+const Actions = require('../actions/actions-model')
 const Projects = require('./projects-model');
 const mw = require('../middleware/middleware')
 
@@ -49,6 +50,14 @@ router.delete('/:id', mw.validateProjectId, (req, res) =>{
     })
     .catch((error) =>{
         res.status(500).json({message: 'Error deleting project'})
+    })
+})
+
+//GET Projects actions
+router.get('/:id/actions', mw.validateProjectId, (req, res) =>{
+    Actions.get(req.query)
+    .then((actions) =>{
+        res.status(200).json(actions)
     })
 })
 
