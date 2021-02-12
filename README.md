@@ -132,7 +132,27 @@ We have provided test data for all the resources.
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
-1. Understand and explain the use of Middleware.
-1. The basic principles of the REST architectural style.
-1. Understand and explain the use of Express Routers.
-1. Describe tooling used to manually test the correctness of an API.
+   Node.js
+   i. Being able to have the client and serve use the same language, thus making it wasier to share code between the two machines.
+   ii. Reducing multi-thread complexity by only using one.
+   iii. Capitilizing on JS asynchronous capabilities, offsetting its single-thread limitaion.
+   iv. Accessing Npm repositories that help to expand its capabilities.
+   Express
+   i. Being able to utilize middleware allows it expand its capabilities.
+   ii. Its considered light weight unlike its counter parts django and rails.
+   iii. Its considred clean and intuitive which is always a plus for devs.
+2. Understand and explain the use of Middleware.
+   Middleware are functnions that extend and/or add features to express.
+
+3. The basic principles of the REST architectural style.
+   i. Required uniform interface; resrouces should follow specific guidelines such as data format ie JSON.
+   ii. Servers and clients can be replaced and developed independently. However the interface between then must not be changed.
+   iii. Statelss, as in no client context is stored on the server between request. The state of the application is dependent on the client managing state.
+   iv. Caching, resources must delare themselves cacheable, furethermore imporving scalability.
+   v. REST can be set up is a layered system that allows you to delploy the API on one server, and store data on another server.
+
+4. Understand and explain the use of Express Routers.
+   This allows you to split routing code between multiple files. When you can export, and utilize to resuce repeating code.
+
+5. Describe tooling used to manually test the correctness of an API.
+   The main two tools that were used are Postman and Nodemon.
