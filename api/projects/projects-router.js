@@ -1,6 +1,5 @@
 const express = require('express');
 
-const Actions = require('../actions/actions-model')
 const Projects = require('./projects-model');
 const mw = require('../middleware/middleware')
 
@@ -33,6 +32,7 @@ router.post('/', mw.validateProject, (req, res) =>{
     })
 })
 
+//PUT will update specified project
 router.put('/:id', mw.validateProjectId, mw.validateProject, (req,res) =>{
     Projects.update(req.params.id, req.body)
     .then((project) =>{
@@ -54,10 +54,13 @@ router.delete('/:id', mw.validateProjectId, (req, res) =>{
 })
 
 //GET Projects actions
-router.get('/:id/actions', mw.validateProjectId, (req, res) =>{
-    Actions.get(req.query)
+router.get('/:id/actions', (req, res) =>{
+    Projects.getProjectActions(req.params.id)
     .then((actions) =>{
         res.status(200).json(actions)
+    })
+    .catch(() =>{
+        res.status(500).json({message: 'Error retrieving actions for project'})
     })
 })
 
