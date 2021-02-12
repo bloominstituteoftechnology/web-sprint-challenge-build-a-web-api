@@ -54,7 +54,9 @@ function validateAction(req, res, next){
     try{
         if(!description || !notes){
             res.status(400).json({message: 'Missing action data'})
-        } else {
+        } else if(description.length > 128){
+            res.status(400).json({message: 'Description is too long. Max is 128 chars'})
+        } else{
             next()
         }
     } catch(error){
