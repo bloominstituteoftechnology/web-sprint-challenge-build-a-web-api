@@ -20,10 +20,8 @@ router.get('/:id', mw.validateActionId, (req, res) =>{
 })
 
 router.post('/', mw.validateAction, (req, res) =>{
-    console.log(req.body)
     Actions.insert(req.body)
     .then((action) =>{
-        console.log('action', action)
         res.status(201).json(action)
     })
     .catch(() =>{
@@ -31,7 +29,7 @@ router.post('/', mw.validateAction, (req, res) =>{
     })
 })
 
-router.put('/:id', mw.validateActionId, (req, res) =>{
+router.put('/:id', mw.validateActionId, mw.validateAction, (req, res) =>{
     Actions.update(req.params.id, req.body)
     .then((action) =>{
         res.status(200).json(action)
