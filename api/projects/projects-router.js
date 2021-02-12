@@ -8,11 +8,11 @@ const router = express.Router()
 
 //Get/Return all projects
 router.get('/', (req, res) =>{
-    Projects.get(req.query)
+    Projects.get(req.params.id)
     .then((projects) =>{
         res.status(200).json(projects)
     })
-    .catch((error) =>{
+    .catch(() =>{
         res.status(500).json({message: 'Error retrieving projects'})
     })
 })
@@ -28,7 +28,7 @@ router.post('/', mw.validateProject, (req, res) =>{
     .then((project) =>{
         res.status(201).json(project)
     })
-    .catch((error) =>{
+    .catch(() =>{
         res.status(500).json({message: 'Error adding project'})
     })
 })
@@ -38,17 +38,17 @@ router.put('/:id', mw.validateProjectId, mw.validateProject, (req,res) =>{
     .then((project) =>{
         res.status(200).json(project)
     })
-    .catch((error) =>{
+    .catch(() =>{
         res.status(500).json({message: 'Error updating project'})
     })
 })
 
 router.delete('/:id', mw.validateProjectId, (req, res) =>{
     Projects.remove(req.params.id)
-    .then((project) =>{
+    .then(() =>{
         res.status(200).json({message: 'Project has been deleted'})
     })
-    .catch((error) =>{
+    .catch(() =>{
         res.status(500).json({message: 'Error deleting project'})
     })
 })

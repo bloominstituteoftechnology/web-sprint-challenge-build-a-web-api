@@ -6,7 +6,7 @@ const mw = require('../middleware/middleware')
 const router = express.Router()
 
 router.get('/', (req, res) =>{
-    Actions.get(req.query)
+    Actions.get(req.params.id)
     .then((actions) =>{
         res.status(200).json(actions)
     })
@@ -26,7 +26,7 @@ router.post('/', mw.validateAction, (req, res) =>{
         console.log('action', action)
         res.status(201).json(action)
     })
-    .catch((error) =>{
+    .catch(() =>{
         res.status(500).json({message: 'Error adding action'})
     })
 })
