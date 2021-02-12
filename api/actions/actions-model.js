@@ -6,9 +6,12 @@ module.exports = {
   insert,
   update,
   remove,
+  getbyId,
 };
-
-function get(id) {
+function get(){
+  return db('actions'); 
+}
+function getbyId(id) {
   let query = db('actions');
 
   if (id) {
