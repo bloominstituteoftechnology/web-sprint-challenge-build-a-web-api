@@ -1,6 +1,7 @@
 const Projects = require('../projects/projects-model')
 const Actions = require('../actions/actions-model')
 
+//MIDDLEWARE FOR PROJECTS
 async function validateProjectId (req, res, next){
     const { id } = req.params
     try{
@@ -29,7 +30,39 @@ function validateProject(req, res, next) {
     }
 }
 
+//MIDDLEWARE FOR ACTIONS
+async function validateActionId(req, res, next){
+    const { id } = req.params
+    try{
+        const action = await Actions.get(id)
+        if(!action){
+            res.status(400).json({message: 'Action not found'})
+        } else {
+            req.action = action
+            next()
+        } 
+    } catch(error) {
+            res.status(400).json({message: 'Action could not be retrieved'})
+        }
+}
+
+function validateAction(req, res, next){
+    const { description, notes } = req.body
+    try{
+        if(!description || !notes){
+            res.status(400).json({message: 'Missing action data'})
+        } else {
+            next()
+        }
+    } catch(error){
+        res.status(400).json({message: 'Missing required inputs'})
+    }
+}
+
+
 module.exports ={
     validateProjectId,
-    validateProject
+    validateProject, 
+    validateActionId,
+    validateAction
 }
