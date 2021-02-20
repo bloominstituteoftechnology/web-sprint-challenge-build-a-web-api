@@ -1,12 +1,30 @@
 // Write your "actions" router here!
 const express = require("express")
-const actions = require('./actions-model')
+const Actions = require('./actions-model')
 const {checkActionId, checkActionUserData}=require('../../middleware/mw')
 const router = express.Router()
 router.use(express.json())
 
 
+router.get("/", (req, res,next) => {
+   
+    const options = {
+		sortBy: req.query.sortBy,
+		limit: req.query.limit,
+        id:req.params.id
+	}
+Actions.get(options)
+.then((result) => {
+    console.log("\033[31m[This is in response to \033[34m[GET Method]\033[31m from projectRouter]")
+    res.status(200).json(result)
+})
+.catch((error) => {
 
+    next(error)
+
+
+})
+})
 
 router.get("/:id",checkActionId(), (req, res) => {
 
