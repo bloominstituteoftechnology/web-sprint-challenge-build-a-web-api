@@ -6,7 +6,7 @@ const server = express();
 // Do NOT `server.listen()` inside this file!
 
 server.use(express.json())
-
+server.use("/api/actions",actionrouter)
 server.get("/",(req,res)=>{
     res.send("Welcome to Sprint Api Challenge")
 })

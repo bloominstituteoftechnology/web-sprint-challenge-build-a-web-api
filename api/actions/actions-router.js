@@ -8,11 +8,11 @@ router.use(express.json())
 
 
 
-router.get("/api/actions/:id",checkActionId(), (req, res) => {
+router.get("/:id",checkActionId(), (req, res) => {
 
 			res.status(200).json(req.project)
         })
-        router.post("/api/actions",checkActionUserData(), (req, res) => {
+        router.post("/",checkActionUserData(), (req, res) => {
             // if (!req.body.name ) {
             //     return res.status(400).json({
             //         message: "Missing project name ",
@@ -33,7 +33,7 @@ router.get("/api/actions/:id",checkActionId(), (req, res) => {
 
 
 
-        router.put("/api/actions/:id",checkActionUserData(),checkActionId(), (req, res) => {
+        router.put("/:id",checkActionUserData(),checkActionId(), (req, res) => {
          
         
             actions.update(req.params.id, req.body)
@@ -58,7 +58,7 @@ router.get("/api/actions/:id",checkActionId(), (req, res) => {
 
 
 
-router.delete("/api/actions/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
 	actions.remove(req.params.id)
 		.then((count) => {
 			if (count > 0) {
