@@ -12,3 +12,11 @@ I need this code, but don't know where, perhaps should make some middleware, don
 
 Go code!
 */
+
+const server=require("./api/server")
+
+const PORT=4444
+
+server.listen(PORT,()=>{
+    console.log("\033[1mServer running  on \031\4m[http://localhost:"+PORT)
+})
