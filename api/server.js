@@ -1,5 +1,6 @@
 const express = require('express');
 const actionrouter=require('./actions/actions-router')
+const projectRouter=require("./projects/projects-router")
 const server = express();
 
 // Complete your server here!
@@ -7,6 +8,7 @@ const server = express();
 
 server.use(express.json())
 server.use("/api/actions",actionrouter)
+server.use("/api/projects",projectRouter)
 server.get("/",(req,res)=>{
     res.send("Welcome to Sprint Api Challenge")
 })
