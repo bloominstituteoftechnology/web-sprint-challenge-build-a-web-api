@@ -122,7 +122,7 @@ After finishing your required elements, you can push your work further. These go
 
 **IMPORTANT:** Work on stretch goals on a **different branch**. You can branch off `<firstName-lastName>` by executing `git checkout -b stretch`.
 
-- [ ] Deploy the API to Heroku.
+- [X] Deploy the API to Heroku.
 - [ ] Configure the API to support environment variables.
 - [ ] Use middleware for validation of incoming data.
 
