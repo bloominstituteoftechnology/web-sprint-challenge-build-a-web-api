@@ -4,7 +4,9 @@
     "description": "Node API Challenge",
     "main": "index.js",
     "scripts": {
-        "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand --silent"
+        "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand --silent",
+        "start": "node index.js",
+        "server": "nodemon index.js"
     },
     "repository": {
         "type": "git",
@@ -12,10 +14,11 @@
     },
     "author": "Lambda School",
     "dependencies": {
+        "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "helmet": "^4.3.1",
         "knex": "^0.21.15",
-        "sqlite3": "^5.0.1"
+        "sqlite3": "^5.0.0"
     },
     "devDependencies": {
         "cross-env": "^7.0.3",
