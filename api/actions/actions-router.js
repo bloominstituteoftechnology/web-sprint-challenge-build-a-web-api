@@ -13,6 +13,12 @@ router.get("/api/actions", async (req, res, next) => {
     } catch (err) {
         next(err)
     }
+    try {
+        await actions.get()
+        res.status(200).json()
+    } catch (err) {
+        next(err)
+    }
 })
 
 // #2 [GET] /api/actions/:id` returns an action with the given `id` as the body of the _response_.
