@@ -5,7 +5,6 @@ const { validateActionsId, validateActionBody } = require("../middleware/middlew
 
 const router = express.Router()
 
-//working
 // #1 [GET] /api/actions` returns an array of actions (or an empty array) as the body of the _response_.
 router.get("/api/actions", async (req, res, next) => {
     try {
@@ -16,13 +15,11 @@ router.get("/api/actions", async (req, res, next) => {
     }
 })
 
-//working
 // #2 [GET] /api/actions/:id` returns an action with the given `id` as the body of the _response_.
 router.get("/api/actions/:id", validateActionsId(), (req, res) => {
     res.json(req.action)
 })
 
-//404 error still
 // #3 [POST] /api/actions` returns the newly created action as the body of the _response_.
 router.post("/api/actions", validateActionBody(), async (req, res, next) => {
     try {
@@ -33,7 +30,6 @@ router.post("/api/actions", validateActionBody(), async (req, res, next) => {
     }
 })
 
-//working
 // #4 [PUT] /api/actions/:id` returns the updated action as the body of the _response_.
 router.put("/api/actions/:id", validateActionsId(), async (req, res, next) => {
     try {
@@ -47,7 +43,7 @@ router.put("/api/actions/:id", validateActionsId(), async (req, res, next) => {
 // #5 [DELETE] /api/actions/:id` returns no _response_ body.
 router.delete("/api/actions/:id", validateActionBody(), async (req, res, next) => {
     try {
-        await actions.remove(req.params.id) //should it be action? or actions? instead of actionsModel
+        await actions.remove(req.params.id) 
         res.status(204).end()
     } catch (err) {
         next(err)
