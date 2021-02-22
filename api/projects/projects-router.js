@@ -6,13 +6,16 @@ const { validateProjects } = require("../middleware/middleware")
 
 const router = express.Router()
 // #1 `[GET] /api/projects` returns an array of projects (or an empty array) as the body of the response.
-router.get("/api/projects", async (req, res, next) => {
-    try {
-        const data = await projectsModel.find()
-        res.status(200).json(data)
-    } catch (err) {
-        next(err)
-    }
+router.get("/api/projects", async (req, res) => {
+    projectsModel.find()
+        .then((posts) => {
+            res.status(200).json({ posts })
+        })
+        .catch(() => {
+            res.status(500).json({
+                message: "The posts information could not be retrived"
+            })
+        })
 })
 
 // #2 `[GET] /api/projects/:id` returns a project with the given `id` as the body of the _response_.
