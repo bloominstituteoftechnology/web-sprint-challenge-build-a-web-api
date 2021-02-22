@@ -21,17 +21,16 @@ router.get("/api/actions/:id", validateActionsId(), (req, res) => {
 })
 
 // #3 [POST] /api/actions` returns the newly created action as the body of the _response_.
-router.post("/api/actions", validateActionBody(), async (req, res, next) => {
-    try {
-        const action = await actions.insert(req.body)
-        res.status(201).json(action)
-    } catch (err) {
-        next(err)
-    }
+router.post("/api/actions", validateActionsId(), (req, res, next) => {
+    actions.insert(req.body)
+        .then((action) => {
+            res.status(201).json(action)
+        })
+        .catch(next)
 })
 
 // #4 [PUT] /api/actions/:id` returns the updated action as the body of the _response_.
-router.put("/api/actions/:id", validateActionsId(), async (req, res, next) => {
+router.put("/api/actions/:id", validateActionsId(), validateActionBody(), async (req, res, next) => {
     try {
         const action = await actions.update(req.params.id, req.body)
         res.status(201).json(action)
@@ -43,7 +42,7 @@ router.put("/api/actions/:id", validateActionsId(), async (req, res, next) => {
 // #5 [DELETE] /api/actions/:id` returns no _response_ body.
 router.delete("/api/actions/:id", validateActionBody(), async (req, res, next) => {
     try {
-        await actions.remove(req.params.id) 
+        await actions.remove(req.params.id)
         res.status(204).end()
     } catch (err) {
         next(err)
