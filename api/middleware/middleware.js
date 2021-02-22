@@ -44,8 +44,10 @@ function validateProjectId() {
 function validateActionBody() {
     return (req, res, next) => {
         if (!req.body) {
-            return res.status(400).json({ message: "missing project data" })
-        } else if (!req.body.project_id) {
+            return res.status(400).json({ message: "missing action data" })
+        } if (!req.body.project_id) {
+            return res.status(400).json({ message: "missing required field" })
+        } if (!req.body.name || !req.body.description) {
             return res.status(400).json({ message: "missing required field" })
         }
         next()

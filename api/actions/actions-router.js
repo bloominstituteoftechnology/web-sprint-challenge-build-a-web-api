@@ -21,7 +21,7 @@ router.get("/api/actions/:id", validateActionsId(), (req, res) => {
 })
 
 // #3 [POST] /api/actions` returns the newly created action as the body of the _response_.
-router.post("/api/actions", validateActionsId(), (req, res, next) => {
+router.post("/api/actions", validateActionBody(), (req, res, next) => {
     actions.insert(req.body)
         .then((action) => {
             res.status(201).json(action)
@@ -40,10 +40,10 @@ router.put("/api/actions/:id", validateActionsId(), validateActionBody(), async 
 })
 
 // #5 [DELETE] /api/actions/:id` returns no _response_ body.
-router.delete("/api/actions/:id", validateActionBody(), async (req, res, next) => {
+router.delete("/api/actions/:id", validateActionsId(), async (req, res, next) => {
     try {
         await actions.remove(req.params.id)
-        res.status(204).end()
+        res.status(200).json()
     } catch (err) {
         next(err)
     }
