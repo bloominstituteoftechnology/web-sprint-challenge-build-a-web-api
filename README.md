@@ -139,7 +139,22 @@ After finishing your required elements, you can push your work further. These go
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+
+
+
 1. Understand and explain the use of Middleware.
+Middleware sits between an operating system and the applications that run on it
+
+
+
 1. The basic principles of the REST architectural style.
+
+
+
 1. Understand and explain the use of Express Routers.
+Routing refers to how an application’s endpoints (URIs) respond to client requests. For an introduction to routing
+
+
+
 1. Describe tooling used to manually test the correctness of an API.
+API testing is a set of quality assurance actions that include sending calls to the API, getting output, and validating the system’s response against the defined input parameters
