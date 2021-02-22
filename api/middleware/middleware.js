@@ -1,5 +1,5 @@
 const actions = require("../actions/actions-model")
-// const projects = require("../projects/projects-model")
+const projects = require("../projects/projects-model")
 
 function logger() {
     return (req, res, next) => {
@@ -9,12 +9,12 @@ function logger() {
     }
 }
 
-function actionsId() {
+function validateActionsId() {
     return (req, res, next) => {
-        actions.findById(req.params.id)
-            .then((user) => {
-                if (user) {
-                    req.user = user
+        actions.get(req.params.id)
+            .then((action) => {
+                if (action) {
+                    req.action = action
                     next()
                 } else {
                     res.status(404).json({
@@ -25,26 +25,44 @@ function actionsId() {
     }
 }
 
-function validateActions() {
+function validateProjectId() {
     return (req, res, next) => {
-        if (!req.body) {
-            return res.status(400).json({ message: "missing action data" })
-        } else if (!req.body.text) {
-            return res.status(400).json({ message: "missing required action name field" })
-        }
-        next()
+        projects.get(req.params.id)
+            .then((project) => {
+                if (project) {
+                    req.project = project
+                    next()
+                } else {
+                    res.status(404).json({
+                        message: "project not found",
+                    })
+                }
+            })
     }
 }
 
-function validateProjects() {
+function validateActionBody() {
     return (req, res, next) => {
         if (!req.body) {
             return res.status(400).json({ message: "missing project data" })
-        } else if (!req.body.text) {
-            return res.status(400).json({ message: "missing required project text field" })
+        } else if (!req.body.project_id) {
+            return res.status(400).json({ message: "missing required field" })
         }
         next()
     }
 }
 
-module.exports = { logger, actionsId, validateActions, validateProjects }
+function validateProjectBody() {
+    return (req, res, next) => {
+        if (!req.body) {
+            return res.status(400).json({ message: "missing project data" })
+        } else if (!req.body.name || !req.body.description) {
+            return res.status(400).json({ message: "missing required field" })
+        }
+        next()
+    }
+}
+
+
+
+module.exports = { logger, validateActionsId, validateProjectId, validateActionBody, validateProjectBody }
