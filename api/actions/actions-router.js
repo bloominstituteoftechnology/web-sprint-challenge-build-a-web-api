@@ -1,6 +1,7 @@
 // Write your "actions" router here!
 const express = require("express")
 const actionsModel = require("./actions-model")
+const { actionsId, validateActions } = require("../middleware/middleware")
 
 const router = express.Router()
 
@@ -15,7 +16,7 @@ router.get("/api/actions", async (req, res, next) => {
 })
 
 // #2 [GET] /api/actions/:id` returns an action with the given `id` as the body of the _response_.
-router.get("/api/actions/:id", async (req, res, next) => {
+router.get("/api/actions/:id", actionsId(), async (req, res, next) => {
 	try {
 		const data = await actionsModel.find()
 		res.status(200).json(data)
@@ -35,7 +36,7 @@ router.post("/api/actions", async (req, res, next) => {
 })
 
 // #4 [PUT] /api/actions/:id` returns the updated action as the body of the _response_.
-router.put("/api/actions/:id", async (req, res, next) => {
+router.put("/api/actions/:id", validateActions(), async (req, res, next) => {
     try {
 		const data = await actionsModel.update(req.body)
 		res.status(201).json(data)

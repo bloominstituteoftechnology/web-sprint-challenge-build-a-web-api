@@ -18,7 +18,8 @@ server.use(cors())
 server.use(actionsRouter)
 server.use(projectsRouter)
 
-server.get((err, req, res) => {
+server.get(( err, req, res) => {
+    res.json({ message: "Hello World" })
     console.log(err)
     res.status(500).json({
         message: "Something went wrong",
