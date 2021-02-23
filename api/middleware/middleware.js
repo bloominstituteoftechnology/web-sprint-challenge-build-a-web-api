@@ -9,7 +9,7 @@ function logger() {
     }
 }
 
-function validateActionsId() {
+function validateActionId() {
     return (req, res, next) => {
         actions.get(req.params.id)
             .then((action) => {
@@ -41,20 +41,20 @@ function validateProjectId() {
     }
 }
 
-function validateActionBody() {
+function validateAction() {
     return (req, res, next) => {
         if (!req.body) {
             return res.status(400).json({ message: "missing action data" })
         } if (!req.body.project_id) {
             return res.status(400).json({ message: "missing required id field" })
-        } if (!req.body.name || !req.body.description) {
+        } else if (!req.body.name || !req.body.description) {
             return res.status(400).json({ message: "missing required field" })
         }
         next()
     }
 }
 
-function validateProjectBody() {
+function validateProject() {
     return (req, res, next) => {
         if (!req.body) {
             return res.status(400).json({ message: "missing project data" })
@@ -67,4 +67,4 @@ function validateProjectBody() {
 
 
 
-module.exports = { logger, validateActionsId, validateProjectId, validateActionBody, validateProjectBody }
+module.exports = { logger, validateActionId, validateProjectId, validateAction, validateProject }

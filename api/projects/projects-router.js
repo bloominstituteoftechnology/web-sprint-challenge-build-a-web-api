@@ -1,10 +1,11 @@
 // Write your "projects" router here!
 const express = require("express")
 const projects = require("./projects-model")
-const { validateProjectId, validateProjectBody } = require("../middleware/middleware")
+const { validateProjectId, validateProject } = require("../middleware/middleware")
 
 
 const router = express.Router()
+
 // #1 `[GET] /api/projects` returns an array of projects (or an empty array) as the body of the response.
 router.get("/api/projects", async (req, res, next) => {
     try {
@@ -17,11 +18,11 @@ router.get("/api/projects", async (req, res, next) => {
 
 // #2 `[GET] /api/projects/:id` returns a project with the given `id` as the body of the _response_.
 router.get("/api/projects/:id", validateProjectId(), (req, res) => {
-    res.json(req.action)
+    res.status(200).json(req.action)
 })
 
 // #3 `[POST] /api/projects` returns the newly created project as the body of the _response_.
-router.post("/api/projects", validateProjectBody(), async (req, res, next) => {
+router.post("/api/projects", validateProject(), async (req, res, next) => {
     try {
         const project = await projects.insert(req.body)
         res.status(201).json(project)
@@ -31,7 +32,7 @@ router.post("/api/projects", validateProjectBody(), async (req, res, next) => {
 })
 
 // #4 `[PUT] /api/projects/:id` returns the updated project as the body of the _response_.
-router.put("/api/projects/:id", validateProjectBody(), validateProjectId(), async (req, res, next) => {
+router.put("/api/projects/:id", validateProject(), async (req, res, next) => { // validateProjectId(),??
     try {
         const project = await projects.update(req.params.id, req.body)
         res.status(200).json(project)
@@ -41,9 +42,9 @@ router.put("/api/projects/:id", validateProjectBody(), validateProjectId(), asyn
 })
 
 // #5 `[DELETE] /api/projects/:id` returns no _response_ body.
-router.delete("/api/projects/:id", validateProjectId(), async (req, res, next) => {
+router.delete("/api/projects/:id", async (req, res, next) => { // validateProjectId(),??
     try {
-        await projects.remove(req.params.id) 
+        await projects.remove(req.params.id)
         res.status(200).json()
     } catch (err) {
         next(err)
@@ -51,10 +52,10 @@ router.delete("/api/projects/:id", validateProjectId(), async (req, res, next) =
 })
 
 // #6 `[GET] /api/projects/:id/actions` sends an array of actions (or an empty array) as the body of the response.
-router.get("/api/projects:id/actions", validateProjectId(), async (req, res, next) => {
+router.get("/api/projects/:id/actions", async (req, res, next) => {
     try {
-        const actions = await projects.getProjectActions()
-        res.status(200).json(actions)
+        const action = await projects.get()
+        res.status(200).json(action)
     } catch (err) {
         next(err)
     }
