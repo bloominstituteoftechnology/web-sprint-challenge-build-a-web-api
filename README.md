@@ -110,6 +110,7 @@ We have provided test data for all the resources.
 
 **Notes:**
 
+- Run tests locally executing `npm test`.
 - You are welcome to create additional files for middlewares, but **do not move or rename existing files** or folders.
 - Do not make changes to your `package.json` except to add additional dependencies and scripts.
 - In your solution, it is essential that you follow best practices and produce clean and professional results.
