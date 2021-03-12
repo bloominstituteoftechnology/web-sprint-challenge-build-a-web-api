@@ -20,6 +20,17 @@ async function validateActionsId(req, res, next) {
   }
 }
 
+function validateAction(req, res, next) {
+  if (!req.body.project_id && req.body.description) {
+    res.status(400).json({
+      message: 'Project Id and Description Are Require',
+    });
+  } else {
+    next();
+  }
+}
+
 module.exports = {
   validateActionsId,
+  validateAction,
 };
