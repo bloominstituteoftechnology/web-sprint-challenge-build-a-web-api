@@ -1,6 +1,7 @@
 /*
 play this: https://www.youtube.com/watch?v=d-diB65scQU
 
+
 Sing along:
 
 here's a little code I wrote, please read the README word for word, don't worry, you got this
@@ -12,3 +13,10 @@ I need this code, but don't know where, perhaps should make some middleware, don
 
 Go code!
 */
+
+const server=require("./api/server")
+const port=5000
+
+server.listen(port, () => {
+    console.log(`running at http://localhost:${port}`)
+})
