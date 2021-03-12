@@ -127,7 +127,7 @@ We have provided test data for all the resources.
 - [ ] Check Codegrade on Monday following the Sprint Challenge for reviewer feedback.
 - [ ] New commits will be evaluated by Codegrade if pushed _before_ the sprint challenge deadline.
 
-## Interview Questions
+## Interview Question
 
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
