@@ -44,6 +44,14 @@ router.delete("/:id", validateProjectId, (req, res, next) => {
     .catch(next);
 });
 
+router.get("/:id/actions", validateProjectId, (req, res, next) => {
+  Project.getProjectActions(req.params.id)
+    .then((actions) => {
+      res.json(actions);
+    })
+    .catch(next);
+});
+
 router.use((err, req, res, next) => {
   res.status(500).json({
     message: err.message,
