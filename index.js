@@ -12,3 +12,16 @@ I need this code, but don't know where, perhaps should make some middleware, don
 
 Go code!
 */
+require("dotenv").config();
+const server = require("./api/server.js");
+
+if (process.env.NODE_ENV === "development") {
+  const cors = require("cors");
+  server.use(cors());
+}
+
+const PORT = process.env.PORT || 4000;
+
+server.listen(PORT, () => {
+  console.log(`\n* Server Running on http://localhost:${PORT} *\n`);
+});
