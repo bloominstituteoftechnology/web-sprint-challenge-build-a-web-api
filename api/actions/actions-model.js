@@ -11,8 +11,8 @@ module.exports = {
 
 function get() {
   let query = db("actions");
-  return query.then((projects) => {
-    return projects.map((project) => mappers.actionToBody(project));
+  return query.then((actions) => {
+    return actions.map((action) => mappers.actionToBody(action));
   });
 }
 
