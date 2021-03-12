@@ -49,8 +49,19 @@ async function validateProjectsId(req, res, next) {
   }
 }
 
+function validateProjects(req, res, next) {
+  if (!req.body.name || !req.body.description) {
+    res.status(400).json({
+      message: 'Name and Description is Require',
+    });
+  } else {
+    next();
+  }
+}
+
 module.exports = {
   validateActionsId,
   validateActions,
   validateProjectsId,
+  validateProjects,
 };
