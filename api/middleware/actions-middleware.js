@@ -21,6 +21,8 @@ const validateAction = (req, res, next) => {
     res.status(400).json({ message: "missing required description field" });
   } else if (!req.body.notes || !req.body.notes.trim()) {
     res.status(400).json({ message: "missing required notes field" });
+  } else if (!req.body.project_id) {
+    res.status(400).json({ message: "missing required project_id field" });
   } else {
     next();
   }

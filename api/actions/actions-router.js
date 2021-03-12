@@ -16,11 +16,17 @@ router.get("/", (req, res, next) => {
     .catch(next);
 });
 
-router.get("/:id", validateActionId, (req, res, next) => {
+router.get("/:id", validateActionId, (req, res) => {
   res.json(req.action);
 });
 
-router.post("/", (req, res) => {});
+router.post("/", validateAction, (req, res, next) => {
+  Action.insert(req.body)
+    .then((action) => {
+      res.status(201).json(action);
+    })
+    .catch(next);
+});
 
 router.put("/:id", (req, res, next) => {});
 
