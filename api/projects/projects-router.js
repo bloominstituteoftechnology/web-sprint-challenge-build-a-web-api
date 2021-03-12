@@ -32,4 +32,16 @@ router.post('/', validateProjects, (req, res) => {
     });
 });
 
+router.put('/:id', validateProjects, validateProjectsId, (req, res) => {
+  Project.update(req.params.id, req.body)
+    .then((project) => {
+      res.status(201).json(project);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'Could not update project',
+      });
+    });
+});
+
 module.exports = router;
