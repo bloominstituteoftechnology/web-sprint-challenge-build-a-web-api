@@ -36,7 +36,13 @@ router.put("/:id", validateActionId, validateAction, (req, res, next) => {
     .catch(next);
 });
 
-router.delete("/:id", (req, res, next) => {});
+router.delete("/:id", validateActionId, (req, res, next) => {
+  Action.remove(req.params.id)
+    .then((action) => {
+      res.status(200).json(action);
+    })
+    .catch(next);
+});
 
 router.use((err, req, res, next) => {
   res.status(500).json({
