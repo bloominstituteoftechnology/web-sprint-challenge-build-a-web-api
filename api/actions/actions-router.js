@@ -1,1 +1,2 @@
-// Write your "actions" router here!
+const Action = require('../actions/actions-model')
+const Project = require('../projects/projects-model')
