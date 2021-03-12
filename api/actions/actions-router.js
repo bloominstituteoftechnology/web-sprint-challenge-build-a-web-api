@@ -28,7 +28,7 @@ router.use((err, req, res, next) => {
   res.status(500).json({
     message: err.message,
     stack: err.stack,
-    custom: "something went wromg in the users router",
+    custom: "something went wrong in the actions router",
   });
 });
 
