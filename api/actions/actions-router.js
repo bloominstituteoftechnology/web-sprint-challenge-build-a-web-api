@@ -1,5 +1,5 @@
-const Action = require('../actions/actions-model')
-const Project = require('../projects/projects-model')
+const Action = require('../actions/actions-model');
+const Project = require('../projects/projects-model');
 
 async function validateActionsId(req, res, next) {
   const { id } = req.params;
@@ -19,3 +19,7 @@ async function validateActionsId(req, res, next) {
     });
   }
 }
+
+module.exports = {
+  validateActionsId,
+};
