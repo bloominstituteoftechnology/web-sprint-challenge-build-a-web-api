@@ -3,6 +3,7 @@ const ActionsFuncs = require("./actions-model");
 
 const router = express.Router();
 
+
 // [GET] /api/actions sends an array of actions (or an empty array) as the body of the response.
 router.get("/", (req, res) => {
   ActionsFuncs.get()

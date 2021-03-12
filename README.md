@@ -152,7 +152,10 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
    v. REST can be set up is a layered system that allows you to delploy the API on one server, and store data on another server.
 
 4. Understand and explain the use of Express Routers.
-   This allows you to split routing code between multiple files. When you can export, and utilize to resuce repeating code.
+   ER are put into endpoints in order to group similarly router URL. In the case of having several URL, its assumed each URL will have its own group of CRUD operations, which would quickly creating a enourmous file.
 
 5. Describe tooling used to manually test the correctness of an API.
-   The main two tools that were used are Postman and Nodemon.
+   Nodemon - allows you to test the server w/o having to turn off/on.
+   PostMan - allows you to check end points and CRUD functionality.
+   Httpie - similar to PostMan, with the added terminal feature.
+   ESlinter - is able to id syntax errors.
