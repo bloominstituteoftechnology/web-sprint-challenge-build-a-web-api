@@ -28,7 +28,13 @@ router.post("/", validateAction, (req, res, next) => {
     .catch(next);
 });
 
-router.put("/:id", (req, res, next) => {});
+router.put("/:id", validateActionId, validateAction, (req, res, next) => {
+  Action.update(req.params.id, req.body)
+    .then((action) => {
+      res.status(200).json(action);
+    })
+    .catch(next);
+});
 
 router.delete("/:id", (req, res, next) => {});
 
