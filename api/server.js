@@ -1,7 +1,10 @@
 const express = require('express');
 const server = express();
 
-// Complete your server here!
-// Do NOT `server.listen()` inside this file!
+server.get('*', (req,res) => {
+    res.status(200).json({
+        message: 'Welcome To My Sprint Submission'
+    })
+})
 
 module.exports = server;
