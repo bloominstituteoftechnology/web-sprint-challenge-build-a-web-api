@@ -28,7 +28,13 @@ router.post("/", validateProject, (req, res, next) => {
     .catch(next);
 });
 
-router.put("/:id", (req, res, next) => {});
+router.put("/:id", validateProjectId, validateProject, (req, res, next) => {
+  Project.update(req.params.id, req.body)
+    .then((project) => {
+      res.status(200).json(project);
+    })
+    .catch(next);
+});
 
 router.delete("/:id", (req, res, next) => {});
 
