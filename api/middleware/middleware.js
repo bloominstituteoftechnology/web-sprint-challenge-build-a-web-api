@@ -20,10 +20,10 @@ async function validateActionsId(req, res, next) {
   }
 }
 
-function validateAction(req, res, next) {
-  if (!req.body.description && !req.body.project_id) {
+function validateActions(req, res, next) {
+  if (!req.body.description) {
     res.status(400).json({
-      message: 'Project Id and Description Are Require',
+      message: 'Description is Require',
     });
   } else {
     next();
@@ -32,5 +32,5 @@ function validateAction(req, res, next) {
 
 module.exports = {
   validateActionsId,
-  validateAction,
+  validateActions,
 };

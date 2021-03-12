@@ -1,7 +1,10 @@
 const express = require('express');
 
 const Action = require('./actions-model');
-const { validateActionsId, validateAction } = require('../middleware/middleware');
+const {
+  validateActionsId,
+  validateActions,
+} = require('../middleware/middleware');
 
 const router = express.Router();
 
@@ -21,8 +24,20 @@ router.get('/:id', validateActionsId, (req, res) => {
   res.status(200).json(req.action);
 });
 
-router.post('/', validateAction, (req, res) => {
+router.post('/', validateActions, (req, res) => {
   Action.insert(req.body)
+    .then((action) => {
+      res.status(201).json(action);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'Could not modifiy action',
+      });
+    });
+});
+
+router.put('/:id', validateActions, validateActionsId, (req, res) => {
+  Action.update(req.params.id, req.body)
     .then((action) => {
       res.status(201).json(action);
     })
