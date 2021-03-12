@@ -16,4 +16,8 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/:id', validateProjectsId, (req, res) => {
+  res.status(200).json(req.project);
+});
+
 module.exports = router;
