@@ -1,6 +1,9 @@
 const express = require('express');
-const Project = require('./projects-model')
-const { validateProjectsId, validateProjects } = require('../middleware/middleware')
+const Project = require('./projects-model');
+const {
+  validateProjectsId,
+  validateProjects,
+} = require('../middleware/middleware');
 
 const router = express.Router();
 
