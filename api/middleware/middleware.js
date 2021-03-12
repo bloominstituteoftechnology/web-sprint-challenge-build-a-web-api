@@ -30,7 +30,27 @@ function validateActions(req, res, next) {
   }
 }
 
+async function validateProjectsId(req, res, next) {
+  const { id } = req.params;
+  try {
+    const project = await Project.get(id);
+    if (!project) {
+      res.status(404).json({
+        message: `Project with the ID ${id} does not exist`,
+      });
+    } else {
+      req.project = project;
+      next();
+    }
+  } catch (err) {
+    res.status(500).json({
+      message: 'Could not Retrieve Projects',
+    });
+  }
+}
+
 module.exports = {
   validateActionsId,
   validateActions,
+  validateProjectsId,
 };
