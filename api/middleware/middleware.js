@@ -21,7 +21,7 @@ async function validateActionsId(req, res, next) {
 }
 
 function validateAction(req, res, next) {
-  if (!req.body.project_id && req.body.description) {
+  if (!req.body.description && !req.body.project_id) {
     res.status(400).json({
       message: 'Project Id and Description Are Require',
     });
