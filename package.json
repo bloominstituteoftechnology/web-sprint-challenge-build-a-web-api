@@ -8,12 +8,18 @@
     "server": "nodemon index.js",
     "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand --silent"
   },
+  "engines": {
+    "node": "14.15.4",
+    "npm": "6.14.11"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LambdaSchool/web-sprint-challenge-build-a-web-api"
   },
   "author": "Lambda School",
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^4.4.1",
     "knex": "^0.95.2",
