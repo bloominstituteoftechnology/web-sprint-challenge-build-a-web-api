@@ -31,7 +31,7 @@ router.post('/', validateActions, (req, res) => {
     })
     .catch((err) => {
       res.status(500).json({
-        message: 'Could not modifiy action',
+        message: 'Could not insert action',
       });
     });
 });
