@@ -16,7 +16,9 @@ router.get("/", (req, res, next) => {
     .catch(next);
 });
 
-router.get("/:id", (req, res, next) => {});
+router.get("/:id", validateActionId, (req, res, next) => {
+  res.json(req.action);
+});
 
 router.post("/", (req, res) => {});
 
