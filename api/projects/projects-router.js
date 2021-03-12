@@ -20,7 +20,13 @@ router.get("/:id", validateProjectId, (req, res) => {
   res.json(req.project);
 });
 
-router.post("/", (req, res, next) => {});
+router.post("/", validateProject, (req, res, next) => {
+  Project.insert(req.body)
+    .then((project) => {
+      res.status(201).json(project);
+    })
+    .catch(next);
+});
 
 router.put("/:id", (req, res, next) => {});
 
