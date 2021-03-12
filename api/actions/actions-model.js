@@ -12,7 +12,7 @@ module.exports = {
 function get() {
   let query = db("actions");
   return query.then((projects) => {
-    return projects.map((project) => mappers.projectToBody(project));
+    return projects.map((project) => mappers.actionToBody(project));
   });
 }
 
