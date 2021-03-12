@@ -36,7 +36,13 @@ router.put("/:id", validateProjectId, validateProject, (req, res, next) => {
     .catch(next);
 });
 
-router.delete("/:id", (req, res, next) => {});
+router.delete("/:id", validateProjectId, (req, res, next) => {
+  Project.remove(req.params.id)
+    .then((project) => {
+      res.status(200).json(project);
+    })
+    .catch(next);
+});
 
 router.use((err, req, res, next) => {
   res.status(500).json({
