@@ -52,6 +52,7 @@ router.get("/:id/actions", validateProjectId, (req, res, next) => {
     .catch(next);
 });
 
+// eslint-disable-next-line no-unused-vars
 router.use((err, req, res, next) => {
   res.status(500).json({
     message: err.message,

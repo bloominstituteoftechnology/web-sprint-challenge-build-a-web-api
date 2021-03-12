@@ -11,7 +11,10 @@ module.exports = {
 };
 
 function get() {
-  return db("projects as p");
+  let query = db("projects as p");
+  return query.then((projects) => {
+    return projects.map((project) => mappers.projectToBody(project));
+  });
 }
 
 function getById(id) {

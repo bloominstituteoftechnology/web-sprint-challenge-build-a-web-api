@@ -10,7 +10,10 @@ module.exports = {
 };
 
 function get() {
-  return db("actions");
+  let query = db("actions");
+  return query.then((projects) => {
+    return projects.map((project) => mappers.projectToBody(project));
+  });
 }
 
 function getById(id) {
