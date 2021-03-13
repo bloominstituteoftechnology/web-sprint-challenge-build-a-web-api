@@ -4,6 +4,8 @@
     "description": "Node API Challenge",
     "main": "index.js",
     "scripts": {
+        "start": "node index.js",
+        "server": "nodemon index.js",
         "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand --silent"
     },
     "repository": {
@@ -15,6 +17,7 @@
         "express": "^4.17.1",
         "helmet": "^4.4.1",
         "knex": "^0.95.2",
+        "nodemon": "^2.0.7",
         "sqlite3": "^5.0.2"
     },
     "devDependencies": {

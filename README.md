@@ -140,7 +140,17 @@ After finishing your required elements, you can push your work further. These go
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+node is useful because it enables both client and server to communicate within the same language, making the data mutually intelligible and thus easier to share.
+these are both lightweight and adaptable, capable of supporting asynchronous operations while still being modular enough to take in repositories for scripting
 1. Understand and explain the use of Middleware.
+middleware are customized functions which add features to express servers
 1. The basic principles of the REST architectural style.
+restful architecture is stateless, with easily modular parts enabling one to adjust the code for either server or client separately.
+it also follows a standard, making it easier for other developers to read one's code and parse whatever was made
 1. Understand and explain the use of Express Routers.
+routers within express are simply endpoints wich can asynchronously handle serveral URL, following CRUD operators to prevent unnecessary bloat
 1. Describe tooling used to manually test the correctness of an API.
+nodemon: testing the server without having to turn it on
+postman: checkign endpoints and CRUD
+httpie: a terminal with similar functionality to Postman
+eslinter: probably a coder's best friend, shows where there are syntax errors within the code!
