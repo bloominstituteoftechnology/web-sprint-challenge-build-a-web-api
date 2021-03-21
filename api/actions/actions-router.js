@@ -55,11 +55,7 @@ router.put('/api/actions/:id', async (req, res) => {
     } else {
         try {
             const updatedAction = await Actions.update(id, body);
-            if (!updatedAction) {
-                res.status(404).json({ message: "The action with the specified id does not exist"});
-            } else {
                 res.status(200).json(updatedAction);
-            }
         } catch (err) {
             res.status(500).json({ Error: {err} });
         }
