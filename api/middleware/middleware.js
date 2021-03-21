@@ -16,6 +16,14 @@ const checkProjectsId = async (req,res,next) =>{
         res.status(500).json(`Server error: ${err}`)
     }
 }
+
+const checkProjectsValidation = (req,res,next) =>{
+    if (!req.body.description) {
+        res.status(400).json({ message: 'description required' })
+    } else {
+        next()
+    }
+}
 const checkActionsId = async (req,res,next) =>{
     const {id} = req.params
     try{
@@ -31,7 +39,16 @@ const checkActionsId = async (req,res,next) =>{
         res.status(500).json(`Server error: ${err}`)
     }
 }
+const checkActionValidation = (req,res,next) =>{
+    if (!req.body.name || !req.body.description) {
+        res.status(400).json({ message: 'user requires both name and description' })
+    } else {
+        next()
+    }
+}
 module.exports={
     checkProjectsId,
-    checkActionsId
+    checkProjectsValidation,
+    checkActionsId,
+    checkActionValidation
 }
