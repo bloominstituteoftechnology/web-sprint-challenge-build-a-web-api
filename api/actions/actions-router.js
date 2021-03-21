@@ -33,7 +33,7 @@ router.get('/api/actions/:id', async (req, res) => {
 // post
 router.post('/api/actions', async (req, res) => {
     const body = req.body;
-    if (!body.project_id || !body.description || !body.notes) {
+    if (!body.description || !body.notes) {
         res.status(400).json({ message: "please fill in all required fields" });
     } else {
     try {
