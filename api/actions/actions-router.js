@@ -7,7 +7,7 @@ router.get('/api/actions', (req,res) =>{
 
 })
 
-router.get('/api/actions/:id', mw.middleware, (req,res) =>{
+router.get('/api/actions/:id', mw.checkActionsId, (req,res) =>{
     res.status(200).json(req.hub)
 })
 
@@ -15,15 +15,15 @@ router.post('/api/actions', (req,res) =>{
 
 })
 
-router.delete('/api/actions/:id', mw.middleware, (req,res) =>{
+router.delete('/api/actions/:id', mw.checkActionsId, (req,res) =>{
 
 })
 
-router.put('/api/actions/:id', mw.middleware, (req,res) =>{
+router.put('/api/actions/:id', mw.checkActionsId, (req,res) =>{
 
 })
 
-router.get('/api/actions/:id', mw.middlware, (req,res) =>{
+router.get('/api/actions/:id', mw.checkActionsId, (req,res) =>{
 
 })
 
