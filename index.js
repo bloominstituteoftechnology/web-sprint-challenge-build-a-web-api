@@ -14,7 +14,7 @@ Go code!
 */
 
 
-const server = require('./appi/server');
+const server = require('./api/server');
 
 const port = 4000;
 
