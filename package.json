@@ -4,7 +4,8 @@
     "description": "Node API Challenge",
     "main": "index.js",
     "scripts": {
-        "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand --silent"
+        "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand --silent",
+        "resetdb": "knex migrate:rollback && knex migrate:latest && knex seed:run"
     },
     "repository": {
         "type": "git",

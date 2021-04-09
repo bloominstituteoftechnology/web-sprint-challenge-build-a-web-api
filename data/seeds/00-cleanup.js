@@ -1,3 +1,4 @@
+// DO NOT CHANGE THIS FILE
 const { clean } = require("knex-cleaner");
 
 exports.seed = function(knex) {

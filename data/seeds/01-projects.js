@@ -1,3 +1,4 @@
+// DO NOT CHANGE THIS FILE
 exports.seed = function(knex, Promise) {
   return knex('projects').insert([
     {
