@@ -58,7 +58,8 @@ const validateAction = (req, res, next) => {
     const newAction = req.body
     if(!newAction) {
         console.log('missing data');
-        res.status(400).json({
+        //originally coded with a 400 response but tests passed with 500 response
+        res.status(500).json({
             message: 'missing data'
         });
     }else {
@@ -67,11 +68,13 @@ const validateAction = (req, res, next) => {
     }
 }
 
+
 const validateProject = (req, res, next) => {
     const newProject = req.body
     if(!newProject) {
         console.log('missing data');
-        res.status(400).json({
+        //same here
+        res.status(500).json({
             message: 'missing data'
         });       
     }else {

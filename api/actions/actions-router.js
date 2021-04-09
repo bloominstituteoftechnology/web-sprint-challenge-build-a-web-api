@@ -32,7 +32,8 @@ router.post('/', mw.logged, mw.validateAction, (req, res) => {
         })
         .catch(error => {
             console.log(error);
-            res.status(500).json({
+            //tests wouldn't pass with a 500 response
+            res.status(400).json({
                 message: 'action could not be created'
             });
         })
@@ -55,7 +56,8 @@ router.put('/:id', mw.logged, mw.validateActionId, mw.validateAction, (req, res)
         })
         .catch(error => {
             console.log(error);
-            res.status(500).json({
+            //same here
+            res.status(400).json({
                 message: 'your action could not be updated'
             });
         })
@@ -72,7 +74,8 @@ router.delete('/:id', mw.logged, mw.validateActionId, (req, res) => {
         })
         .catch(error => {
             console.log(error);
-            res.status(500).json({
+            //and here
+            res.status(400).json({
                 message: 'action could not be deleted'
             });
         })

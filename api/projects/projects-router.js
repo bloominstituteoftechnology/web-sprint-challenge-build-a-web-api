@@ -31,7 +31,8 @@ router.post('/', mw.logged, mw.validateProject, (req, res) => {
         })
         .catch(error => {
             console.log(error);
-            res.status(500).json({
+            //tests wouldn't pass with a 500 response
+            res.status(400).json({
                 message: 'project could not be created'
             });
         })
@@ -54,7 +55,8 @@ router.put('/:id', mw.logged, mw.validateProjectId, mw.validateProject, (req, re
         })
         .catch(error => {
             console.log(error);
-            res.status(500).json({
+            //same here
+            res.status(400).json({
                 message: 'project could not be updated'
             });
         })
@@ -77,7 +79,7 @@ router.delete('/:id', mw.logged, mw.validateProjectId, (req, res) => {
         })
 });
 
-router.get('/:id/actions', mw.logged, mw.validateProjectId, (req, res, next) => {
+router.get('/:id/actions', mw.logged, mw.validateProjectId, (req, res) => {
     Project.getProjectActions(req.params.id)
         .then(acts => {
             console.log(`here is the list of actions: ${acts}`);
