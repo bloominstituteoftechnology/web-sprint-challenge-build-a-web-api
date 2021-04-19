@@ -26,7 +26,7 @@ server.use(actionsRouter);
 server.use(projectsRouter);
 
 server.get('/', (req, res) => {
-    res.send('Welcome to the API')
+    res.send('Welcome to the API!')
 })
 
 server.listen(port, () => {
