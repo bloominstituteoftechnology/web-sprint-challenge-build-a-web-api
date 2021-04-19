@@ -1,6 +1,8 @@
 const express = require('express');
 const projects = require('./helpers/projectModel');
 
+const router = express.Router();
+
 
 router.get("/projects/:id", (req, res) => {
     projects

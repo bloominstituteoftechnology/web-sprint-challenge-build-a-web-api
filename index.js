@@ -18,13 +18,19 @@ const actionsRouter = require('./data/actionRouter');
 const projectsRouter = require('./data/projectRouter');
 
 const server = express()
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 4000;
 
 server.use(express.json())
 
 server.use(actionsRouter);
 server.use(projectsRouter);
 
+server.get('/', (req, res) => {
+    res.send('Welcome to the API')
+})
+
 server.listen(port, () => {
     console.log(`server is running at http://localhost:${port}`)
 });
+
+
