@@ -54,7 +54,7 @@ router.put("/projects/:id", (req, res, next) => {
 // [DELETE] /api/projects/:id returns no response body.
 router.delete("/projects/:id", (req, res, next) => {
   Projects.remove(req.params.id).then(() => {
-    res.status(201).json({});
+    res.status(204).json({});
   });
 });
 
