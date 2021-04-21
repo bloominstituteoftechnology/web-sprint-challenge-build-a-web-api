@@ -12,3 +12,15 @@ I need this code, but don't know where, perhaps should make some middleware, don
 
 Go code!
 */
+
+require("dotenv").config();
+
+const port = process.env.PORT || 3600;
+const secret = process.env.SECRET || "secret-for-build-an-api";
+const server = require("./api/server.js");
+
+server.listen(port, () => {
+  console.log(
+    `\n*** It works! - Server running on http://localhost:${port} ***\n`
+  );
+});
