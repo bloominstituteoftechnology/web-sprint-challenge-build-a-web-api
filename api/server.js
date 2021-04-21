@@ -6,11 +6,11 @@ const server = express();
 // Custom Middleware
 function logger(req, res, next) {
   console.log(
-    "Req Method: ",
+    "Req Method:",
     req.method,
-    ", Req URL: ",
+    ", Req URL:",
     req.url,
-    ", Req Timestamp: ",
+    ", Req Timestamp:",
     new Date().toString()
   );
   next();
@@ -22,7 +22,7 @@ function logger(req, res, next) {
 server.use(express.json());
 server.use(logger);
 server.use("/api", projectRouter);
-//server.use("/api", actionRouter);
+server.use("/api", actionRouter);
 
 server.get("/", (req, res) => {
   res.send(`<h2>App test - When you finish this, play video games!</h2>`);
