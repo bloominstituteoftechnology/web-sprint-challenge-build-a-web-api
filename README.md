@@ -8,7 +8,7 @@ In your challenge this week, you will demonstrate your mastery of these skills b
 
 This is an individual assessment. All work must be your own. All projects will be submitted to Codegrade for automated review. You will also be given feedback by code reviewers the Monday after challenge submissions. For more information on the review process [click here](https://www.notion.so/lambdaschool/How-to-View-Feedback-in-CodeGrade-c5147cee220c4044a25de28bcb6bb54a).
 
-You are not allowed to collaborate during the sprint challenge. However, you are encouraged to follow the twenty-minute rule and seek support by dropping a :wave: in your help channel when needed.
+You are not allowed to collaborate during the sprint challenge.
 
 ## Introduction
 
@@ -40,7 +40,7 @@ A _"test"_ script already exists you can use to run tests against your code.
 A _"resetdb"_ script exists that allows you to reset the database to its original state.
 
 - [ ] Write an _npm script_ named _"start"_ that uses `node` to run the API server.
-- [ ] Write an _npm script_ named _"server"_ that uses `nodemon`to run the API server.
+- [ ] Write an _npm script_ named _"server"_ that uses `nodemon` to run the API server.
 - [ ] Install _nodemon_ as a development dependency that would not be used in production.
 
 #### Build an API
