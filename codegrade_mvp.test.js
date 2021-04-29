@@ -118,44 +118,44 @@ describe('server.js', () => {
         expect(res.status).toBe(404)
       }, 500)
     })
+    describe('[GET] /api/projects/:id/actions', () => {
+      test('[13] sends back the actions in project with given id', async () => {
+        const res = await request(server).get('/api/projects/1/actions')
+        expect(res.body).toMatchObject(actions)
+      }, 500)
+      test('[14] sends back empty array if no actions in project with given id', async () => {
+        const res = await request(server).get('/api/projects/2/actions')
+        expect(res.body).toMatchObject([])
+      }, 500)
+    })
   })
   // 👉 ACTIONS
   // 👉 ACTIONS
   // 👉 ACTIONS
   describe('actions endpoints', () => {
     describe('[GET] /api/actions', () => {
-      test('[13] sends back all actions that exist', async () => {
+      test('[15] sends back all actions that exist', async () => {
         const res = await request(server).get('/api/actions')
         expect(res.body).toHaveLength(2)
         expect(res.body[0]).toMatchObject(actionA)
         expect(res.body[1]).toMatchObject(actionB)
       }, 500)
-      test('[14] sends back empty array if no actions', async () => {
+      test('[16] sends back empty array if no actions', async () => {
         await db('actions').truncate()
         const res = await request(server).get('/api/actions')
         expect(res.body).toHaveLength(0)
       }, 500)
     })
     describe('[GET] /api/actions/:id', () => {
-      test('[15] sends back the action with given id', async () => {
+      test('[17] sends back the action with given id', async () => {
         const res1 = await request(server).get('/api/actions/1')
         const res2 = await request(server).get('/api/actions/2')
         expect(res1.body).toMatchObject(actionA)
         expect(res2.body).toMatchObject(actionB)
       }, 500)
-      test('[16] responds with a 404 if no action with given id', async () => {
+      test('[18] responds with a 404 if no action with given id', async () => {
         const res = await request(server).get('/api/actions/11')
         expect(res.status).toBe(404)
-      }, 500)
-    })
-    describe('[GET] /api/projects/:id/actions', () => {
-      test('[17] sends back the actions in project with given id', async () => {
-        const res = await request(server).get('/api/projects/1/actions')
-        expect(res.body).toMatchObject(actions)
-      }, 500)
-      test('[18] sends back empty array if no actions in project with given id', async () => {
-        const res = await request(server).get('/api/projects/2/actions')
-        expect(res.body).toMatchObject([])
       }, 500)
     })
     describe('[POST] /api/actions', () => {
