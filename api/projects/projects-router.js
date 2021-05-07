@@ -19,4 +19,12 @@ router.get("/:id", (req, res) => {
   res.status(200).json(req.idResult);
 });
 
+router.post("/", validateProject, (req, res, next) => {
+  Projects.insert(req.body)
+    .then((newProject) => {
+      res.status(201).json(newProject);
+    })
+    .catch(next);
+});
+
 module.exports = router;
