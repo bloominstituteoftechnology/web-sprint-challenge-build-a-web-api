@@ -29,3 +29,11 @@ router.put("/:id", validateAction, (req, res, next) => {
     .then((updatedAction) => res.status(201).json(updatedAction))
     .catch(next);
 });
+
+router.delete("/:id", (req, res, next) => {
+  Actions.remove(req.params.id)
+    .then(() => res.sendStatus(200))
+    .catch(next);
+});
+
+module.exports = router;

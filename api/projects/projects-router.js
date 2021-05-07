@@ -26,9 +26,7 @@ router.put("/:id", validateProject, (req, res, next) => {
   const id = req.params.id;
 
   Projects.update(id, req.body)
-    .then((updatedProject) => {
-      res.status(201).json(updatedProject);
-    })
+    .then((updatedProject) => res.status(201).json(updatedProject))
     .catch(next);
 });
 
@@ -40,9 +38,7 @@ router.delete("/:id", (req, res, next) => {
 
 router.get("/:id/actions", (req, res, next) => {
   Projects.getProjectActions(req.params.id)
-    .then((actions) => {
-      res.status(200).json(actions);
-    })
+    .then((actions) => res.status(200).json(actions))
     .catch(next);
 });
 
