@@ -27,4 +27,15 @@ router.post("/", validateProject, (req, res, next) => {
     .catch(next);
 });
 
+router.put("/:id", validateProject, (req, res, next) => {
+  const id = req.params.id;
+  req.body = { ...req.body, id: id };
+
+  Projects.update(id, req.body)
+    .then((updatedProject) => {
+      res.status(201).json(updatedProject);
+    })
+    .catch(next);
+});
+
 module.exports = router;
