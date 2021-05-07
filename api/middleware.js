@@ -5,8 +5,7 @@ const logger = (req, _res, next) => {
   request-type: ${req.method},
   endpoint: ${req.originalUrl},
   time-received: ${new Date().toISOString()}
-}
-  `);
+}`);
   next();
 };
 

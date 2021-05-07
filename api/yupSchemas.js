@@ -6,6 +6,7 @@ const projectsSchema = yup.object({
     .trim()
     .required("missing required name field")
     .max(64, "name must be at most 64 chars"),
+
   description: yup
     .string()
     .trim()
@@ -17,12 +18,14 @@ const projectsSchema = yup.object({
 
 const actionsSchema = yup.object({
   project_id: yup.string().required("missing required project ID"),
+
   description: yup
     .string()
     .trim()
     .required("missing required project ID")
     .max(128, "description must be at most 280 chars"),
   notes: yup.string().trim().required("missing required notes"),
+
   completed: yup.bool(),
 });
 
