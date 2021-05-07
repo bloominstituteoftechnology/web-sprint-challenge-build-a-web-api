@@ -33,7 +33,7 @@ const validateID = (req, _res, next) => {
     : next();
 };
 
-const validateBody = (req, res, next) => {
+const validateBody = (schema, body, next) => {
   next();
 };
 
