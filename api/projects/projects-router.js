@@ -29,12 +29,17 @@ router.post("/", validateProject, (req, res, next) => {
 
 router.put("/:id", validateProject, (req, res, next) => {
   const id = req.params.id;
-  req.body = { ...req.body, id: id };
 
   Projects.update(id, req.body)
     .then((updatedProject) => {
       res.status(201).json(updatedProject);
     })
+    .catch(next);
+});
+
+router.delete("/:id", (req, res, next) => {
+  Projects.remove(req.params.id)
+    .then(() => res.sendStatus(200))
     .catch(next);
 });
 
