@@ -50,7 +50,8 @@ const validateAction = (req, _res, next) => {
   validateBody(actionsSchema, req.body, next);
 };
 
-const handleErrors = (err, _req, res, next) => {
+// eslint-disable-next-line no-unused-vars
+const handleErrors = (err, _req, res, _next) => {
   res.status(err.status || 500).json({
     note: "DEVS: There's trouble afoot, let's solve it!",
     message: err.message,

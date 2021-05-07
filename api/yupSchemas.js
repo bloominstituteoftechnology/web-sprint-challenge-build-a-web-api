@@ -5,7 +5,6 @@ const projectsSchema = yup.object({
     .string()
     .trim()
     .required("missing required name field")
-    .min(2, "name must be at least 2 chars")
     .max(64, "name must be at most 64 chars"),
   description: yup
     .string()
