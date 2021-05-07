@@ -1,4 +1,10 @@
 const logger = (req, res, next) => {
+  console.log(`{
+  request-type: ${req.method},
+  endpoint: ${req.originalUrl},
+  time-received: ${new Date().toISOString()}
+}
+  `);
   next();
 };
 

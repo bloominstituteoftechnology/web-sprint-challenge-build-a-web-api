@@ -19,7 +19,8 @@
         "express": "^4.17.1",
         "helmet": "^4.6.0",
         "knex": "^0.95.4",
-        "sqlite3": "^5.0.2"
+        "sqlite3": "^5.0.2",
+        "yup": "^0.32.9"
     },
     "devDependencies": {
         "cross-env": "^7.0.3",
