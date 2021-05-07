@@ -17,7 +17,7 @@ const projectsSchema = yup.object({
 });
 
 const actionsSchema = yup.object({
-  project_id: yup.required("missing required project ID"),
+  project_id: yup.string().required("missing required project ID"),
   description: yup
     .string()
     .trim()

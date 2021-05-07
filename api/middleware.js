@@ -1,8 +1,6 @@
-const Projects = require("./projects/projects-model");
-const Actions = require("./actions/actions-model");
 const { projectsSchema, actionsSchema } = require("./yupSchemas");
 
-const logger = (req, res, next) => {
+const logger = (req, _res, next) => {
   console.log(`{
   request-type: ${req.method},
   endpoint: ${req.originalUrl},
@@ -26,7 +24,7 @@ const validateID = (dbModel, resName, req, next) => {
               message: `${resName} with ID ${id} not found`,
             });
       })
-      .catch(next());
+      .catch(next);
   }
   next();
 };
@@ -41,20 +39,19 @@ const validateBody = (schema, body, next) => {
     .catch((err) => next({ status: 400, message: err.message }));
 };
 
-const validateProject = (req, res, next) => {
+const validateProject = (req, _res, next) => {
   validateBody(projectsSchema, req.body, next);
 };
-const validateAction = (req, res, next) => {
+const validateAction = (req, _res, next) => {
   validateBody(actionsSchema, req.body, next);
 };
 
-const handleErrors = (err, req, res, next) => {
+const handleErrors = (err, _req, res, next) => {
   res.status(err.status || 500).json({
     note: "DEVS: There's trouble afoot, let's solve it!",
     message: err.message,
     stack: err.stack,
   });
-  next();
 };
 
 module.exports = {

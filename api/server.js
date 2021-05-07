@@ -1,17 +1,19 @@
 const express = require("express");
-const { logger, handleErrors, validateID } = require("./middleware");
+const { logger, handleErrors } = require("./middleware");
+const projectsRouter = require("./projects/projects-router");
 const server = express();
 
 server.use(express.json());
 server.use(logger);
+server.use("/api/projects", projectsRouter);
 
 // Build your actions router in /api/actions/actions-router.js
 // Build your projects router in /api/projects/projects-router.js
 
-server.use("/api/actions/:id", validateID);
-
-server.use("*", (_req, res) => {
+server.use("/", (_req, res) => {
   res.send("<h2>API located at /api</h2>");
 });
+
+server.use(handleErrors);
 
 module.exports = server;
