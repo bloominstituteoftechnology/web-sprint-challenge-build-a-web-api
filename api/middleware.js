@@ -12,26 +12,23 @@ const logger = (req, res, next) => {
   next();
 };
 
-const validateID = (req, _res, next) => {
-  const url = req.originalUrl;
+const validateID = (dbModel, resName, req, next) => {
   const id = req.params.id;
-  url.startsWith("/api/projects")
-    ? Projects.get(id)
-        .then((result) => {
-          result
-            ? (req.idResult = result)
-            : next({ status: 404, message: "PARSE THIS" });
-        }) //!extrapolate this string
-        .catch(next())
-    : url.startsWith("/api/actions")
-    ? Actions.get(id)
-        .then((result) => {
-          result
-            ? (req.idResult = result)
-            : next({ status: 404, message: "PARSE THIS" });
-        }) //!extrapolate this string
-        .catch(next())
-    : next();
+
+  if (id) {
+    dbModel
+      .get(id)
+      .then((result) => {
+        result
+          ? (req.idResult = result)
+          : next({
+              status: 404,
+              message: `${resName} with ID ${id} not found`,
+            });
+      })
+      .catch(next());
+  }
+  next();
 };
 
 const validateBody = (schema, body, next) => {
