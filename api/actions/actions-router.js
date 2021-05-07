@@ -18,6 +18,14 @@ router.get("/:id", (req, res, next) => res.status(200).json(req.idResult));
 
 router.post("/", validateAction, (req, res, next) => {
   Actions.insert(req.body)
-    .then((newProject) => res.status(201).json(newProject))
+    .then((newAction) => res.status(201).json(newAction))
+    .catch(next);
+});
+
+router.put("/:id", validateAction, (req, res, next) => {
+  const id = req.params.id;
+
+  Actions.update(id, req.body)
+    .then((updatedAction) => res.status(201).json(updatedAction))
     .catch(next);
 });
