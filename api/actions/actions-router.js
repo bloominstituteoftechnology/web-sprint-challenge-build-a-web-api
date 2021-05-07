@@ -30,6 +30,21 @@ router.put("/:id", validateAction, (req, res, next) => {
     .catch(next);
 });
 
+router.patch("/:id", (req, res, next) => {
+  const id = req.params.id;
+  const status = req.query.status;
+
+  if (typeof status === "boolean") {
+    res.status(400).json({ message: "status query must be true or false" });
+  } else {
+    req.idResult.completed = status;
+    console.log(req.idResult);
+    Actions.update(id, req.idResult)
+      .then((updatedAction) => res.status(201).json(updatedAction))
+      .catch(next);
+  }
+});
+
 router.delete("/:id", (req, res, next) => {
   Actions.remove(req.params.id)
     .then(() => res.sendStatus(200))
