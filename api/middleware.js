@@ -17,16 +17,20 @@ const validateID = (dbModel, resName, req, next) => {
     dbModel
       .get(id)
       .then((result) => {
-        result
-          ? (req.idResult = result)
-          : next({
-              status: 404,
-              message: `${resName} with ID ${id} not found`,
-            });
+        if (result) {
+          req.idResult = result;
+          next();
+        } else {
+          next({
+            status: 404,
+            message: `${resName} with ID ${id} not found`,
+          });
+        }
       })
       .catch(next);
+  } else {
+    next();
   }
-  next();
 };
 
 const validateBody = (schema, body, next) => {
