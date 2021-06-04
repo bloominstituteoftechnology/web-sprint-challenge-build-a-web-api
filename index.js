@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 6000;
 
-console.log('port is -> ', PORT);
+console.log('port is -> ', PORT); // test
 
 server.listen(PORT, () => {
 	console.log(`\n*** Server Running on http://localhost:${PORT}***\n`);
