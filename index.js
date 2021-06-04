@@ -14,7 +14,7 @@ Pull your server into this file and start it!
 */
 const server = require('./api/server');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 server.get('/api', (req,res)=>{
     res.json({message: 'Working project!'})
