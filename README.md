@@ -159,7 +159,12 @@ After finishing your required elements, you can push your work further. These go
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+   Node.js and Express allow you to use JavaScript outside of the brower write code on a server for APIs
 1. Understand and explain the use of Middleware.
+   Middleware is used to intercept a request made by a client and make changes in needed before the server sends back a response
 1. The basic principles of the REST architectural style.
+   the basic principles are clients that request the resources to servers that hold the resources and the transfer of it.
 1. Understand and explain the use of Express Routers.
+   Routers are used to handle requests made to the server.
 1. Describe tooling used to manually test the correctness of an API.
+   you can manually text the correctness of an API with applications like postman that allow u to make http requests and view the responses being sent back ad if you were a user on a client machine.
