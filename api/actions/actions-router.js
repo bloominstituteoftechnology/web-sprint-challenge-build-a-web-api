@@ -50,4 +50,13 @@ router.put('/:id', validateActionId, validateAction, (req, res, next) => {
         .catch(next)
 })
 
+router.delete('/:id', validateActionId, async (req, res, next) => {
+    try {
+        await Action.remove(req.params.id)
+        res.json(res.Action)
+    } catch (err) {
+        next(err)
+    }
+})
+
 module.exports = router
