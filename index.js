@@ -14,9 +14,9 @@ if (process.env.NODE_ENV === 'production') {
 	console.log('this means this code is deployed');
 }
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
-console.log('port is -> ', PORT); // test
+console.log('port is -> ', PORT); // tes
 
 server.listen(PORT, () => {
 	console.log(`\n*** Server Running on http://localhost:${PORT}***\n`);
