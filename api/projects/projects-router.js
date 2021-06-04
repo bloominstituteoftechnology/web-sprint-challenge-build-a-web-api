@@ -29,4 +29,20 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// `[POST] /api/projects`
+router.post("/", (req, res) => {
+  const { name, description } = req.body;
+  Projects.insert(req.body)
+    .then((newProject) => {
+      if (!name || !description) {
+        res.status(400);
+      } else {
+        res.json(newProject);
+      }
+    })
+    .catch((err) => {
+      res.status(400).json({ message: err.message });
+    });
+});
+
 module.exports = router;
