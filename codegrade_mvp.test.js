@@ -30,9 +30,8 @@ beforeEach(async () => {
   await db('actions').insert(actionA)
   await db('actions').insert(actionB)
 })
-afterAll(async (done) => {
+afterAll(async () => {
   await db.destroy()
-  done()
 })
 
 test('[0] sanity check', () => {
