@@ -77,4 +77,20 @@ router.delete("/:id", (req, res) => {
     });
 });
 
+// `[GET] /api/projects/:id/actions`
+router.get("/:id/actions", (req, res) => {
+  const { id } = req.params;
+  Projects.getProjectActions(id)
+    .then((actions) => {
+      if (!actions) {
+        res.status(404);
+      } else {
+        res.json(actions);
+      }
+    })
+    .catch((err) => {
+      res.json({ stack: err.stack });
+    });
+});
+
 module.exports = router;
