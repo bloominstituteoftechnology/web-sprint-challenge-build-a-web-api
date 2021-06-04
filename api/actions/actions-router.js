@@ -9,12 +9,11 @@ const Action = require('./actions-model')
 
 const router = express.Router()
 
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
     Action.get()
         .then(actions => {
             res.json(actions)
         })
-        .catch(next)
 })
 
 router.get('/:id', validateActionId, (req, res) => {

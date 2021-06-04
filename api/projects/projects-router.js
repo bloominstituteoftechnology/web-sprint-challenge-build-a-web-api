@@ -63,7 +63,7 @@ router.get('/:id/actions', validateProjectId, async (req, res, next) => {
             if (actions.length > 0) {
                 res.status(200).json(actions)
             } else {
-                res.status(404).json({actions})
+                res.status(404).json((actions))
             }
         })
         .catch(next)
