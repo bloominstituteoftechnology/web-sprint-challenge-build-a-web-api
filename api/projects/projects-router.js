@@ -4,7 +4,7 @@ const express = require('express')
 const router = express.Router()
 
 const Projects = require('./projects-model')
-const Actions = require('../actions/actions-model')
+
 
 router.get('/', async (req, res) => {
     try {
@@ -54,6 +54,56 @@ router.post('/projects', async (req, res) => {
     }
 })
 
+router.put('/:id', async (req, res) => {
+    const id = req.params.id
+    const body = req.body
+    if (!body.name && !body.description) {
+        res.status(400).json({
+            message: 'Please fill out required fields'
+        })
+    }else {
+        try {
+            const project = await Projects.update(id, body)
+            res.status(200).json(project)
+        }
+        catch(err) {
+            res.status(500).json({
+                error: {err}
+            })
+        }
+    }
+})
 
+router.delete('/:id', async (req, res) => {
+    const id = req.params.id
+    try {
+        const project = await Projects.remove(id)
+        if(!project) {
+            res.status(404).json({
+                message: 'Specified project does not exist'
+            })
+        }else {
+            res.status(200).json(project)
+        }
+    }
+    catch(err) {
+        res.status(500).json({
+            error: {err}
+        })
+    }
+})
+
+router.get('/:id/actions', async (req, res) => {
+    const id = req.params.id
+    try {
+        const project = await Projects.getProjectActions(id)
+        res.status(200).json(project)
+    }
+    catch(err) {
+        res.status(500).json({
+            error: {err}
+        })
+    }
+})
 
 module.exports = router
