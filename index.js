@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'production') {
 	console.log('this means this code is deployed');
 }
 
-const PORT = process.env.PORT || 6000;
+const PORT = process.env.PORT;
 
 console.log('port is -> ', PORT); // test
 

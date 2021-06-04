@@ -16,7 +16,6 @@ server.use('/api/actions', actionsRouter);
 server.use('/api/projects', projectsRouter);
 
 // Do NOT `server.listen()` inside this file!
-
 server.use('*', (req, res) => {
 	res.status(404).send(`
        <p>Oops, can't find that!</p>
