@@ -32,4 +32,18 @@ router.post('/', validateProject, (req, res, next) => {
         .catch(next)
 })
 
+router.put('/:id', validateProjectId, validateProject, (req, res, next) => {
+    Project.update(req.params.id, {
+        name: req.name,
+        description: req.description
+    })
+        .then(() => {
+            return Project.get(req.params.id)
+        })
+        .then(project => {
+            res.json(project)
+        })
+        .catch(next)
+})
+
 module.exports = router
