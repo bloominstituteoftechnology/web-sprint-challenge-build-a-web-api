@@ -36,7 +36,8 @@ router.post('/', validateProject, (req, res, next) => {
 router.put('/:id', validateProjectId, validateProject, (req, res, next) => {
     Project.update(req.params.id, {
         name: req.name,
-        description: req.description
+        description: req.description,
+        completed: req.completed
     })
         .then(() => {
             return Project.get(req.params.id)
@@ -47,13 +48,25 @@ router.put('/:id', validateProjectId, validateProject, (req, res, next) => {
         .catch(next)
 })
 
-router.delete('/api/projects/:id', validateProjectId, async (req, res, next) => {
+router.delete('/:id', validateProjectId, async (req, res, next) => {
     try {
         await Project.remove(req.params.id)
-        res.json(null)
+        res.json(res.Project)
     } catch (err) {
         next(err)
     }
+})
+
+router.get('/:id/actions', validateProjectId, async (req, res, next) => {
+    Project.getProjectActions(req.params.id)
+        .then(actions => {
+            if (actions.length > 0) {
+                res.status(200).json(actions)
+            } else {
+                res.status(404).json({actions})
+            }
+        })
+        .catch(next)
 })
 
 router.use((err, req, res, next) => { //eslint-disable-line
