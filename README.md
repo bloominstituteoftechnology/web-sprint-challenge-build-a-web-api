@@ -18,17 +18,17 @@ In meeting the minimum viable product (MVP) specifications listed below, your pr
 
 ### Task 1: Project Set Up
 
-- [ ] Fork and clone this repository. **If you are repeating this Course, delete your old fork from Github and re-fork and re-clone.**
-- [ ] Create a new branch: `git checkout -b <firstName-lastName>`.
-- [ ] Implement the project on your newly created branch, committing changes regularly.
-- [ ] Push commits: `git push origin <firstName-lastName>`.
-- [ ] **RUN** `npm install` to install your dependencies.
+- [ x ] Fork and clone this repository. **If you are repeating this Course, delete your old fork from Github and re-fork and re-clone.**
+- [ x ] Create a new branch: `git checkout -b <firstName-lastName>`.
+- [ x ] Implement the project on your newly created branch, committing changes regularly.
+- [ x ] Push commits: `git push origin <firstName-lastName>`.
+- [ x ] **RUN** `npm install` to install your dependencies.
 
 ### Task 2: CodeGrade Setup
 
-- [ ] Follow [instructions](https://www.notion.so/lambdaschool/Submitting-an-assignment-via-Code-Grade-A-Step-by-Step-Walkthrough-07bd65f5f8364e709ecb5064735ce374) to set up Codegrade's Webhook and Deploy Key, making sure your deployment is set to your `<firstName-lastName>` branch.
-- [ ] Make a commit and push it to Github.
-- [ ] Check to see that Codegrade has accepted your git submission.
+- [ x ] Follow [instructions](https://www.notion.so/lambdaschool/Submitting-an-assignment-via-Code-Grade-A-Step-by-Step-Walkthrough-07bd65f5f8364e709ecb5064735ce374) to set up Codegrade's Webhook and Deploy Key, making sure your deployment is set to your `<firstName-lastName>` branch.
+- [ x ] Make a commit and push it to Github.
+- [ x ] Check to see that Codegrade has accepted your git submission.
 
 ### Task 3: Project Requirements (MVP)
 
@@ -39,9 +39,9 @@ Your finished project must include all of the following requirements:
 A _"test"_ script already exists you can use to run tests against your code.
 A _"resetdb"_ script exists that allows you to reset the database to its original state.
 
-- [ ] Write an _npm script_ named _"start"_ that uses `node` to run the API server.
-- [ ] Write an _npm script_ named _"server"_ that uses `nodemon` to run the API server.
-- [ ] Install _nodemon_ as a development dependency that would not be used in production.
+- [ x ] Write an _npm script_ named _"start"_ that uses `node` to run the API server.
+- [ x ] Write an _npm script_ named _"server"_ that uses `nodemon` to run the API server.
+- [ x ] Install _nodemon_ as a development dependency that would not be used in production.
 
 #### Build an API
 
@@ -92,22 +92,22 @@ The description of the structure and extra information about each _resource_ sto
 
 #### Projects
 
-| Field       | Data Type | Metadata                                                                    |
-| ----------- | --------- | --------------------------------------------------------------------------- |
-| id          | number    | do not provide it when creating projects, the database will generate it     |
-| name        | string    | required                                                                    |
-| description | string    | required                                                                    |
-| completed   | boolean   | not required, defaults to false when creating projects                      |
+| Field       | Data Type | Metadata                                                                |
+| ----------- | --------- | ----------------------------------------------------------------------- |
+| id          | number    | do not provide it when creating projects, the database will generate it |
+| name        | string    | required                                                                |
+| description | string    | required                                                                |
+| completed   | boolean   | not required, defaults to false when creating projects                  |
 
 #### Actions
 
-| Field       | Data Type | Metadata                                                                                         |
-| ----------- | --------- | ------------------------------------------------------------------------------------------------ |
-| id          | number    | do not provide it when creating actions, the database will generate it                           |
-| project_id  | number    | required, must be the id of an existing project                                                  |
-| description | string    | required, up to 128 characters long                                                              |
-| notes       | string    | required, no size limit. Used to record additional notes or requirements to complete the action  |
-| completed   | boolean   | not required, defaults to false when creating actions                                            |
+| Field       | Data Type | Metadata                                                                                        |
+| ----------- | --------- | ----------------------------------------------------------------------------------------------- |
+| id          | number    | do not provide it when creating actions, the database will generate it                          |
+| project_id  | number    | required, must be the id of an existing project                                                 |
+| description | string    | required, up to 128 characters long                                                             |
+| notes       | string    | required, no size limit. Used to record additional notes or requirements to complete the action |
+| completed   | boolean   | not required, defaults to false when creating actions                                           |
 
 ### Database Persistence Helpers
 
