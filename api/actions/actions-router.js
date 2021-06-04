@@ -61,4 +61,16 @@ router.put("/:id", async (req, res) => {
     }
   }
 });
+
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  Actions.remove(id).then((removedAction) => {
+    if (!removedAction) {
+      res.status(404).json({ message: "nope" });
+    } else {
+      res.json(removedAction);
+    }
+  });
+});
+
 module.exports = router;
