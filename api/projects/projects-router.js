@@ -45,4 +45,36 @@ router.post("/", (req, res) => {
     });
 });
 
+// `[PUT] /api/projects/:id`
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const body = req.body;
+  try {
+    if (!body.name && !body.description) {
+      res.status(400).json({ message: "Please fill out the required fields" });
+    } else {
+      const updatedProject = await Projects.update(id, body);
+      res.status(200).json(updatedProject);
+    }
+  } catch (err) {
+    res.status(500).json({ Error: { err } });
+  }
+});
+
+// `[DELETE] /api/projects/:id`
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  Projects.remove(id)
+    .then((removedProject) => {
+      if (!removedProject) {
+        res.status(404).json({ message: "nothing to see" });
+      } else {
+        res.json(removedProject);
+      }
+    })
+    .catch((err) => {
+      res.status(404).json({ message: err.message });
+    });
+});
+
 module.exports = router;
