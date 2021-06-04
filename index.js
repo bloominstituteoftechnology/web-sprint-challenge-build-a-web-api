@@ -12,3 +12,14 @@ I need this code, but don't know where, perhaps should make some middleware, don
 
 Pull your server into this file and start it!
 */
+const server = require('./api/server');
+
+const port = process.env.PORT || 3000;
+
+server.get('/api', (req,res)=>{
+    res.json({message: 'Working project!'})
+});
+
+server.listen(port,()=>{
+    console.log('listening on', port);
+})
