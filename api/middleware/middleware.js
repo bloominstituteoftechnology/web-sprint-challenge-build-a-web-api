@@ -10,7 +10,7 @@ function logger(req, res, next) {
 }
 // good
 function validateProject(req, res, next) {
-	console.log('validatePost middleware');
+	console.log('validateProject middleware');
 	const { name, description } = req.body;
 	if (!name || !name.trim() || !description || !description.trim()) {
 		res.status(400).json({ message: 'missing required name and/or description field' });
@@ -22,7 +22,7 @@ function validateProject(req, res, next) {
 }
 
 function validateAction(req, res, next) {
-	console.log('validatePost middleware');
+	console.log('validateAction middleware');
 	const { project_id, description, notes } = req.body;
 	if (!project_id || !description || !description.trim() || !notes || !notes.trim()) {
 		res.status(400).json({ message: 'missing required project_id, notes, and/or description field' });
