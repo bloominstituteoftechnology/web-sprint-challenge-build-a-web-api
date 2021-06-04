@@ -30,4 +30,35 @@ router.get("/:id", (req, res) => {
     });
 });
 
+// `[POST] /api/actions`
+router.post("/", async (req, res) => {
+  const body = req.body;
+  if (!body.description || !body.notes) {
+    res.status(400).json({ message: "please fill in all required fields" });
+  } else {
+    try {
+      const newAction = await Actions.insert(body);
+      res.status(201).json(newAction);
+    } catch (err) {
+      res.status(500).json({ Error: { err } });
+    }
+  }
+});
+
+// `[PUT] /api/actions/:id`
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const body = req.body;
+
+  if (!body.description && !body.notes) {
+    res.status(400).json({ message: "please fill in all the required fields" });
+  } else {
+    try {
+      const updatedAction = await Actions.update(id, body);
+      res.status(200).json(updatedAction);
+    } catch (err) {
+      res.status(500).json({ Error: { err } });
+    }
+  }
+});
 module.exports = router;

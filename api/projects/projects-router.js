@@ -37,7 +37,7 @@ router.post("/", (req, res) => {
       if (!name || !description) {
         res.status(400);
       } else {
-        res.json(newProject);
+        res.status(201).json(newProject);
       }
     })
     .catch((err) => {
