@@ -5,10 +5,10 @@ const path = require('path');
 const server = require('./api/server');
 
 server.use(cors());
-server.use(express.static(path.join(__dirname, 'client/build'))); // static assets
+server.use(express.static(path.join(__dirname, 'client/build')));
 
-console.log(process.env.USER); // env USER=michael
-console.log(process.env.SHELL); // env SHELL=/bin/zhs
+console.log(process.env.USER);
+console.log(process.env.SHELL);
 
 if (process.env.NODE_ENV === 'production') {
 	console.log('this means this code is deployed');

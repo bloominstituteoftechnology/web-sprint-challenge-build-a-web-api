@@ -1,5 +1,3 @@
-// Write your "actions" router here!
-// Write your "projects" router here!
 const express = require('express');
 const { validateAction } = require('../middleware/middleware');
 

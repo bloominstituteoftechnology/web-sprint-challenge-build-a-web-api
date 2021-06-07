@@ -1,14 +1,9 @@
-// const express = require('express');
-// const Actions = require('../actions/actions-model');
-// const Projects = require('../projects/projects-model');
-
-// good
 function logger(req, res, next) {
 	console.log('logger middleware');
 	console.log(`[${new Date().toLocaleString()}] [${req.method}] ${req.path}`);
 	next();
 }
-// good
+
 function validateProject(req, res, next) {
 	console.log('validateProject middleware');
 	const { name, description } = req.body;
