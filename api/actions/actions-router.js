@@ -20,7 +20,6 @@ router.get('/:id', (req, res, next) => {
 				res.status(404);
 				next();
 			} else {
-				console.log('actions: ', actions);
 				res.status(200).json(actions);
 			}
 		})
@@ -56,7 +55,6 @@ router.put('/:id', validateAction, (req, res, next) => {
 			}
 		})
 		.then(action => {
-			console.log('PUT ACTION: ', action);
 			res.status(200).json(action);
 		})
 		.catch(next);

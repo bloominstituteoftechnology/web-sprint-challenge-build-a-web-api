@@ -9,7 +9,6 @@ const router = express.Router();
 router.get('/', (req, res, next) => {
 	Projects.get()
 		.then(projects => {
-			console.log('PROJECTS: ', projects);
 			res.status(200).json(projects);
 		})
 		.catch(next);
@@ -22,7 +21,6 @@ router.get('/:id', (req, res, next) => {
 				res.status(404);
 				next();
 			} else {
-				console.log('PROJECT: ', project);
 				res.status(200).json(project);
 			}
 		})
@@ -32,7 +30,6 @@ router.get('/:id', (req, res, next) => {
 router.post('/', validateProject, (req, res, next) => {
 	Projects.insert({ name: req.name, description: req.description, completed: req.body.completed })
 		.then(project => {
-			console.log('PROJECT: ', project);
 			res.json(project);
 		})
 		.catch(next);
@@ -67,7 +64,6 @@ router.get('/:id/actions', (req, res, next) => {
 	const { id } = req.params;
 	Projects.getProjectActions(id)
 		.then(actions => {
-			console.log('PROJECT ACTIONS: ', actions);
 			res.status(200).json(actions);
 		})
 		.catch(next);

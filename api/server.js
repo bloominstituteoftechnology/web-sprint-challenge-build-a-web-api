@@ -24,7 +24,6 @@ server.use('*', (req, res) => {
 
 // eslint-disable-next-line
 server.use((err, req, res, next) => {
-	console.log('err handling middleware kicking in!', err.message);
 	res.status(err.status || 500).json({
 		custom: 'something exploded inside the app',
 		message: err.message,
