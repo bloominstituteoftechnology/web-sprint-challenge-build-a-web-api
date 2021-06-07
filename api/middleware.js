@@ -90,8 +90,6 @@ async function validateAction(req, res, next) {
 
 }
 
-
-
 module.exports = {
     logger,
     validateProjectId,
