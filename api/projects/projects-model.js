@@ -26,6 +26,7 @@ function get(id) {
 
         return mappers.projectToBody(project);
       } else {
+        console.log("we are in the model get null")
         return null;
       }
     });

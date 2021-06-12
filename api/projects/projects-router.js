@@ -34,7 +34,17 @@ router.get('/', (req, res) => {
         });
 }); 
 
-// router.get('/:id', (req, res) => {
+router.get('/:id', (req, res) => {
+
+    Projects.get(req.params.id)
+        .then((response) => {
+        console.log("response: ", response);
+        res.status(201).json(response)
+        })
+        .catch((error) => {
+        res.status(500).json({ message: `Error retrieving the project: ${error.message}`})
+        })
+});
 
 // })
 
