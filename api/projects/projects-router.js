@@ -42,12 +42,15 @@ router.get('/:id', (req, res) => {
         .then((response) => {
             console.log("response: ", response);
             if (!response) {
-                res.status(404).json({ message: `Project of ${req.params.id} not found: ${error.message}`})
+                console.log("we are in the !response")
+                res.status(404).json({ message: `Project of ${req.params.id} not found`})
             } else {
-                res.status(201).json(response)
+                console.log("we are in the else")
+                res.status(200).json(response);
             }
         })
         .catch((error) => {
+            console.log("we are in the catch")
             res.status(500).json({ message: `Error retrieving the project of id ${req.params.id}: ${error.message}`})
         })
 });
