@@ -18,11 +18,15 @@ module.exports = {
 
 router.get('/', (req, res) => {
     Projects.get(req.query)
-        .then(response => {
+        .then((response) => {
             console.log("response: ", response)
-            res.status(200).json(response);
+            if (!response) {
+                res.json([])
+            } else {
+                res.status(200).json(response)
+            }
         })
-        .catch(error => {
+        .catch((error) => {
             console.log("error",error)
             res.status(500).json({
                 message: 'Error retrieving the projects.',

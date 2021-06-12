@@ -11,6 +11,7 @@ module.exports = {
 
 function get(id) {
   let query = db("projects as p");
+  console.log("id", id)
 
   if (id) {
     query.where("p.id", id).first();
