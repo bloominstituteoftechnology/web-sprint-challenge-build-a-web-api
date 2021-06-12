@@ -17,11 +17,12 @@ module.exports = {
 // PROJECTS ENDPOINTS
 
 router.get('/', (req, res) => {
-    Projects.get(req.query)
+    console.log("req.query: ", req.query)
+    Projects.get()
         .then((response) => {
             console.log("response: ", response)
             if (!response) {
-                res.json([])
+                res.status(404).json([])
             } else {
                 res.status(200).json(response)
             }
