@@ -12,7 +12,7 @@ const projectsRouter = require('./projects/projects-router.js');
 const actionsRouter = require('./actions/actions-router.js');
 
 server.use(express.json());
-server.use('/api/actions', actionsRouter);
+//server.use('/api/actions', actionsRouter);
 server.use('/api/projects', projectsRouter);
 
 
