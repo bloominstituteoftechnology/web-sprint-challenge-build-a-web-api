@@ -37,12 +37,17 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
 
     Projects.get(req.params.id)
+    
         .then((response) => {
-        console.log("response: ", response);
-        res.status(201).json(response)
+            console.log("response: ", response);
+            if (!response) {
+                res.status(404).json({ message: `Project of ${req.params.id} not found: ${error.message}`})
+            } else {
+                res.status(201).json(response)
+            }
         })
         .catch((error) => {
-        res.status(500).json({ message: `Error retrieving the project: ${error.message}`})
+            res.status(500).json({ message: `Error retrieving the project of id ${req.params.id}: ${error.message}`})
         })
 });
 
