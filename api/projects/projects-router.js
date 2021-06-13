@@ -96,7 +96,7 @@ router.put('/:id', (req, res) => {
         })
         .catch((updateError) => {
             console.log("updateError", updateError)
-            res.status(500).json({ message: `Unable to update project.`})
+            res.status(400).json({ message: `Unable to update project. Missing fields.`})
         })
     }
 });
