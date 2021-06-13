@@ -101,9 +101,20 @@ router.put('/:id', (req, res) => {
     }
 });
 
-// router.delete('/:id', (req,res) => {
+router.delete('/:id', (req,res) => {
+    const id = req.params.id;
+    console.log("id from router delete: ", id)
+    Projects.remove(id)
+        .then((response) => {
+            res.status(200).json({ message:  `Success! Delete project of id ${id}`})
+        })
+        .catch ((error) => {
+            console.log("error", error)
+            res.status(400).json({ message: `Unable to delete project.`})
+        })
 
-// });
+
+});
 
 // router.get('/:id/actions', (req,res) => {
 
