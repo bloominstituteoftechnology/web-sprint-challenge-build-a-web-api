@@ -47,7 +47,7 @@ router.get('/:id', (req, res) => {
         })
         .catch((error) => {
             // console.log("error", error)
-            res.status(500).json({ message: `Error retrieving the project of id ${req.params.id}: ${error.message}`})
+            res.status(500).json({ message: `Error retrieving the action of id ${req.params.id}: ${error.message}`})
         })
 });
 
