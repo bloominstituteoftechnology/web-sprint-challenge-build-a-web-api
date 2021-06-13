@@ -74,4 +74,29 @@ router.post('/', (req, res) => {
     }
 });
 
+router.put('/:id', (req, res) => {
+    const id = req.params.id;
+    const changes = req.body;
+    console.log("id and changes: ", req.params.id + req.body)
+
+    if (!changes) {
+        res.status(400).json({ message: `All actions fields required.`})
+    } else {
+
+        Actions.update(id, changes)
+        .then((updateResponse) => {
+            console.log("updateResponse", updateResponse) // response is either null or updated project object
+            if (!updateResponse) {
+                res.status(404).json({ message: `Action of id ${id} not found`})
+            } else {
+                res.status(200).json(updateResponse);
+            }
+        })
+        .catch((updateError) => {
+            console.log("updateError", updateError)
+            res.status(400).json({ message: `Unable to update action. Missing fields.`})
+        })
+    }
+});
+
 module.exports = router;
