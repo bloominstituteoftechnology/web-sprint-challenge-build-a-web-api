@@ -77,9 +77,9 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-    const id = req.params;
+    const id = req.params.id;
     const changes = req.body;
-    console.log("id and changes: ", id + changes)
+    console.log("id and changes: ", req.params.id + req.body)
 
     if (!changes) {
         res.status(400).json({ message: `All project fields required.`})
@@ -100,6 +100,14 @@ router.put('/:id', (req, res) => {
         })
     }
 });
+
+// router.delete('/:id', (req,res) => {
+
+// });
+
+// router.get('/:id/actions', (req,res) => {
+
+// });
 
 
 
