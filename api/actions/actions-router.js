@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
             if (!response) {
                 res.status(404).json([])
             } else {
-                res.status(200).json([response])
+                res.status(200).json(response)
             }
         })
         .catch((error) => {
