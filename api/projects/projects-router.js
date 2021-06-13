@@ -138,30 +138,18 @@ router.get('/:id/actions', (req,res) => {
     const id = req.params.id;
     
     Actions.get(id)
-    
-    .then((response) => {
-        console.log("response: ", response); // response is project with given id
-        if (response) {
-       
-            console.log("Response fr actions.get", response)
-            Projects.remove(id)
-                .then((deleteResponse) => {
-                    console.log("deleteResponse: ", deleteResponse)
-                    res.status(200).json({ message:  `Success! Delete project of id ${id}`})
-                })
-                .catch ((error) => {
-                    console.log("error", error)
-                    res.status(400).json({ message: `Unable to delete project.`})
-                })
-
-        } else {
-            res.status(404).json({ message: `Project of ${id} not found`})
-        }
-    })
-    .catch((error) => {
-        console.log("error", error)
-        res.status(500).json({ message: `Error, the project of id ${id} could not be deleted: ${error}`})
-    })
+        .then((response) => {
+            console.log("response: ", response); // response is project with given id
+            if (response) {
+                res.status(200).json({ message:  `Success! Delete project of id ${id}`})
+            } else {
+                res.status(404).json({ message: `Project of ${id} not found`})
+            }
+        })
+        .catch((error) => {
+            console.log("error", error)
+            res.status(500).json({ message: `Error, the project of id ${id} could not be deleted: ${error}`})
+        })
 
 
 });
