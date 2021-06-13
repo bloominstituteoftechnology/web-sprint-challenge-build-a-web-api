@@ -144,8 +144,11 @@ router.get('/:id/actions', (req,res) => {
             console.log("actions: ", actions); // response is an array with all actions
             if (actions) {
                 const filteredActions = actions.filter((action => {
-                    action.project_id === id;
+                    console.log("Action project id: ", action.project_id)
+                    console.log("id: ", id)
+                    return action.project_id === Number(id);
                 }));
+                console.log("filteredActions: ",filteredActions)
                 res.status(200).json(filteredActions);
             } else {
                 res.status(404).json([]);
