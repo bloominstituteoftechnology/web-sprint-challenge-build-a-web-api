@@ -143,7 +143,7 @@ router.get('/:id/actions', (req,res) => {
         .then((response) => {
             console.log("response: ", response); // response is project with given id
             if (response) {
-                res.status(200).json(response)
+                res.status(200).json([response])
             } else {
                 res.status(404).json([])
             }
