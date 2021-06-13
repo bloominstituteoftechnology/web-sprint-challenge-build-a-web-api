@@ -22,7 +22,7 @@ router.get('/:id', (req, res) =>{
         res.status(200).json(project)
     })
     .catch(error => {
-        res.status(500).json({ message: error.message })
+        res.status(404).json({ message: error.message })
     })
 })
 
@@ -32,7 +32,7 @@ router.get('/:id/actions', (req, res) =>{
         res.status(200).json(actions)
     })
     .catch(error => {
-        res.status(500).json({ message: error.message })
+        res.status(404).json({ message: error.message })
     })
 })
 

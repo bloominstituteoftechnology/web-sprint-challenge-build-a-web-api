@@ -20,8 +20,8 @@ router.get('/:id', (req, res) => {
     .then(actionId => {
         res.status(200).json(actionId)
     })
-    .catch(error => {
-        res.status(500).json({ message: error.message })
+    .catch(() => {
+        res.status(404).json({ message: "There is no action with this ID" })
     })
 })
 
@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
         res.status(201).json(post)
     })
     .catch(error => {
-        res.status(500).json(error)
+        res.status(400).json({ message: error.message })
     })
 })
 
@@ -41,7 +41,7 @@ router.delete('/:id', (req, res) => {
         res.status(200).json({ message: "action has been deleted!" })
     })
     .catch(() => {
-        res.status(500).json({ message: "unable to delete action" })
+        res.status(404).json({ message: "unable to delete action, ID for action does not exist" })
     })
 })
 
