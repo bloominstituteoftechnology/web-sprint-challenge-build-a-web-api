@@ -88,7 +88,7 @@ router.put('/:id', (req, res) => {
         Projects.update(id, changes)
         .then((updateResponse) => {
             console.log("updateResponse", updateResponse) // response is either null or updated project object
-            if (updateResponse === null) {
+            if (!updateResponse) {
                 res.status(404).json({ message: `Project of id ${id} not found`})
             } else {
                 res.status(200).json(updateResponse);
