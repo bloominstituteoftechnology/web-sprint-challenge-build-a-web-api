@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
     // console.log("req.query: ", req.query)
     Projects.get()
         .then((response) => {
-            // console.log("response: ", response)
+            // console.log("response: ", response) // response is array of all projects
             if (!response) {
                 res.status(404).json([])
             } else {
@@ -40,7 +40,7 @@ router.get('/:id', (req, res) => {
     Projects.get(req.params.id)
     
         .then((response) => {
-            // console.log("response: ", response);
+            // console.log("response: ", response); // response is project with given id
             if (!response) {
                 res.status(404).json({ message: `Project of ${req.params.id} not found`})
             } else {
@@ -60,21 +60,47 @@ router.post('/', (req, res) => {
 
     if (!body || !body.name || !body.description ) {
         res.status(400).json({ message: `All project fields required.`})
+    } else if (body.description === null) {
+        res.status(400).json({ message: `All project fields required.`})
     } else {
 
-    Projects.insert(req.body)
-        .then((response) => {
-            console.log("response", response)
-            res.status(200).json(response);
-        })
-        .catch((error) => {
-            // console.log("error", error)
-            res.status(500).json({ message: `Error retrieving the project of id ${req.params.id}: ${error.message}`})
-        })
-
+        Projects.insert(req.body)
+            .then((response) => {
+                // console.log("response", response) // response is posted project
+                res.status(200).json(response);
+            })
+            .catch((error) => {
+                // console.log("error", error)
+                res.status(500).json({ message: `Error retrieving the project of id ${req.params.id}: ${error.message}`})
+            })
     }
 });
 
-// })
+router.put('/:id', (req, res) => {
+    const id = req.params;
+    const changes = req.body;
+    console.log("id and changes: ", id + changes)
+
+    if (!changes) {
+        res.status(400).json({ message: `All project fields required.`})
+    } else {
+
+        Projects.update(id, changes)
+        .then((updateResponse) => {
+            console.log("updateResponse", updateResponse) // response is either null or updated project object
+            if (updateResponse === null) {
+                res.status(404).json({ message: `Project of id ${id} not found`})
+            } else {
+                res.status(200).json(updateResponse);
+            }
+        })
+        .catch((updateError) => {
+            console.log("updateError", updateError)
+            res.status(500).json({ message: `Unable to update project.`})
+        })
+    }
+});
+
+
 
 module.exports = router;
