@@ -12,7 +12,7 @@ module.exports = {
 
 function get(id) {
   let query = db("projects as p");
-  console.log("id", id)
+  console.log("id from model", id)
 
   if (id) {
     query.where("p.id", id).first();
@@ -37,7 +37,7 @@ function get(id) {
     });
   }
 }
-
+// 
 
 function insert(project) {
   return db("projects")

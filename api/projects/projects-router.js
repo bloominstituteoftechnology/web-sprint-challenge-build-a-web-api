@@ -1,5 +1,6 @@
 // Write your "projects" router here!
 const Projects = require('./projects-model');
+const Actions = require('../actions/actions-model');
 const express = require('express');
 const router = express.Router();
 
@@ -136,14 +137,15 @@ router.delete('/:id', (req,res) => {
 
 router.get('/:id/actions', (req,res) => {
     const id = req.params.id;
+    console.log("id: ", id)
     
     Actions.get(id)
         .then((response) => {
             console.log("response: ", response); // response is project with given id
             if (response) {
-                res.status(200).json({ message:  `Success! Delete project of id ${id}`})
+                res.status(200).json(response)
             } else {
-                res.status(404).json({ message: `Project of ${id} not found`})
+                res.status(404).json([])
             }
         })
         .catch((error) => {
