@@ -55,7 +55,13 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    console.log("req.body: ", req.body)
+    const body = req.body;
+    // console.log("req.body: ", body)
+
+    if (!body || !body.name || !body.description ) {
+        res.status(400).json({ message: `All project fields required.`})
+    } else {
+
     Projects.insert(req.body)
         .then((response) => {
             console.log("response", response)
@@ -65,6 +71,8 @@ router.post('/', (req, res) => {
             // console.log("error", error)
             res.status(500).json({ message: `Error retrieving the project of id ${req.params.id}: ${error.message}`})
         })
+
+    }
 });
 
 // })
