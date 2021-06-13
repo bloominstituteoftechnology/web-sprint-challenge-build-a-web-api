@@ -17,10 +17,10 @@ module.exports = {
 // PROJECTS ENDPOINTS
 
 router.get('/', (req, res) => {
-    console.log("req.query: ", req.query)
+    // console.log("req.query: ", req.query)
     Projects.get()
         .then((response) => {
-            console.log("response: ", response)
+            // console.log("response: ", response)
             if (!response) {
                 res.status(404).json([])
             } else {
@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
             }
         })
         .catch((error) => {
-            console.log("error",error)
+            // console.log("error",error)
             res.status(500).json({
                 message: 'Error retrieving the projects.',
             });
@@ -40,9 +40,8 @@ router.get('/:id', (req, res) => {
     Projects.get(req.params.id)
     
         .then((response) => {
-            console.log("response: ", response);
+            // console.log("response: ", response);
             if (!response) {
-                console.log("we are in the !response")
                 res.status(404).json({ message: `Project of ${req.params.id} not found`})
             } else {
                 console.log("we are in the else")
@@ -50,7 +49,20 @@ router.get('/:id', (req, res) => {
             }
         })
         .catch((error) => {
-            console.log("we are in the catch")
+            // console.log("error", error)
+            res.status(500).json({ message: `Error retrieving the project of id ${req.params.id}: ${error.message}`})
+        })
+});
+
+router.post('/', (req, res) => {
+    console.log("req.body: ", req.body)
+    Projects.insert(req.body)
+        .then((response) => {
+            console.log("response", response)
+            res.status(200).json(response);
+        })
+        .catch((error) => {
+            // console.log("error", error)
             res.status(500).json({ message: `Error retrieving the project of id ${req.params.id}: ${error.message}`})
         })
 });
