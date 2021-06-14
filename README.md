@@ -43,7 +43,11 @@ A _"resetdb"_ script exists that allows you to reset the database to its origina
 - [ ] Write an _npm script_ named _"server"_ that uses `nodemon` to run the API server.
 - [ ] Install _nodemon_ as a development dependency that would not be used in production.
 
-#### Build an API
+#### Environment Variables
+
+- [ ] Bring the port number from the `process.env` variable, falling back to `5000` if `process.env.PORT` is undefined.
+
+#### Endpoints
 
 Inside `api/projects/projects-router.js` build the following endpoints:
 
@@ -85,6 +89,10 @@ Inside `api/actions/actions-router.js` build endpoints for performing CRUD opera
 - [ ] `[DELETE] /api/actions/:id`
   - Returns no response body.
   - If there is no action with the given `id` it responds with a status code 404.
+
+#### Middleware functions
+
+- [ ] Write at least two middleware functions for this API, and consume them in the proper places of your code.
 
 ### Database Schemas
 
@@ -129,22 +137,12 @@ We have provided test data for all the resources.
 - Run tests locally executing `npm test`.
 - Use an HTTP client like `HTTPie`, `Postman` or `Insomnia` to manually test the API's endpoints.
 - Use Express Routers to organize your endpoints.
-- The use of middlewares to avoid repetitive code is highly recommended.
+- Even though you are only required to write two middleware functions, it is advised that you leverage middlewares as much as possible.
 - You are welcome to create additional files for middlewares, but **do not move or rename existing files** or folders.
 - Do not make changes to your `package.json` except to add additional dependencies and scripts.
 - In your solution, it is essential that you follow best practices and produce clean and professional results.
 - Schedule time to review, refine, and assess your work and perform basic professional polishing including spell-checking and grammar-checking on your work.
 - It is better to submit a challenge that meets MVP than one that attempts too much and does not.
-
-### Task 4: Stretch Goals
-
-After finishing your required elements, you can push your work further. These goals may or may not be things you have learned in this module but they build on the material you just studied. Time allowing, stretch your limits and see if you can deliver on the following optional goals:
-
-**IMPORTANT:** Do not break any MPV functionality by adding "stretch" code! Keep an eye on those tests!
-
-- [ ] Deploy the API to Heroku.
-- [ ] Configure the API to support environment variables.
-- [ ] Use middleware for validation of incoming data.
 
 ## Submission format
 

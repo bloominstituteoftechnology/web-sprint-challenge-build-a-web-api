@@ -80,7 +80,7 @@ describe('server.js', () => {
         const project = await Project.get(3)
         expect(project).toMatchObject(projectNew)
       }, 500)
-      test('[7] responds with a 400 if the request body is missing required fields', async () => {
+      test('[7] responds with a 400 if the request body is missing name or description', async () => {
         const projectNew = { name: 'e' }
         const res = await request(server).post('/api/projects').send(projectNew)
         expect(res.status).toBe(400)
@@ -98,7 +98,7 @@ describe('server.js', () => {
         const project = await Project.get(1)
         expect(project.completed).toBe(true)
       }, 500)
-      test('[10] responds with a 400 if the request body is missing all fields', async () => {
+      test('[10] responds with a 400 if the request body is missing name, description or completed', async () => {
         const res = await request(server).put('/api/projects/1').send({})
         expect(res.status).toBe(400)
       }, 500)
@@ -169,7 +169,7 @@ describe('server.js', () => {
         const action = await Action.get(3)
         expect(action).toMatchObject(actionNew)
       }, 500)
-      test('[21] responds with a 400 if the request body is missing required fields', async () => {
+      test('[21] responds with a 400 if the request body is missing notes, description or project_id', async () => {
         const actionNew = { project_id: 2, description: 'm' }
         const res = await request(server).post('/api/actions').send(actionNew)
         expect(res.status).toBe(400)
@@ -189,7 +189,7 @@ describe('server.js', () => {
         action = await Action.get(1)
         expect(action.completed).toBe(true)
       }, 500)
-      test('[24] responds with a 400 if the request body is missing all fields', async () => {
+      test('[24] responds with a 400 if the request body is missing missing notes, description, completed or project_id', async () => {
         const res = await request(server).put('/api/actions/1').send({})
         expect(res.status).toBe(400)
       }, 500)
