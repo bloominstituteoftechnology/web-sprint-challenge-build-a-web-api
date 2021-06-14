@@ -81,25 +81,44 @@ describe('server.js', () => {
         expect(project).toMatchObject(projectNew)
       }, 500)
       test('[7] responds with a 400 if the request body is missing name or description', async () => {
-        const projectNew = { name: 'e' }
-        const res = await request(server).post('/api/projects').send(projectNew)
+        let projectNew = { name: 'e' }
+        let res = await request(server).post('/api/projects').send(projectNew)
+        expect(res.status).toBe(400)
+        projectNew = { description: 'e' }
+        res = await request(server).post('/api/projects').send(projectNew)
+        expect(res.status).toBe(400)
+        projectNew = {}
+        res = await request(server).post('/api/projects').send(projectNew)
         expect(res.status).toBe(400)
       }, 500)
     })
     describe('[PUT] /api/projects/:id', () => {
       test('[8] responds with the updated project', async () => {
-        const changes = { ...projectA, completed: true }
-        const res = await request(server).put('/api/projects/1').send(changes)
+        let changes = { ...projectA, completed: !projectA.completed }
+        let res = await request(server).put('/api/projects/1').send(changes)
+        expect(res.body).toMatchObject(changes)
+        changes = { ...projectA, description: 'Lady Gaga' }
+        res = await request(server).put('/api/projects/1').send(changes)
         expect(res.body).toMatchObject(changes)
       }, 500)
       test('[9] updates the project in the projects table', async () => {
-        const changes = { ...projectA, completed: true }
+        let changes = { ...projectA, completed: !projectA.completed }
         await request(server).put('/api/projects/1').send(changes)
-        const project = await Project.get(1)
+        let project = await Project.get(1)
         expect(project.completed).toBe(true)
+        changes = { ...projectA, name: 'Gaga project' }
+        await request(server).put('/api/projects/1').send(changes)
+        project = await Project.get(1)
+        expect(project.name).toBe('Gaga project')
       }, 500)
       test('[10] responds with a 400 if the request body is missing name, description or completed', async () => {
-        const res = await request(server).put('/api/projects/1').send({})
+        let res = await request(server).put('/api/projects/1').send({ description: 'b', completed: false })
+        expect(res.status).toBe(400)
+        res = await request(server).put('/api/projects/1').send({ name: 'a', completed: false })
+        expect(res.status).toBe(400)
+        res = await request(server).put('/api/projects/1').send({ name: 'a', description: 'b' })
+        expect(res.status).toBe(400)
+        res = await request(server).put('/api/projects/1').send({})
         expect(res.status).toBe(400)
       }, 500)
     })
@@ -185,9 +204,9 @@ describe('server.js', () => {
       }, 500)
       test('[23] updates the action in the actions table', async () => {
         let action = await Action.get(1)
-        await request(server).put('/api/actions/1').send({ ...action, completed: true })
-        action = await Action.get(1)
-        expect(action.completed).toBe(true)
+        await request(server).put('/api/actions/1').send({ ...action, completed: !action.completed })
+        let updated = await Action.get(1)
+        expect(updated.completed).toBe(!action.completed)
       }, 500)
       test('[24] responds with a 400 if the request body is missing missing notes, description, completed or project_id', async () => {
         const res = await request(server).put('/api/actions/1').send({})
