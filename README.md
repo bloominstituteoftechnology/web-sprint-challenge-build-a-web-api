@@ -135,11 +135,11 @@ We have provided test data for all the resources.
 **Notes:**
 
 - Run tests locally executing `npm test`.
+- Do not make changes to your `package.json` except to add **additional** dependencies and scripts. Do not update existing packages.
 - Use an HTTP client like `HTTPie`, `Postman` or `Insomnia` to manually test the API's endpoints.
 - Use Express Routers to organize your endpoints.
 - Even though you are only required to write two middleware functions, it is advised that you leverage middlewares as much as possible.
 - You are welcome to create additional files for middlewares, but **do not move or rename existing files** or folders.
-- Do not make changes to your `package.json` except to add additional dependencies and scripts.
 - In your solution, it is essential that you follow best practices and produce clean and professional results.
 - Schedule time to review, refine, and assess your work and perform basic professional polishing including spell-checking and grammar-checking on your work.
 - It is better to submit a challenge that meets MVP than one that attempts too much and does not.
