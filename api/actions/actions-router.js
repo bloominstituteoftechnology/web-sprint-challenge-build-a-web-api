@@ -1,13 +1,10 @@
 const express = require('express')
-// pull in model
-// pull in middleware
 const Action = require('./actions-model')
+const Project = require('../projects/projects-model')
 const {
     validateActionId,
     validateAction
 } = require('./actions-middlware')
-
-// const { RuleTester } = require('eslint')
 
 const router = express.Router()
 
@@ -24,8 +21,7 @@ router.get ('/:id', validateActionId, (req, res) => {
 })
 
 router.post ('/', validateAction, (req, res, next) => {
-    // console.log("POST endpoint connected")
-    Action.insert(req.params.id, req.body)
+    Action.insert(req.body)
         .then(newAction => {
             res.status(201).json(newAction)
         })

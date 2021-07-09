@@ -16,16 +16,17 @@ async function validateActionId (req, res, next) {
     }
 }
 
-// middleware to validate required name and description fields for actions
+// middleware to validate required notes and description fields for actions
 function validateAction (req, res, next) {
-    const { description, notes } = req.body
-    if (!notes || !notes.trim() || !description || !description.trim() || !req.params.id) {
+    const { description, notes, project_id } = req.body
+    if (!notes || !notes.trim() || !description || !description.trim() || !project_id) {
         res.status(400).json({
             message: "missing required field (notes or description)"
         })
     } else {
         req.notes = notes.trim()
         req.description = description.trim()
+        req.project_id = project_id
         next()
     }
 }
