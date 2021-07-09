@@ -39,6 +39,23 @@ router.post('/', validateAction, async (req, res, next) => {
         next(err)
     }
 })
+
+router.put('/:id', validateActionId, validateAction, (req, res, next) => {
+    Action.update(req.params.id, {
+        project_id: req.project_id,
+        description: req.description,
+        notes: req.notes,
+        completed: req.completed
+    })
+        .then(() => {
+            return Action.get(req.params.id)
+        })
+        .then(action => {
+            res.json(action)
+        })
+        .catch(next)
+ })
+ 
  
 
 router.delete('/:id', validateActionId, async (req, res, next) => {

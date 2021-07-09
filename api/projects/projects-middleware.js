@@ -28,7 +28,9 @@ async function validateProject(req, res, next) {
         res.status(400).json({
             message: 'missing required description field'
         })
-    } else {
+    }
+    // adding in an else if to check for completed breaks the first two project PUT tests
+    else {
         req.name = name.trim()
         req.description = description.trim()
         req.completed = completed
@@ -36,23 +38,23 @@ async function validateProject(req, res, next) {
     }
  }
 
-async function validateProjectPut(req, res, next) {
-    const { name, description, completed } = req.body
-    if ( name && description && completed ) {
-        req.name = name
-        req.description = description
-        req.completed = completed
-    } else {
-        res.status(400).json({
-            message: 'Missing name, description or completed field'
-        })
-    }
+// async function validateProjectPut(req, res, next) {
+//     const { name, description, completed } = req.body
+//     if ( name && description && completed ) {
+//         req.name = name
+//         req.description = description
+//         req.completed = completed
+//         next()
+//     } else {
+//         res.status(400).json({
+//             message: 'Missing name, description or completed field'
+//         })
+//     }
 
-}
+// }
  
 
 module.exports = {
     validateProjectId,
     validateProject,
-    validateProjectPut
 }
