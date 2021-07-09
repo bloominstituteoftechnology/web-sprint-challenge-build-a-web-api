@@ -1,6 +1,6 @@
 const express = require('express')
 const Project = require('./projects-model')
-const Action = require('../actions/actions-model')
+// const Action = require('../actions/actions-model')
 const { 
     validateProjectId, 
     validateProject, 
@@ -44,20 +44,21 @@ router.put ('/:id', validateProjectId, validateProject, (req, res, next) => {
 })
 
 router.delete ('/:id', validateProjectId, async (req, res, next) => {
-    // console.log(req.project)
-    // console.log("DELETE endpoint connected")
     try {
         await Project.remove(req.params.id)
         res.json(req.project)
     } catch (err) {
         next(err)
     }
-
 })
 
-router.get ('/:id/actions', validateProjectId, (req, res) => {
-    console.log(req.project)
-    console.log("GET with Actions endpoint connected")
+router.get ('/:id/actions', validateProjectId, async (req, res, next) => {
+    try {
+        const actions = await Project.getProjectActions(req.params.id)
+        res.json(actions)
+    } catch (err) {
+        next(err)
+    }
 })
 
 router.use((err, req, res, next) => { //eslint-disable-line
