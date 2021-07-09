@@ -26,6 +26,21 @@ router.get('/:id', validateActionId, (req, res, next) => {
     }
 })
 
+router.post('/', validateAction, async (req, res, next) => {
+    try {
+        const newAction = await Action.insert({
+            project_id: req.project_id,
+            description: req.description,
+            notes: req.notes,
+            completed: req.completed
+        })
+        res.status(201).json(newAction)
+    } catch (err) {
+        next(err)
+    }
+})
+ 
+
 router.delete('/:id', validateActionId, async (req, res, next) => {
     try {
         await Action.remove(req.params.id)
