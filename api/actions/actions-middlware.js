@@ -18,7 +18,7 @@ async function validateActionId(req, res, next) {
     }
 }
 
-function validateAction(req, res, next) {
+function validateAction(req, res, next) {//eslint-disable-line
     const { project_id, description, notes} = req.body
     if(!project_id || !description || !description.trim() || !notes || !notes.trim()) {
         res.status(400).json({
