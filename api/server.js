@@ -21,6 +21,8 @@ const errorHandling = (err, req, res, next) => { // eslint-disable-line
     })
 }
 
+server.use(express.json())
+
 server.use('/api/projects', logger, projectsRouter)
 server.use('/api/actions', logger, actionsRouter)
 
