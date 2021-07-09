@@ -8,7 +8,7 @@ const Projects = require('./projects-model');
 const router = express.Router();
 
 
-router.get('/api/projects', (req, res) => {
+router.get('/', (req, res) => {
     Projects.get()
         .then(proj => {
             res.json(proj)
@@ -20,7 +20,7 @@ router.get('/api/projects', (req, res) => {
         })
 });
 
-router.get('/api/projects/:id', validateProjectId, async (req, res) => {
+router.get('/:id', validateProjectId, async (req, res) => {
  try {
       const projId = await Projects.get(req.params.id)
   if(!projId) {
@@ -31,4 +31,15 @@ router.get('/api/projects/:id', validateProjectId, async (req, res) => {
 }catch (err) {
     res.status(500).json({message: "somthing went worn"})
 }
+})
+
+router.post('/' , (req, res, next) => {
+    Projects.update(req.params.id, {change: req.change})
+        .then(() => {
+            return Projects.get(req.params.id)
+        })
+        .then(project => {
+            res.json(project)
+        })
+        .catch(next)
 })

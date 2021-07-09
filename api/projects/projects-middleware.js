@@ -29,8 +29,37 @@ async function validateProjectId(req, res, next) {
     }
 }
 
+function validateProject(req, res, next) {
+    const { name, desciption } = req.body
+    if(!name || !name.trim() || !desciption || !desciption.trim()) {
+        res.status(400).json({
+            message: "missing required field of name and description"
+        })
+    } else {
+        req.name = name.trim()
+        req.desciption = desciption.trim()
+        next()
+    }
+}
+
+function validatePorjectWithComplete(req, res, next) {
+    const {name, desciption, completed} = req.body
+    if(!name || !name.trim() || !desciption || !desciption.trim() || !completed ) {
+        res.status(400).json({
+            message: "missing required fields"
+        })
+    } else {
+        req.name = name.trim()
+        req.desciption = desciption.trim()
+        req.completed = completed
+        next()
+    }
+}
+
 
 module.exports = {
     validateProjectId,
     logger,
+    validateProject,
+    validatePorjectWithComplete
 }
