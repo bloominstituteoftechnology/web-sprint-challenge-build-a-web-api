@@ -6,7 +6,6 @@ const { validateProjectId } = require('./projects-middleware')
 const router = express.Router()
 
 router.get ('/', (req, res, next) => {
-    // console.log("GET endpoint connected")
     Project.get()
         .then(projects => {
             res.status(200).json(projects)
@@ -15,7 +14,7 @@ router.get ('/', (req, res, next) => {
 })
 
 router.get ('/:id', validateProjectId, (req, res) => {
-    console.log(req.project)
+    res.json(req.project)
 })
 
 router.post ('/', (req, res) => {
