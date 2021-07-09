@@ -1,7 +1,7 @@
 const Project = require('./projects-model')
 
 async function validateProjectId (req, res, next) {
-    console.log("middleware connected")
+    // console.log("validateProjectId middleware connected")
     try {
         const project = await Project.get(req.params.id)
         if (!project) {
@@ -12,9 +12,10 @@ async function validateProjectId (req, res, next) {
         }
 
     } catch (err) {
-        res.status(500).json({
-            message: "issue finding project"
-        })
+        next(err)
+        // res.status(500).json({
+        //     message: "issue finding project"
+        // })
     }
     // } catch (err) {
     //     next(err)
