@@ -50,7 +50,7 @@ router.delete('/:id', validateActionId, async (req, res, next) => {
     }
 })
 
-router.use((err, req, res, next) => {
+router.use((err, req, res, next) => {//eslint-disable-line
     res.status(err.status || 500).json({
         err: err.message,
         stack: err.stack

@@ -3,7 +3,6 @@ const express = require('express');
 const {
     validateProjectId,
     validateProject,
-    validatePorjectWithComplete
 } = require('./projects-middleware')
 
 const Projects = require('./projects-model');
@@ -25,7 +24,7 @@ router.get('/:id', validateProjectId, async (req, res) => {
 router.post('/', validateProject , (req, res, next) => {
     Projects.insert(req.body)
     .then(newProject => {
-        rew.status(201).json(newProject)
+        res.status(201).json(newProject)
     })
     .catch(next)
 })
@@ -61,7 +60,7 @@ router.get('/:id/actions', validateProjectId, async (req, res, next) => {
     }
 })
 
-router.use((err, req, res, next) => {
+router.use((err, req, res, next) => {//eslint-disable-line
     res.status(err.status || 500).json({
         message: err.message,
         stack: err.stack
