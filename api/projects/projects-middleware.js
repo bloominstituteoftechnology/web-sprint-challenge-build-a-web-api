@@ -29,7 +29,23 @@ function validateProject (req, res, next) {
     }
 }
 
+// middleware to validate required name and description fields for projects
+function validateProjectWithCompleted (req, res, next) {
+    const { name, description, completed } = req.body
+    if (!name || !name.trim() || !description || !description.trim() || !completed) {
+        res.status(400).json({
+            message: "missing required field (name or description)"
+        })
+    } else {
+        req.name = name.trim()
+        req.description = description.trim()
+        req.completed = completed
+        next()
+    }
+}
+
 module.exports = {
     validateProjectId,
     validateProject,
+    validateProjectWithCompleted
 }

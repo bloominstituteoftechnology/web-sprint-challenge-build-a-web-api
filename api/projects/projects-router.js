@@ -1,7 +1,11 @@
 const express = require('express')
 const Project = require('./projects-model')
 const Action = require('../actions/actions-model')
-const { validateProjectId, validateProject } = require('./projects-middleware')
+const { 
+    validateProjectId, 
+    validateProject, 
+    validateProjectWithCompleted 
+} = require('./projects-middleware')
 
 const router = express.Router()
 
@@ -26,14 +30,29 @@ router.post ('/', validateProject, (req, res, next) => {
         .catch(next)
 })
 
-router.put ('/:id', validateProjectId, (req, res) => {
-    console.log(req.project)
-    console.log("PUT endpoint connected")
+router.put ('/:id', validateProjectId, validateProject, (req, res, next) => {
+    // console.log(req.project)
+    // console.log("PUT endpoint connected")
+    Project.update(req.params.id, req.body)
+        .then(() => {
+            return Project.get(req.params.id)
+        })
+        .then(project => {
+            res.json(project)
+        })
+        .catch(next)
 })
 
-router.delete ('/:id', validateProjectId, (req, res) => {
-    console.log(req.project)
-    console.log("DELETE endpoint connected")
+router.delete ('/:id', validateProjectId, async (req, res, next) => {
+    // console.log(req.project)
+    // console.log("DELETE endpoint connected")
+    try {
+        await Project.remove(req.params.id)
+        res.json(req.project)
+    } catch (err) {
+        next(err)
+    }
+
 })
 
 router.get ('/:id/actions', validateProjectId, (req, res) => {
