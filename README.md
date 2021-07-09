@@ -78,11 +78,11 @@ Inside `api/actions/actions-router.js` build endpoints for performing CRUD opera
 - [x] `[GET] /api/actions/:id`
   - Returns an action with the given `id` as the body of the response.
   - If there is no action with the given `id` it responds with a status code 404.
-- [ ] `[POST] /api/actions`
+- [x] `[POST] /api/actions`
   - Returns the newly created action as the body of the response.
   - If the request body is missing any of the required fields it responds with a status code 400.
   - When adding an action make sure the `project_id` provided belongs to an existing `project`.
-- [ ] `[PUT] /api/actions/:id`
+- [x] `[PUT] /api/actions/:id`
   - Returns the updated action as the body of the response.
   - If there is no action with the given `id` it responds with a status code 404.
   - If the request body is missing any of the required fields it responds with a status code 400.
@@ -146,18 +146,29 @@ We have provided test data for all the resources.
 
 ## Submission format
 
-- [ ] Submit via Codegrade by pushing commits to your `<firstName-lastName>` branch on Github.
-- [ ] Create a pull-request to merge `<firstName-lastName>` branch into main.
-- [ ] Check Codegrade for automated feedback.
-- [ ] Check Codegrade on Monday following the Sprint Challenge for reviewer feedback.
-- [ ] New commits will be evaluated by Codegrade if pushed _before_ the sprint challenge deadline.
+- [x] Submit via Codegrade by pushing commits to your `<firstName-lastName>` branch on Github.
+- [x] Create a pull-request to merge `<firstName-lastName>` branch into main.
+- [x] Check Codegrade for automated feedback.
+- [x] Check Codegrade on Monday following the Sprint Challenge for reviewer feedback.
+- [x] New commits will be evaluated by Codegrade if pushed _before_ the sprint challenge deadline.
 
 ## Interview Questions
 
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+Node.js allows us to write server-side code using JavaScript. This is useful since it eliminates context switching that occurs when you use another programming language for server-side coding. It also gives us access to the useful npm repository. 
+
+Express is a framework on top of Node.js. It allows us to build web apps, RESTful web services, middleware, routing, etc. 
+
 1. Understand and explain the use of Middleware.
+Middleware are functions that help us perform tasks. We can create middleware to handle routing, data validation, errors, etc. It allows us to make our code more modular, keeping it dry while separating concerns. 
+
 1. The basic principles of the REST architectural style.
+REST architecture is composed of client HTTP requests (GET, POST, PUT, DELETE) to access resources that live on a server. Servers send clients responses to deliver resources. 
+
 1. Understand and explain the use of Express Routers.
+Express routers allow us organize our Express applications into modular pieces. It allows us to write cleaner and more maintainable code since it separates our routes appropriately. 
+
 1. Describe tooling used to manually test the correctness of an API.
+Tools like Postman or HTTPie can be used to manually test API endpoints. They allow us to send test messages for HTTP requests to make sure our APIs are successfully connected and sending back the appropriate resources. We can add bodies or headers to the request when appropriate. 
