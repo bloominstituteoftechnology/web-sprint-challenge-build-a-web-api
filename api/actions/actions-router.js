@@ -10,4 +10,16 @@ const {
 
 const router = express.Router()
 
+router.get('/', (req, res, next) => {
+    Actions.get()
+    .then(actions => {
+        res.status(200).json(actions)
+    })
+    .catch(next)
+})
+
+router.get('/:id', validateActionId, (req, res) => {
+    res.json(req.action)
+})
+
 module.exports = router
