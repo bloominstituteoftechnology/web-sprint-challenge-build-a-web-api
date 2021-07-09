@@ -1,7 +1,7 @@
 const express = require('express')
 const Project = require('./projects-model')
 const Action = require('../actions/actions-model')
-const { validateProjectId } = require('./projects-middleware')
+const { validateProjectId, validateProject } = require('./projects-middleware')
 
 const router = express.Router()
 
@@ -17,8 +17,13 @@ router.get ('/:id', validateProjectId, (req, res) => {
     res.json(req.project)
 })
 
-router.post ('/', (req, res) => {
-    console.log("POST endpoint connected")
+router.post ('/', validateProject, (req, res, next) => {
+    // Project.insert({ name: req.name, description: req.description })
+    Project.insert(req.body)
+        .then(newProject => {
+            res.status(201).json(newProject)
+        })
+        .catch(next)
 })
 
 router.put ('/:id', validateProjectId, (req, res) => {

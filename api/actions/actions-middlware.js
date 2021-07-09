@@ -1,5 +1,6 @@
 const Action = require('./actions-model')
 
+// middleware to get project id from projects database
 async function validateActionId (req, res, next) {
     console.log("Action middleware connected")
     try {

@@ -1,7 +1,7 @@
 const Project = require('./projects-model')
 
+// middleware to get project id from projects database
 async function validateProjectId (req, res, next) {
-    // console.log("validateProjectId middleware connected")
     try {
         const project = await Project.get(req.params.id)
         if (!project) {
@@ -10,18 +10,26 @@ async function validateProjectId (req, res, next) {
             req.project = project
             next()
         }
-
     } catch (err) {
         next(err)
-        // res.status(500).json({
-        //     message: "issue finding project"
-        // })
     }
-    // } catch (err) {
-    //     next(err)
-    // }
+}
+
+// middleware to validate required name and description fields for projects
+function validateProject (req, res, next) {
+    const { name, description } = req.body
+    if (!name || !name.trim() || !description || !description.trim()) {
+        res.status(400).json({
+            message: "missing required field (name or description)"
+        })
+    } else {
+        req.name = name.trim()
+        req.description = description.trim()
+        next()
+    }
 }
 
 module.exports = {
     validateProjectId,
+    validateProject,
 }
