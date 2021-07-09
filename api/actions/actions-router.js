@@ -17,19 +17,19 @@ router.get ('/', (req, res, next) => {
         .catch(next)
 })
 
-router.get ('/:id', (req, res) => {
-    console.log("GET by ID endpoint connected")
+router.get ('/:id', validateActionId, (req, res) => {
+    res.json(req.action)
 })
 
 router.post ('/', (req, res) => {
     console.log("POST endpoint connected")
 })
 
-router.put ('/:id', (req, res) => {
+router.put ('/:id', validateActionId, (req, res) => {
     console.log("PUT endpoint connected")
 })
 
-router.delete ('/:id', (req, res) => {
+router.delete ('/:id', validateActionId, (req, res) => {
     console.log("DELETE endpoint connected")
 })
 
