@@ -11,8 +11,8 @@ const router = express.Router()
 
 router.get('/', (req, res, next) => {
     Actions.get()
-    .then(actions => {
-        res.status(200).json(actions)
+    .then(allActions => {
+        res.status(200).json(allActions)
     })
     .catch(next)
 })
