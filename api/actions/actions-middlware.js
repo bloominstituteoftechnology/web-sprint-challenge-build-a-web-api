@@ -12,13 +12,8 @@ async function validateActionId (req, res, next) {
             next()
         }
     } catch (err) {
-        res.status(500).json({
-            message: "issue finding action"
-        })
+        next(err)
     }
-    // } catch (err) {
-    //     next(err)
-    // }
 }
 module.exports = {
     validateActionId,
