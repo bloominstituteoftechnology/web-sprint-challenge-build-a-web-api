@@ -20,14 +20,12 @@ async function validateProjectId(req, res, next) {
                 req.proj = proj
                 next()
             }
-
     }
     catch (err) {
-        res.status(500).json({
-            message: err.message
-        })
+        next(err)
+        }
     }
-}
+
 
 function validateProject(req, res, next) {
     const { name, desciption } = req.body
