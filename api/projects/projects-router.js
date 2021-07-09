@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
         .catch(next)
 });
 
-router.get('/:id', validateProjectId, async (req, res) => {
+router.get('/:id', validateProjectId, (req, res) => {
     res.json(req.project)
 })
 
