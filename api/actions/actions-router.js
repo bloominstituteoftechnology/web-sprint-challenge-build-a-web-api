@@ -28,8 +28,15 @@ router.post ('/', validateAction, (req, res, next) => {
         .catch(next)
 })
 
-router.put ('/:id', validateActionId, (req, res) => {
-    console.log("PUT endpoint connected")
+router.put ('/:id', validateActionId, validateAction, (req, res, next) => {
+    Action.update(req.params.id, req.body)
+        .then(() => {
+            return Action.get(req.params.id)
+        })
+        .then(action => {
+            res.json(action)
+        })
+        .catch(next)
 })
 
 router.delete ('/:id', validateActionId, async (req, res, next) => {
