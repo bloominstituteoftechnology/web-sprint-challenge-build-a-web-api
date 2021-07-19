@@ -1,13 +1,13 @@
 /* eslint-disable */
 const express = require("express");
 
-const Action = require("./actions/actions-model");
-
 const {
   validatePost,
   validateActionId,
   validateAction,
-} = require("./actions/actions-middleware");
+} = require("../actions/actions-middleware");
+
+const Action = require("../actions/actions-model");
 
 const router = express.Router();
 
