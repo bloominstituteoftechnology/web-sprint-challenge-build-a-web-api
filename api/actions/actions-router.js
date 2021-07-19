@@ -1,4 +1,3 @@
-/* eslint-disable */
 const express = require("express");
 
 const {
@@ -41,7 +40,7 @@ router.put("/:id", validateActionId, validateAction, (req, res, next) => {
 
 router.delete("/:id", validateActionId, (req, res, next) => {
   Action.remove(req.params.id)
-    .then((action) => {
+    .then((action) => { // eslint-disable-line
       res.json(req.action);
     })
     .catch(next);
