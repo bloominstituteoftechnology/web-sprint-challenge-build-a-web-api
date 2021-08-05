@@ -18,15 +18,13 @@ In meeting the minimum viable product (MVP) specifications listed below, your pr
 
 ### Task 1: Project Set Up
 
-- [ ] Fork and clone this repository. **If you are repeating this Course, delete your old fork from Github and re-fork and re-clone.**
-- [ ] Create a new branch: `git checkout -b <firstName-lastName>`.
-- [ ] Implement the project on your newly created branch, committing changes regularly.
-- [ ] Push commits: `git push origin <firstName-lastName>`.
-- [ ] **RUN** `npm install` to install your dependencies.
+- [ ] Run `npm install` to install your dependencies.
+- [ ] Run tests locally executing `npm test`.
+- [ ] Reset the database to its original state executing `npm run resetdb`.
 
 ### Task 2: CodeGrade Setup
 
-- [ ] Follow [instructions](https://www.notion.so/lambdaschool/Submitting-an-assignment-via-Code-Grade-A-Step-by-Step-Walkthrough-07bd65f5f8364e709ecb5064735ce374) to set up Codegrade's Webhook and Deploy Key, making sure your deployment is set to your `<firstName-lastName>` branch.
+- [ ] Accept the repository sent to your email inbox associated with your Github account.
 - [ ] Make a commit and push it to Github.
 - [ ] Check to see that Codegrade has accepted your git submission.
 
@@ -132,24 +130,22 @@ The `projects-model.js` includes an extra method called `getProjectActions()` th
 
 We have provided test data for all the resources.
 
-**Notes:**
+**Important Notes:**
 
-- Run tests locally executing `npm test`.
 - Do not make changes to your `package.json` except to add **additional** dependencies and scripts. Do not update existing packages.
+- Your app must be able to run in Node v.12. Do not use newer features of Node (e.g.: optional chaining and nullish coalescing NOT supported).
 - Use an HTTP client like `HTTPie`, `Postman` or `Insomnia` to manually test the API's endpoints.
 - Use Express Routers to organize your endpoints.
 - Even though you are only required to write two middleware functions, it is advised that you leverage middlewares as much as possible.
-- You are welcome to create additional files for middlewares, but **do not move or rename existing files** or folders.
+- You are welcome to create additional files, but **do not move or rename existing files** or folders.
 - In your solution, it is essential that you follow best practices and produce clean and professional results.
 - Schedule time to review, refine, and assess your work and perform basic professional polishing including spell-checking and grammar-checking on your work.
-- It is better to submit a challenge that meets MVP than one that attempts too much and does not.
 
 ## Submission format
 
 - [ ] Submit via Codegrade by pushing commits to your `<firstName-lastName>` branch on Github.
-- [ ] Create a pull-request to merge `<firstName-lastName>` branch into main.
 - [ ] Check Codegrade for automated feedback.
-- [ ] Check Codegrade on Monday following the Sprint Challenge for reviewer feedback.
+- [ ] Check Codegrade on the days following the Sprint Challenge for reviewer feedback.
 - [ ] New commits will be evaluated by Codegrade if pushed _before_ the sprint challenge deadline.
 
 ## Interview Questions
