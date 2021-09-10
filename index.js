@@ -14,7 +14,9 @@ Pull your server into this file and start it!
 //seed: nodeProj3
 
 require('dotenv').config()
+
 const PORT = process.env.PORT || 5000
+
 const server = require("./api/server")
 
 server.listen(PORT, () => {

@@ -1,31 +1,27 @@
-const express = require('express');
+const express = require('express') //require dependencies
 const helmet = require('helmet')
 const cors = require ('cors')
 
-const server = express();
+const server = express() //start express
 
+server.use(express.json()) //utilize dependencies (modules?)
+server.use(helmet())
+server.use(cors())
 
-server.use('/api/posts', postsRouter)
+// const actionRouter = require('./actions/actions-router') //require routers
+// const projectRouter = require('./projects/projects-router')
+
+// server.use('/api/projects', projectRouter) //utilize routers
+// server.use('/api/actions', actionRouter)
+
+server.use('*', (req, res) =>{ //404 fallback on *
+    res.send(`<h1>Apologies, path not found. Please check for typos and ensure everything
+    is up and running. This is the fallback response.</h1>`)
+})
+
+module.exports = server //export to index
 
 // Configure your server here
 // Build your actions router in /api/actions/actions-router.js
 // Build your projects router in /api/projects/projects-router.js
 // Do NOT `server.listen()` inside this file!
-
-module.exports = server;
-
-
-
-//seed: nodeProj3, nodeProj2
-
-const { logger } = require('./middleware/middleware') //ctrl + space
-const usersRouter = require('./users/users-router')
-// remember express by default cannot parse JSON in request bodies
-server.use(express.json())
-server.use(logger)
-server.use('/api/users', usersRouter)
-// global middlewares and the user's router need to be connected here
-
-server.get('/', (req, res) => {
-  res.send(`<h2>Let's write some middleware!</h2>`)
-})
