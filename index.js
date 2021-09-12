@@ -12,3 +12,10 @@ I need this code, but don't know where, perhaps should make some middleware, don
 
 Pull your server into this file and start it!
 */
+const server = require("./api/server");
+
+const port = process.env.PORT || 5000;
+
+server.listen(port, () => {
+  console.log(`\n*** Server running on ${port} ***\n`);
+});
