@@ -4,13 +4,16 @@
     "main": "index.js",
     "scripts": {
         "test": "cross-env NODE_ENV=testing jest --watchAll --verbose --runInBand --silent",
-        "resetdb": "knex migrate:rollback && knex migrate:latest && knex seed:run"
+        "resetdb": "knex migrate:rollback && knex migrate:latest && knex seed:run",
+        "server": "nodemon index.js",
+        "start": "node index.js"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/LambdaSchool/web-sprint-challenge-build-a-web-api"
     },
     "dependencies": {
+        "dotenv": "^10.0.0",
         "express": "4.17.1",
         "helmet": "4.6.0",
         "knex": "0.95.6",
