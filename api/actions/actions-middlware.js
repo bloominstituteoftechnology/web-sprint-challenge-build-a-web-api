@@ -10,13 +10,15 @@ function logger(req, res, next) {
 }
 
 async function validateActionId(req, res, next) {
-    try {
-      const action = await Action.get(req.params.id);
-      if (!action) {
-        next({ status: 404, message: "action not found" });
-      } else {
+  const { id } = req.params;
+  try {
+      const action = await Action.get(id);
+      if (action) {
         req.action = action;
         next();
+      } else {
+
+        next({ status: 404, message: "action not found" });
       }
     } catch (err) {
       res.status(500).json({ message: "problem finding action" });
@@ -24,17 +26,22 @@ async function validateActionId(req, res, next) {
   }
 
   function validateAction(req, res, next) {
-    Action.insert(req.body)
-        .then(action => {
-            if (!req.body.name || !req.body.description) {
-                res.status(400).json({
-                  message: 'missing required name and description field'
-                });
-              } else {
-                  res.status(201).json(action);
-              }
-        })
-        .catch(next);
+    const body = req.body;
+    try {
+      if (body && Object.keys(body).length === 0) {
+        next({ message: "missing actions data. Please provide project_id, description and notes", status: 400 });
+      } else if (!body.project_id) {
+        next({ message: "missing project id", status: 400 });
+      } else if (!body.description) {
+        next({ message: "missing action description", status: 400 });
+      } else if (!body.notes) {
+        next({ message: "missing action notes", status: 400 });
+      } else {
+        next();
+      }
+    } catch (err) {
+      next({ message: err.message, status: 500 });
+    }
   }
 
 module.exports = {
