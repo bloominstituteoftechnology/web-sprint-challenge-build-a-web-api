@@ -22,7 +22,7 @@ router.get('/:id', validateProjectId, (req, res) => {
     res.json(req.projects);
 });
 
-router.post('/', validateProject, (req, res) => {
+router.post('/', validateProject, (req, res, next) => {
     Project.insert({ name: req.name, description: req.description })
         .then((newProject) => {
             res.status(201).json(newProject);
@@ -30,7 +30,7 @@ router.post('/', validateProject, (req, res) => {
         .catch(next);
 });
 
-router.put('/:id', validateProjectId, validateProject, (req, res) => {
+router.put('/:id', validateProjectId, validateProject, (req, res, next) => {
     Project.update(req.params.id, { name: req.name, description: req.description })
         .then(() => {
             return Project.update(req.params.id);
@@ -41,7 +41,7 @@ router.put('/:id', validateProjectId, validateProject, (req, res) => {
         .catch(next);
 });
 
-router.delete('/:id', validateProjectId, async (req, res) => {
+router.delete('/:id', validateProjectId, async (req, res, next) => {
     try {
         await Project.remove(req.params.id);
         res.json(req.projects);
@@ -50,7 +50,7 @@ router.delete('/:id', validateProjectId, async (req, res) => {
     }
 });
 
-router.get('/:id/actions', validateProjectId, async (req, res) => {
+router.get('/:id/actions', validateProjectId, async (req, res, next) => {
     try {
         const result = await Project.getProjectActions(req.params.id);
         res.json(result);

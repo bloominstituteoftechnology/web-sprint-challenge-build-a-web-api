@@ -20,7 +20,7 @@ router.post('/:id', validateActionId, (req, res) => {
     res.json(req.actions);
 });
 
-router.post('/:id', validateAction, (req, res) => {
+router.post('/:id', validateAction, (req, res, next) => {
     Action.insert({ name: req.name, description: req.description })
         .then((actions) => {
             res.status(201).json(actions);
@@ -28,7 +28,7 @@ router.post('/:id', validateAction, (req, res) => {
         .catch(next);
 });
 
-router.put('/:id',validateAction, validateActionId, (req, res) => {
+router.put('/:id',validateAction, validateActionId, (req, res, next) => {
     Action.update(req.params.id, { name: req.name, description: req.description })
         .then(() => {
             return Action.update(req.params.id);
@@ -39,7 +39,7 @@ router.put('/:id',validateAction, validateActionId, (req, res) => {
         .catch(next);
 });
 
-router.delete('/:id', validateActionId, async (req, res) => {
+router.delete('/:id', validateActionId, async (req, res, next) => {
     try {
         await Action.remove(req.params.id);
         res.json(req.actions);
