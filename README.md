@@ -74,8 +74,6 @@ Inside `api/projects/projects-router.js` build the following endpoints:
   - Returns the updated project as the body of the response.
   - If there is no project with the given `id` it responds with a status code 404.
 
-
-
 Inside `api/actions/actions-router.js` build endpoints for performing CRUD operations on _actions_:
 
 - [ ] `[GET] /api/actions`
@@ -137,24 +135,22 @@ The `projects-model.js` includes an extra method called `getProjectActions()` th
 
 We have provided test data for all the resources.
 
-**Notes:**
+**Important Notes:**
 
-- Run tests locally executing `npm test`.
 - Do not make changes to your `package.json` except to add **additional** dependencies and scripts. Do not update existing packages.
+- Your app must be able to run in Node v.12. Do not use newer features of Node (e.g.: optional chaining and nullish coalescing NOT supported).
 - Use an HTTP client like `HTTPie`, `Postman` or `Insomnia` to manually test the API's endpoints.
 - Use Express Routers to organize your endpoints.
 - Even though you are only required to write two middleware functions, it is advised that you leverage middlewares as much as possible.
-- You are welcome to create additional files for middlewares, but **do not move or rename existing files** or folders.
+- You are welcome to create additional files, but **do not move or rename existing files** or folders.
 - In your solution, it is essential that you follow best practices and produce clean and professional results.
 - Schedule time to review, refine, and assess your work and perform basic professional polishing including spell-checking and grammar-checking on your work.
-- It is better to submit a challenge that meets MVP than one that attempts too much and does not.
 
 ## Submission format
 
-- [ ] Submit via Codegrade by pushing commits to your `<firstName-lastName>` branch on Github.
-- [ ] Create a pull-request to merge `<firstName-lastName>` branch into main.
-- [ ] Check Codegrade for automated feedback.
-- [ ] Check Codegrade on Monday following the Sprint Challenge for reviewer feedback.
+- [ ] Submit via Codegrade by pushing commits to your `<firstName-lastName>` branch.
+- [ ] Check Codegrade before the deadline to compare its results against your local tests.
+- [ ] Check Codegrade on the days following the Sprint Challenge for reviewer feedback.
 - [ ] New commits will be evaluated by Codegrade if pushed _before_ the sprint challenge deadline.
 
 ## Interview Questions
