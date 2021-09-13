@@ -2,7 +2,7 @@
 const Project = require('../projects/projects-model');
 
 function logger(req, res, next) {
-    const timeStamp = new Date().toLocaleString();
+    const timeStamp = new Date().toLocalString();
     const method = req.method;
     const url = req.originalUrl;
     console.log(`[${timestamp}] ${method} to ${url}`);

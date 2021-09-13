@@ -1,12 +1,11 @@
 const express = require('express');
+const Action = require('./actions-model');
+const router = express.Router();
 
 const {
     validateActionId,
     validateAction
  } = require('../actions/actions-middlware');
-const Action = require('./actions-model');
-const router = express.Router();
-
 
 router.get('/', (req, res, next) => {
     Action.get()
@@ -16,14 +15,14 @@ router.get('/', (req, res, next) => {
       .catch(next);
   });
 
-router.post('/:id', validateActionId, (req, res) => {
+router.get('/:id', validateActionId, (req, res) => {
     res.json(req.actions);
 });
 
-router.post('/:id', validateAction, (req, res, next) => {
+router.post('/', validateAction, (req, res, next) => {
     Action.insert({ name: req.name, description: req.description })
-        .then((actions) => {
-            res.status(201).json(actions);
+        .then((newActions) => {
+            res.status(201).json(newActions);
         })
         .catch(next);
 });

@@ -1,8 +1,8 @@
 // add middlewares here related to actions
-const Action = require('./actions-model');
+const Action = require('../actions/actions-model');
 
 function logger(req, res, next) {
-    const timeStamp = new Date().toLocaleString();
+    const timeStamp = new Date().toLocalString();
     const method = req.method;
     const url = req.originalUrl;
     console.log(`[${timestamp}] ${method} to ${url}`);

@@ -1,8 +1,11 @@
+require('dotenv').config();
 const server = require('./api/server');
+const { PORT } = require('./config');
 
-server.listen(5000, () => {
-    console.log(`\n *** Server running on http://localhost:5000 *** \n`);
+server.listen(PORT, () => {
+    console.log(`listening on ${PORT}`)
 });
+
 
 /*
 play this: https://www.youtube.com/watch?v=d-diB65scQU
