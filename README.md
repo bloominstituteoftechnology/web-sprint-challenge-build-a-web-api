@@ -137,7 +137,7 @@ We have provided test data for all the resources.
 
 ## Submission format
 
-- [ ] Submit via Codegrade by pushing commits to your `<firstName-lastName>` branch.
+- [ ] Submit via Codegrade by pushing commits to your `main` branch.
 - [ ] Check Codegrade before the deadline to compare its results against your local tests.
 - [ ] Check Codegrade on the days following the Sprint Challenge for reviewer feedback.
 - [ ] New commits will be evaluated by Codegrade if pushed _before_ the sprint challenge deadline.
