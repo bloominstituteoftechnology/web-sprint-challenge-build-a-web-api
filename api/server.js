@@ -13,4 +13,8 @@ server.use("/api/projects", projectsRouter);
 // Build your projects router in /api/projects/projects-router.js
 // Do NOT `server.listen()` inside this file!
 
+server.get("/", (req, res) => {
+  res.json("Hello this is inside server.js");
+});
+
 module.exports = server;
