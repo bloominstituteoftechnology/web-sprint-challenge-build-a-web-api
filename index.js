@@ -10,7 +10,14 @@ your file is getting way too big, bring a Router and make it thin, don't worry, 
 there is no data on that route, just write some code, you'll sort it out… don't worry, just hack it…
 I need this code, but don't know where, perhaps should make some middleware, don't worry, just hack it
 
-Pull your server into this file and start it!
-*/ const server = require('./api/server')
+Pull your server into this file and start it!*/ 
+require('dotenv').config()
+const server = require('./api/server')
+
+const port = process.env.PORT || 5000
+
+server.listen(port, () => {
+    console.log(`listening on ${port}`)
+})
 
 
