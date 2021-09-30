@@ -20,14 +20,14 @@
  }
 
  function validateProject(req, res, next) {
-     const { name, descripton } = req.body
-     if (!name || !descripton) {
+     const { name, description } = req.body
+     if (!name || !description) {
          res.status(400).json({
              message: "Name and description is required"
          })
      } else {
         req.name = name
-        req.descripton = descripton
+        req.description = description
         next()
      }
  }
