@@ -26,7 +26,7 @@ function validProject(req, res, next) {
       message: "Please provide name and description for the project"
     });
   } else {
-    req.name = name.trim(), req.description = description.trim()
+    req.body
     next();
   };
 };

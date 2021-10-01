@@ -25,7 +25,7 @@ router.post('/', validProject, (req, res, next) => {
 });
 
 router.put('/:id', checkProjectId, validProject, (req, res, next) => {
-  const { id } = req.body;
+  const { id } = req.params;
   Project.update(id, {
     name: req.name, 
     description: req.description, 
@@ -38,6 +38,15 @@ router.put('/:id', checkProjectId, validProject, (req, res, next) => {
       res.json(updatedProject)
     })
     .catch(next)
+});
+
+router.delete('/:id', checkProjectId, (req, res, next) => {
+  const { id } = req.params;
+  Project.remove(id)
+    .then(() => {
+      res.status(200).json({ message: `Deleted project ${id}` });
+    })
+    .catch(next);
 });
 
 module.exports = router;
