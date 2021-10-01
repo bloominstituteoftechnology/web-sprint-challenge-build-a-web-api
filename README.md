@@ -92,22 +92,22 @@ The description of the structure and extra information about each _resource_ sto
 
 #### Projects
 
-| Field       | Data Type | Metadata                                                                    |
-| ----------- | --------- | --------------------------------------------------------------------------- |
-| id          | number    | do not provide it when creating projects, the database will generate it     |
-| name        | string    | required                                                                    |
-| description | string    | required                                                                    |
-| completed   | boolean   | not required, defaults to false when creating projects                      |
+| Field       | Data Type | Metadata                                                                |
+| ----------- | --------- | ----------------------------------------------------------------------- |
+| id          | number    | do not provide it when creating projects, the database will generate it |
+| name        | string    | required                                                                |
+| description | string    | required                                                                |
+| completed   | boolean   | not required, defaults to false when creating projects                  |
 
 #### Actions
 
-| Field       | Data Type | Metadata                                                                                         |
-| ----------- | --------- | ------------------------------------------------------------------------------------------------ |
-| id          | number    | do not provide it when creating actions, the database will generate it                           |
-| project_id  | number    | required, must be the id of an existing project                                                  |
-| description | string    | required, up to 128 characters long                                                              |
-| notes       | string    | required, no size limit. Used to record additional notes or requirements to complete the action  |
-| completed   | boolean   | not required, defaults to false when creating actions                                            |
+| Field       | Data Type | Metadata                                                                                        |
+| ----------- | --------- | ----------------------------------------------------------------------------------------------- |
+| id          | number    | do not provide it when creating actions, the database will generate it                          |
+| project_id  | number    | required, must be the id of an existing project                                                 |
+| description | string    | required, up to 128 characters long                                                             |
+| notes       | string    | required, no size limit. Used to record additional notes or requirements to complete the action |
+| completed   | boolean   | not required, defaults to false when creating actions                                           |
 
 ### Database Persistence Helpers
 
@@ -147,7 +147,40 @@ We have provided test data for all the resources.
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
-1. Understand and explain the use of Middleware.
-1. The basic principles of the REST architectural style.
-1. Understand and explain the use of Express Routers.
-1. Describe tooling used to manually test the correctness of an API.
+   `node`: 
+   node uses the same progarming language as web browsers, which make it easy to move from serverside to clientside
+   node is exrimy fast and it runs on single cpu
+   since node gives us acces to npm repository that makes the developer life alot easier 
+   `express`: 
+   Middleware: function that get req and res and next can preform some kind of task and return the result to client 
+   Routing: gives the ability to select what function to excute base on the url and we can use it to break the application to smaller parts
+   Helpers: function that are part of express library and give us out of teh box functionality 
+   views: gives us ability to render html on server
+
+
+
+2. Understand and explain the use of Middleware.
+
+   Middleware: function that get req and res and next can preform some kind of task and return the result to client or it can move to next middleware and do multiple task. one of the awesome functionality of Middleware is that it can change the request
+
+
+3. The basic principles of the REST architectural style.
+
+REST is a way to guide interaction between computer systems that are connceted to the worldwide web and makinkg them able to communicate in a easier and faster way.
+
+client-server : REST seprate the everything to clinet server side
+stateless: meaing server doesn't need to know about the client state and server can be used to get and send information not realy on the previos request
+
+cache : client can send request to server and server response back to the client with whatever they wanted, for exmple if the client wanted to
+ get(that thing ) then server knows where to look for (that thing) and it respons back with (that thing)
+
+Rest layer : there can be many layered betweenn the clinet and server, for exmple for secuiryt reasons. 
+
+4. Understand and explain the use of Express Routers.
+
+Express Routers is one of the main features of Express which gives us the ability to select what function to excute base on the url and we can use it to break the application to smaller parts
+
+5. Describe tooling used to manually test the correctness of an API.
+   we can test our api using tools like postman that can interact with our api and show us the result.
+   we can also use good old trusty console.log to see our result
+   or we can use tools like vscode debug to find the connection between the fucntion and endpoints 
