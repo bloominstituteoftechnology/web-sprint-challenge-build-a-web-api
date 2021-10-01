@@ -3,8 +3,7 @@ const Project = require('./projects-model');
 const express = require('express');
 
 const router = express.Router()
-
-
+const { checkId } = require('./projects-middleware');
 router.get('/', async (req, res, next) => {
     try {
         const allProjects = await Project.get()
@@ -15,8 +14,8 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.get('/:id', (req, res) => {
-
+router.get('/:id', checkId, (req, res) => {
+    res.status(200).json(req.body)
 })
 
 router.post('/', (req, res) => {
