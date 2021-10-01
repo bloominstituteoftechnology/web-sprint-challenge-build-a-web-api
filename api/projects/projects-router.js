@@ -18,6 +18,28 @@ router.get('/', async (req, res)=>{
         })
     }
 })
+
+//second request: Returns a project with the given id as the body of the response and if there is no project with the given id it responds with a status code 404.
+
+router.get('/:id', async (req, res)=>{
+    try{
+        const id = req.params.id;
+        const projectFromId = await Projects.get(id);
+        if(!projectFromId){
+            res.status(404).json({
+                message: "No project exists with this ID that has been given in the URL."
+            })
+        }
+        else{
+            res.status(200).json(projectFromId);
+        }
+    }
+    catch(err){
+        res.status(500).json({
+            message: "There was an issue accessing the server with your information" 
+        })
+    }
+})
 //get requests//
 
 
