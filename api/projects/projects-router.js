@@ -28,7 +28,7 @@ router.post("/", validProject, (req, res, next) => {
     .catch(next)
 });
 
-// work on later
+// work on now!
 router.put("/:id", checkProjectId, validProject, (req, res, next) => {
   const { id } = req.params;
   Project.update(id, req.body)

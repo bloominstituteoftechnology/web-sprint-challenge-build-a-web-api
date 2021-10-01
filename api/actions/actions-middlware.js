@@ -31,8 +31,6 @@ function validAction(req, res, next) {
   };
 };
 
-
-
 module.exports = {
   checkActionId,
   validAction
