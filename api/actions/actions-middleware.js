@@ -1,4 +1,3 @@
-// add middlewares here related to actions
 const yup = require('yup')
 const Action = require('./actions-model')
 

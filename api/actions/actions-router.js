@@ -29,17 +29,13 @@ router.post('/', validateAction, (req, res, next) => {
 })
 
 //[PUT] api/actions/:id
-router.put('/:id', validateActionId, validateAction, (req, res, next) => {
-    const { id } = req.params
-    Action.update(id, req.body)
-        .then(()=> {
-            return Action.get(id)
-        })
-        .then(updated => {
-            res.json(updated)
-        })
-        .catch(next)
-})
+router.put('/:id', validateAction, (req, res, next) => {
+    Action.update(req.params.id, req.body)
+     .then(action => {
+       res.status(200).json(action);
+     })
+     .catch(next)
+   });
 
 
 //[DELETE] api/actions/:id

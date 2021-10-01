@@ -1,7 +1,7 @@
 const express = require('express');
 const { validateProject, validateProjectId } = require('./projects-middleware')
 const Project = require('./projects-model')
-const Action = require('../actions/actions-model')
+// const Action = require('../actions/actions-model')
 
 const router = express.Router();
 
@@ -29,17 +29,13 @@ router.post('/', validateProject, (req, res, next) => {
 })
 
 //[PUT] api/projects/:id
-router.put('/:id', validateProject, validateProjectId, (req, res, next) => {
-    const { id } = req.params
-    Project.update(id, req.body)
-        .then(() => {
-            return Project.get(id)
-        })
-        .then(updated => {
-            res.json(updated)
-        })
-        .catch(next)
-})
+router.put('/:id', validateProject, (req, res, next) => {
+     Project.update(req.params.id, req.body)
+      .then(hub => {
+        res.status(200).json(hub);
+      })
+      .catch(next)
+    });
 
 //[DELETE] api/projects/:id
 router.delete('/:id', async (req, res) => {
@@ -66,7 +62,7 @@ router.delete('/:id', async (req, res) => {
 router.get('/:id/actions', validateProjectId, (req, res, next) => {
        Project.getProjectActions(req.params.id)
        .then((action) => {
-        console.log(action)
+        res.status(200).json(action)
        })
        .catch(next)
   });
