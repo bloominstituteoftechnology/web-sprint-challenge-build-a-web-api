@@ -28,7 +28,11 @@ const projectValidationSchema = yup.object().shape({
         .string()
         .trim()
         .required('project name is required')
-        .min(1, 'min 1 char')
+        .min(1, 'min 1 char'),
+    completed: yup
+        .boolean()
+        .required('Project must be marked completed or uncompleted')
+
 });
 
 async function validateProject(req, res, next) {
@@ -42,8 +46,6 @@ async function validateProject(req, res, next) {
         next({ status: 400, message: 'missing required text field'})
     }
 }
-
-
 
 module.exports = {
     validateProjectId,
