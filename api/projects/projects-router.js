@@ -10,7 +10,7 @@ const router = express.Router();
 router.get('/', async (req, res)=>{
     try{
         const projects = await Projects.get();
-        res.status(400).json(projects);
+        res.status(200).json(projects);
     }
     catch(err){
         res.status(500).json({
@@ -63,6 +63,31 @@ router.get('/:id/actions', async (req,res)=>{
     }
 })
 //get requests//
+
+//post requests//
+
+//first request: Returns the newly created project as the body of the response and if the request body is missing any of the required fields it responds with a status code 400.
+router.post('/', async (req,res)=>{
+    try{
+        const {name, description}=req.body;
+
+        if(!name || !description){
+            res.status(400).json({
+                message: "We need both the name of the project and the description of the project before we can save it in our server."
+            })
+        }
+        else{
+            const newProject = await Projects.insert(req.body)
+            res.status(200).json(newProject)
+        }
+    }
+    catch(err){
+        res.status(500).json({
+            message: "There was an issue accessing the server with your information" 
+        })
+    }
+})
+//post requests//
 
 
 
