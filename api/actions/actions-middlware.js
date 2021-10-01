@@ -33,12 +33,10 @@ const validateAction = async (req, res, next) => {
     const validatebody = await vaidatetion.isValid(req.body);
 
     try {
-        if (!findPost && req.body.completed || !findPost && !req.body.params || !findPost)
-            res
-                .status(404)
-                .json({
-                    message: `Sorry we coundt find a project with that id of ${id}`,
-                });
+        if (!findPost)
+            res.status(404).json({
+                message: `Sorry we coundt find a project with that id of ${id}`,
+            });
         if (!validatebody) {
             res
                 .status(400)
@@ -50,9 +48,6 @@ const validateAction = async (req, res, next) => {
         next(error);
     }
 };
-
-
-
 
 module.exports = {
     checkId,
