@@ -1,10 +1,10 @@
 const express = require("express");
 const Projects = require('./projects-model');
-const Actions = require('../actions/actions-model');
+
 
 const router = express.Router();
 
-//get requests//
+//**get requests**//
 
 //first request: Returns an array of projects as the body of the response and if there are no projects it responds with an empty array
 router.get('/', async (req, res)=>{
@@ -62,9 +62,9 @@ router.get('/:id/actions', async (req,res)=>{
         })
     }
 })
-//get requests//
+//**get requests**//
 
-//post requests//
+//**post requests**//
 
 //first request: Returns the newly created project as the body of the response and if the request body is missing any of the required fields it responds with a status code 400.
 router.post('/', async (req,res)=>{
@@ -78,7 +78,7 @@ router.post('/', async (req,res)=>{
         }
         else{
             const newProject = await Projects.insert(req.body)
-            res.status(200).json(newProject)
+            res.status(201).json(newProject)
         }
     }
     catch(err){
@@ -87,8 +87,59 @@ router.post('/', async (req,res)=>{
         })
     }
 })
-//post requests//
+//**post requests**//
 
+
+//**put requests**//
+//first request: Returns the updated project as the body of the response. If there is no project with the given id it responds with a status code 404. If the request body is missing any of the required fields it responds with a status code 400
+
+router.put('/:id', async(req, res)=>{
+    try{
+
+    
+        const projectFromId = await Projects.get(req.params.id);
+        const {name, description, completed} = req.body;
+        
+       
+
+        if(!name|| !description|| completed.notHere){
+            res.status(400).json({message: " We need all information: name, description, and completed boolean value"})
+        }else if(!projectFromId){
+            res.status(404).json({message: "No project exists with this ID"})
+        } else{
+            const updatedProject = await Projects.update(req.params.id, req.body)
+            res.status(200).json(updatedProject);
+        }
+    }
+    catch(err){
+        res.status(500).json({
+            message: "There was an issue accessing the server with your information" 
+        })
+    }
+})
+//**put requests**//
+
+//**delete requests**//
+//first request: Returns no response body. If there is no project with the given id it responds with a status code 404.
+
+router.delete('/:id', async (req,res)=>{
+    try{
+        const projectFromId = await Projects.get(req.params.id);
+        if(!projectFromId){
+            res.status(404).json({message: "No project exists with this ID"})
+        }
+        else{
+            await Projects.remove(req.params.id)
+        }
+        
+    }
+    catch(err){
+        res.status(500).json({
+            message: "There was an issue accessing the server with your information" 
+        }) 
+    }
+})
+//**delete requests**//
 
 
 
