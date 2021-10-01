@@ -12,12 +12,27 @@ async function checkProjectId(req, res, next) {
       req.project = validId;
       next();
     };
-  } catch (error) {
-    next(error)
-  }
-}
+  } catch (err) {
+    res.status(500).json({
+      message: "problem finding project"
+    })
+  };
+};
+
+function validProject(req, res, next) {
+  const { name, description } = req.body;
+  if (!name || !description) {
+    res.status(400).json({
+      message: "Please provide name and description for the project"
+    });
+  } else {
+    req.name = name.trim(), req.description = description.trim()
+    next();
+  };
+};
 
 
 module.exports = {
   checkProjectId,
+  validProject
 };
