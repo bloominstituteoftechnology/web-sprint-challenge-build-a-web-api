@@ -1,5 +1,5 @@
 const express = require('express')
-const { validateAction } = require('./actions-middleware')
+const { validateAction, validateActionId } = require('./actions-middleware')
 const Action = require('../actions/actions-model')
 const Project = require('../projects/projects-model')
 
@@ -14,6 +14,11 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
+//[GET] api/actions/:id
+router.get('/:id', validateActionId, (req, res) => {
+    res.status(200).json(req.action)
+  });
+
 
 //[POST] api/actions
 router.post('/', validateAction, (req, res, next) => {
@@ -23,6 +28,10 @@ router.post('/', validateAction, (req, res, next) => {
     })
     .catch(next)
 })
+
+//[PUT] api/actions/:id
+
+//[DELETE] api/actions/:id
 
 
 module.exports = router

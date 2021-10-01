@@ -29,7 +29,23 @@ async function validateAction(req, res, next) {
     }
 }
 
+async function validateActionId(req, res, next) {
+    try {
+        const action = await Action.get(req.params.id)
+        if (!action) {
+            res.status(404).json({
+                message: "No project was found"
+            })
+        } else {
+            res.status(200).json(action)
+        }
+      } catch (error) {
+        next(error)
+      }
+    }
+
 module.exports = {
-    validateAction
+    validateAction,
+    validateActionId
 
 }

@@ -29,8 +29,13 @@ router.post('/', validateProject, (req, res, next) => {
 })
 
 //[PUT] api/projects/:id
-router.get('/:id', (req, res) => {
-
+router.put('/:id', validateProject, validateProjectId,  (req, res, next) => {
+    const { id } = req.params
+    Project.update(id, req.body)
+        .then(updated => {
+            res.status(200).json(updated)
+        })
+        .catch(next)
 })
 
 //[DELETE] api/projects/:id
@@ -55,8 +60,13 @@ router.delete('/:id', async (req, res) => {
 })
 
 //[GET] api/projects/:id/actions
-router.get('/:id/actions', (req, res) => {
-
+router.get('/:id/actions', validateProjectId, (req, res, next) => {
+    const { id } = req.params
+    Project.getProjectActions(id)
+        .then(actions => {
+            res.status(200).json(actions[actions])
+        })
+        .catch(next)
 })
 
 // Catch-All Error Function
