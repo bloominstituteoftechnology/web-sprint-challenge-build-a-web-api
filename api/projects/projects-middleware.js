@@ -32,13 +32,13 @@ function validProject(req, res, next) {
 };
 
 function checkCompleted(req, res, next) {
-  const { completed } = req.body;
-  if (!completed) {
+  const { name, description, completed } = req.body;
+  if (!completed || !name || !description) {
     res.status(400).json({
-      message: "Is it completed?"
+      message: "request body is missing name, description or completed"
     });
   } else {
-    req.body.completed
+    req.body
     next();
   };
 };
