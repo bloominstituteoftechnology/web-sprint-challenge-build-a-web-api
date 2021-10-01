@@ -24,7 +24,17 @@ router.post("/", validAction, (req, res, next) => {
     .catch(next)
 });
 
-
+router.put("/:id", checkActionId, validAction, (req, res, next) => {
+  const { id } = req.params;
+  Action.update(id, req.body)
+    .then(() => {
+      return Action.get(id)
+    })
+    .then(() => {
+      res.status(200).json(req.body)
+    })
+    .catch(next)
+});
 
 router.delete("/:id", checkActionId, (req, res, next) => {
   const { id } = req.params;
