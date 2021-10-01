@@ -30,7 +30,6 @@ const validateProject = async (req, res, next) => {
         if (!validatebody) {
             res.status(400).json({ message: "name and description are required" });
         } else {
-            req.body = { name: name.trim(), description: description.trim() };
             next();
         }
 
