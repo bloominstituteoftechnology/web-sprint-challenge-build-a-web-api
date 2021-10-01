@@ -49,11 +49,10 @@ router.delete("/:id", checkProjectId, (req, res, next) => {
     .catch(next);
 });
 
-// work on later
-router.get("/:id/actions", checkProjectId, (req, res, next) => {
-  Project.get(req.params.id)
-    .then(() => {
-      res.json(req.body)
+router.get("/:id/actions", (req, res, next) => {
+  Project.getProjectActions(req.params.id)
+    .then((actions) => {
+      res.json(actions)
     })
     .catch(next)
 });
