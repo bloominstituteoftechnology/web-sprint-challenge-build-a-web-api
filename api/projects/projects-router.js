@@ -79,28 +79,19 @@ router.post('/', async (req,res)=>{
 //**put requests**//
 //first request: Returns the updated project as the body of the response. If there is no project with the given id it responds with a status code 404. If the request body is missing any of the required fields it responds with a status code 400
 
-router.put('/:id', async(req, res)=>{
+router.put('/:id', validateProjectId, async(req, res, next)=>{
     try{
-
-    
-        const projectFromId = await Projects.get(req.params.id);
         const {name, description, completed} = req.body;
         
-       
-
-        if(!name|| !description|| completed.notHere){
+        if(!name|| !description|| typeof completed==="undefined"){
             res.status(400).json({message: " We need all information: name, description, and completed boolean value"})
-        }else if(!projectFromId){
-            res.status(404).json({message: "No project exists with this ID"})
         } else{
             const updatedProject = await Projects.update(req.params.id, req.body)
             res.status(200).json(updatedProject);
         }
     }
     catch(err){
-        res.status(500).json({
-            message: "There was an issue accessing the server with your information" 
-        })
+        next(err)
     }
 })
 //**put requests**//
