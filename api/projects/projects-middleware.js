@@ -7,7 +7,7 @@ const checkId = async (req, res, next) => {
         const found = await get(id);
 
         if (!found) {
-            next({ message: "sorry that that id doesn't exist'" })
+            next({ message: "sorry that that id doesn't exist'" });
         } else {
             req.found = found;
             next();
@@ -20,7 +20,6 @@ const checkId = async (req, res, next) => {
 const vaidatetion = yup.object().shape({
     name: yup.string().required().trim(),
     description: yup.string().required().trim(),
-
 });
 
 const validateProject = async (req, res, next) => {
@@ -36,7 +35,6 @@ const validateProject = async (req, res, next) => {
     }
 };
 
-
 const changeValid = yup.object().shape({
     name: yup.string().required().trim(),
     description: yup.string().required().trim(),
@@ -46,7 +44,9 @@ const validateChange = async (req, res, next) => {
     try {
         const validatebody = await changeValid.isValid(req.body);
         if (!validatebody) {
-            res.status(400).json({ message: 'name and description and completed are required' });
+            res
+                .status(400)
+                .json({ message: 'name and description and completed are required' });
         } else {
             next();
         }
@@ -59,5 +59,4 @@ module.exports = {
     checkId,
     validateProject,
     validateChange,
-
 };

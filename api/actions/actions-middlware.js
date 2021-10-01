@@ -8,7 +8,7 @@ const checkId = async (req, res, next) => {
         const id = req.params.id;
         const found = await Action.get(id);
         if (!found) {
-            res.status(404).json({ message: "sorry that that id doesn't exist'" });
+            next({ message: `sorry that that id ${id} doesn't exist` });
         } else {
             req.found = found;
             next();
@@ -26,13 +26,11 @@ const vaidatetion = yup.object().shape({
 
 const validateAction = async (req, res, next) => {
     const id = req.body.project_id;
-    const findPost = await Post.get(1);
+    const findPost = await Post.get(id);
     const validatebody = await vaidatetion.isValid(req.body);
     try {
         if (!findPost)
-            res.status(404).json({
-                message: `Sorry we coundt find a project with that id of ${id}`,
-            });
+            next({ message: `Sorry we coundt find a project with that id of ${id}` });
         if (!validatebody) {
             res
                 .status(400)

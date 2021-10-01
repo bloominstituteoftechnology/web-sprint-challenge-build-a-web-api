@@ -8,7 +8,6 @@ router.get('/', async (req, res, next) => {
     try {
         const allProjects = await Project.get()
         res.status(200).json(allProjects)
-
     } catch (err) {
         next(err)
     }
@@ -37,7 +36,6 @@ router.delete('/:id', checkId, async (req, res) => {
 })
 
 router.get('/:id/actions', checkId, async (req, res, next) => {
-
     const projectActions = await Project.getProjectActions(req.params.id)
     try {
         if (req.found.actions === []) {

@@ -24,7 +24,7 @@ router.get('/:id', checkId, (req, res) => {
 router.post('/', validateAction, async (req, res) => {
 
     const actionA = await Action.insert(req.body)
-    res.status(200).json(actionA)
+    res.status(201).json(actionA)
 })
 
 router.put('/:id', validateAction, async (req, res) => {
