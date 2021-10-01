@@ -1,4 +1,3 @@
-// Write your "projects" router here!
 const express = require('express');
 const {
     validateProject,
@@ -30,7 +29,6 @@ router.post('/', validateProject, (req, res, next) => {
         res.status(201).json(newProject)
     })
     .catch(next)
-
 })
 
 //[PUT] api/projects/:id
