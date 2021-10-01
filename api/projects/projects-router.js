@@ -3,7 +3,7 @@ const Project = require('./projects-model');
 const express = require('express');
 
 const router = express.Router()
-const { checkId } = require('./projects-middleware');
+const { checkId, validateProject } = require('./projects-middleware');
 router.get('/', async (req, res, next) => {
     try {
         const allProjects = await Project.get()
@@ -18,8 +18,14 @@ router.get('/:id', checkId, (req, res) => {
     res.status(200).json(req.body)
 })
 
-router.post('/', (req, res) => {
+router.post('/', validateProject, async (req, res, next) => {
+    try {
+        const newProject = await Project.insert({ name: req.body.name, description: req.body.description })
+        res.status(201).json(newProject)
 
+    } catch (error) {
+        next(error)
+    }
 })
 
 router.put('/:id', (req, res) => {
