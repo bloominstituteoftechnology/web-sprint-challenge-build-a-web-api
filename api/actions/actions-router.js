@@ -24,13 +24,11 @@ router.post('/', validateAction, async (req, res) => {
 
 router.put('/:id', checkId, validateAction, async (req, res) => {
     const actionA = await Action.update(req.params.id, req.body);
-
     res.status(200).json(actionA);
 });
 
 router.delete('/:id', checkId, async (req, res) => {
     const actionA = await Action.remove(req.params.id, req.body);
-
     res.status(200).json(actionA);
 });
 

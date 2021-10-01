@@ -5,7 +5,7 @@ const checkId = async (req, res, next) => {
         const id = req.params.id;
         const found = await get(id);
         if (!found) {
-            next({ message: `sorry that the id of ${id}  doesn't exist` });
+            next({ message: `sorry that the id of ${id} doesn't exist` });
         } else {
             req.found = found;
             next();
