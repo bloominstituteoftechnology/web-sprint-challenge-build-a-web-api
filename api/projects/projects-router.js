@@ -1,5 +1,5 @@
 const express = require('express');
-const { validateProject } = require('./projects-middleware')
+const { validateProject, validateProjectId } = require('./projects-middleware')
 const Project = require('./projects-model')
 const Action = require('../actions/actions-model')
 
@@ -15,23 +15,8 @@ router.get('/', (req, res, next) => {
 })
 
 //[GET] api/projects/:id
- router.get('/:id', async (req, res) => {
-   try {
-       const { id } = req.params
-       const project = await Project.get(id)
-      
-       if (!project) {
-           res.status(404).json({
-               message: "No project was found"
-           })
-       } else {
-           res.status(200).json(project)
-       }
-   } catch(err) {
-       res.status(500).json({
-           message: "Something went wrong"
-       })
-   }
+ router.get('/:id', validateProjectId, (req, res) => {
+  res.status(200).json(req.project)
 })
 
 //[POST] api/projects

@@ -14,6 +14,23 @@
      }
  }
 
+ async function validateProjectId(req, res, next) {
+    try {
+        const project = await Project.get(req.params.id)
+        if (!project) {
+            res.status(404).json({
+                message: "No project was found"
+            })
+        } else {
+            res.status(200).json(project)
+        }
+      } catch (error) {
+        next(error)
+      }
+    }
+ 
+
  module.exports = {
-     validateProject
+     validateProject,
+     validateProjectId
  }
