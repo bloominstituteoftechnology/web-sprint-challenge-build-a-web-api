@@ -21,14 +21,19 @@ router.get('/:id', checkId, (req, res) => {
     res.status(200).json(req.found)
 })
 
-router.post('/', validateAction, (req, res) => {
+router.post('/', validateAction, async (req, res) => {
 
-    Action.insert(req.body)
-    res.status(200).json(req.body)
+    const actionA = await Action.insert(req.body)
+    // Action.insert(req.body)
+    res.status(200).json(actionA)
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', validateAction, async (req, res) => {
 
+
+    const actionA = await Action.update(req.params.id, req.body)
+
+    res.status(200).json(actionA)
 })
 
 router.delete('/:id', (req, res) => {

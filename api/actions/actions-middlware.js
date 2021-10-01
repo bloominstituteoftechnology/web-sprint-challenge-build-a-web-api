@@ -1,6 +1,6 @@
 // add middlewares here related to actions
 const Action = require('./actions-model');
-const Post = require('../projects/projects-model')
+const Post = require('../projects/projects-model');
 const yup = require('yup');
 
 const checkId = async (req, res, next) => {
@@ -20,39 +20,41 @@ const checkId = async (req, res, next) => {
     }
 };
 
-const vaidatetion = yup.object().shape({ //eslint-disable-line
+const vaidatetion = yup.object().shape({
     notes: yup.string().required(),
     description: yup.string().required(),
-    project_id: yup.number().required()
+    project_id: yup.number().required(),
 });
 
 const validateAction = async (req, res, next) => {
     const id = req.body.project_id;
 
-    const findPost = await Post.get(1)
+    const findPost = await Post.get(1);
     const validatebody = await vaidatetion.isValid(req.body);
-    console.log(req.body);
+
     try {
-        if (!findPost)
-            res.status(404).json({ message: `Sorry we coundt find a project with that id of ${id}` })
+        if (!findPost && req.body.completed || !findPost && !req.body.params || !findPost)
+            res
+                .status(404)
+                .json({
+                    message: `Sorry we coundt find a project with that id of ${id}`,
+                });
         if (!validatebody) {
-            res.status(400).json({ message: "action is missing id or note or description" })
-        }
-        else {
+            res
+                .status(400)
+                .json({ message: 'action is missing id or note or description' });
+        } else {
             next();
         }
     } catch (error) {
         next(error);
     }
-
-
-
 };
+
+
 
 
 module.exports = {
     checkId,
     validateAction,
-
-
 };
