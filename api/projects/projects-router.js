@@ -3,7 +3,7 @@ const Project = require('./projects-model');
 const express = require('express');
 
 const router = express.Router()
-const { checkId, validateProject } = require('./projects-middleware');
+const { checkId, validateProject, validateChange } = require('./projects-middleware');
 router.get('/', async (req, res, next) => {
     try {
         const allProjects = await Project.get()
@@ -15,30 +15,28 @@ router.get('/', async (req, res, next) => {
 })
 
 router.get('/:id', checkId, (req, res) => {
-    res.status(200).json(req.body)
+    res.status(200).json(req.found)
 })
 
-router.post('/', validateProject, async (req, res, next) => {
-    try {
-        const newProject = await Project.insert(req.body)
-        console.log(req.body)
-        console.log(newProject);
-        res.status(201).json(newProject)
+router.post('/', validateProject, async (req, res) => {
 
-    } catch (error) {
-        next(error)
-    }
-})
+    const newProject = await Project.insert(req.body)
+    console.log(req.body)
+    res.status(201).json(newProject)
 
-router.put('/:id', (req, res) => {
 
 })
 
-router.delete('/:id', (req, res) => {
+router.put('/:id', checkId, validateChange, async (req, res) => {
+    const updated = await Project.update(req.params.id, req.body)
+    res.status(200).json(updated)
+})
+
+router.delete('/:id', checkId, (req, res) => {
 
 })
 
-router.get('/:id/actions', (req, res) => {
+router.get('/:id/actions', checkId, (req, res) => {
 
 })
 
