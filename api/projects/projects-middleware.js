@@ -9,6 +9,7 @@ const checkId = async (req, res, next) => {
         if (!found) {
             res.status(404).json({ message: "sorry that that id doesn't exist'" });
         } else {
+            console.log(found)
             req.found = found;
             next();
         }

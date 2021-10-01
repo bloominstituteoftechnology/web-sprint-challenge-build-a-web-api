@@ -21,7 +21,6 @@ router.get('/:id', checkId, (req, res) => {
 router.post('/', validateProject, async (req, res) => {
 
     const newProject = await Project.insert(req.body)
-    console.log(req.body)
     res.status(201).json(newProject)
 
 
@@ -29,17 +28,28 @@ router.post('/', validateProject, async (req, res) => {
 
 router.put('/:id', checkId, validateChange, async (req, res) => {
     const updated = await Project.update(req.params.id, req.body)
-
     res.status(200).json(updated)
 })
 
 router.delete('/:id', checkId, async (req, res) => {
-    console.log(req.found)
     await Project.remove(req.params.id)
     res.status(200).json([{ number_of_deleted: "project blow has been deleted", deleted_project: req.found }])
 })
 
-router.get('/:id/actions', checkId, (req, res) => {
+router.get('/:id/actions', checkId, async (req, res, next) => {
+
+    const projectActions = await Project.getProjectActions(req.params.id)
+    try {
+        if (req.found.actions === []) {
+            res.status(200).json([])
+        }
+        else {
+            res.status(200).json(projectActions)
+        }
+    } catch (error) {
+        next()
+    }
+
 
 })
 
