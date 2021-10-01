@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { validateProjectId } = require('./projects-middleware');
+const { validateProjectId, validateProject } = require('./projects-middleware');
 const Projects = require('./projects-model');
 
 const router = express.Router();
@@ -21,9 +21,13 @@ router.get('/:id', validateProjectId, (req, res) => {
 });
 
 //  [POST] /api/projects
-// Returns the newly created project as the body of the response.
-// If the request body is missing any of the required fields it responds with a status code 400.
-router.post('/', (req, res) => {});
+router.post('/', validateProject, (req, res, next) => {
+    Projects.insert(req.body)
+        .then(newProject => {
+            res.status(201).json(newProject);
+        })
+        .catch(next)
+});
 
 //  [PUT] /api/projects/:id
 // Returns the updated project as the body of the response.
