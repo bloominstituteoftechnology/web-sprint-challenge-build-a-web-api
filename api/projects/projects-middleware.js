@@ -33,7 +33,7 @@ function validProject(req, res, next) {
 
 function checkCompleted(req, res, next) {
   const { name, description, completed } = req.body;
-  if (!name || !description || !completed) {
+  if (name === undefined || description === undefined || completed === undefined) {
     res.status(400).json({
       message: "request body is missing name, description or completed"
     });

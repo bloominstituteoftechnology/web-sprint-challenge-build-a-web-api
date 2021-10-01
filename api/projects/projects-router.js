@@ -28,8 +28,7 @@ router.post("/", validProject, (req, res, next) => {
     .catch(next)
 });
 
-// work on now!
-router.put("/:id", checkProjectId, validProject, (req, res, next) => {
+router.put("/:id", checkProjectId, checkCompleted, (req, res, next) => {
   const { id } = req.params;
   Project.update(id, req.body)
     .then(() => {
@@ -51,10 +50,10 @@ router.delete("/:id", checkProjectId, (req, res, next) => {
 });
 
 // work on later
-router.get("/:id/actions", (req, res, next) => {
+router.get("/:id/actions", checkProjectId, (req, res, next) => {
   Project.get(req.params.id)
     .then(() => {
-      res.json()
+      res.json(req.body)
     })
     .catch(next)
 });
