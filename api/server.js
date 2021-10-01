@@ -17,6 +17,6 @@ module.exports = server;
 
 
 
-function handleError(req, res) {
-    res.status(500).json({ message: 'Something went wrong please check your url' })
+function handleError(err, req, res, next) { // eslint-disable-line
+    res.status(404).json({ error: 'Something went wrong please check your url', message: err.message })
 }
