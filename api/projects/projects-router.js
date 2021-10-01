@@ -24,45 +24,28 @@ router.get('/', async (req, res)=>{
 
 //second request: Returns a project with the given id as the body of the response and if there is no project with the given id it responds with a status code 404.
 
-router.get('/:id', async (req, res)=>{
+router.get('/:id', validateProjectId, async (req, res, next)=>{
     try{
         const id = req.params.id;
         const projectFromId = await Projects.get(id);
-        if(!projectFromId){
-            res.status(404).json({
-                message: "No project exists with this ID that has been given in the URL."
-            })
-        }
-        else{
-            res.status(200).json(projectFromId);
-        }
+        res.status(200).json(projectFromId);
+        
     }
     catch(err){
-        res.status(500).json({
-            message: "There was an issue accessing the server with your information" 
-        })
+        next(err)
     }
 })
 
 //third request: Returns an array of actions (could be empty) belonging to a project with the given id.If there is no project with the given id it responds with a status code 404.
-router.get('/:id/actions', async (req,res)=>{
+router.get('/:id/actions',validateProjectId, async (req,res,next)=>{
     try{
         const id = req.params.id;
-        const projectFromId = await Projects.get(id);
         const projectActions = await Projects.getProjectActions(id);
-        if(!projectFromId){
-            res.status(404).json({
-                message: "No project exists with this ID that has been given in the URL. Hence, there are not any actions belonging to a project that does not exist"
-            })
-        }
-        else{
-            res.status(200).json(projectActions);
-        }
+        res.status(200).json(projectActions);
+        
     }
     catch(err){
-        res.status(500).json({
-            message: "There was an issue accessing the server with your information" 
-        })
+        next(err)
     }
 })
 //**get requests**//

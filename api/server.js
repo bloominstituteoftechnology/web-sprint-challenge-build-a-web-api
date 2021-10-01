@@ -1,5 +1,6 @@
 const express = require('express');
 const projectRouter = require('./projects/projects-router');
+const actionRouter = require('./actions/actions-router')
 
 
 const server = express();
@@ -7,6 +8,7 @@ const server = express();
 // remember express by default cannot parse JSON in request bodies
 server.use(express.json());
 server.use('/api/projects/', projectRouter)
+server.use('/api/actions/', actionRouter)
 
 
 // global middlewares and the user's router need to be connected here
