@@ -45,8 +45,8 @@ actionRouter.post('/', async (req,res,)=>{
             res.status(400).json({message: " We need all information: name, description, and completed boolean value"})
         }
         else{
-            const updatedAction = await Actions.insert(req.body)
-            res.status(201).json(updatedAction)
+            const newAction = await Actions.insert(req.body)
+            res.status(201).json(newAction)
         }
     }
     catch(err){
@@ -56,6 +56,30 @@ actionRouter.post('/', async (req,res,)=>{
     }
 })
 //**post requests**//
+
+//**put request**/
+//first request: Returns the updated action as the body of the response.If there is no action with the given id it responds with a status code 404. If the request body is missing any of the required fields it responds with a status code 400.
+
+actionRouter.put('/:id', validateActionsId, async (req, res)=>{
+    try{
+        const id = req.params.id;
+        const {project_id, description, notes, completed}=req.body;
+        if(!project_id || !description || !notes || typeof completed === "undefined"){
+            res.status(400).json({message: " We need all information: name, description, and completed boolean value"})
+        }
+        else{
+            const updatedAction = await Actions.update(id, req.body)
+            res.status(201).json(updatedAction)
+        }
+
+    }
+    catch(err){
+        res.status(500).json({
+            message: "There was an issue accessing the server with your information"
+        })
+    }
+})
+//**put request**/
 
 
 module.exports = actionRouter;
