@@ -1,12 +1,9 @@
  const yup = require('yup');
-const server = require('../server');
  const Actions = require('./actions-model');
 
  async function validateActionId(req, res, next){
      try{
          const validatedId = await Actions.get(req.params.id);
-
-         console.log('validatedId', req.params.id)
 
          if(!validatedId){
              next({ status: 404, message: 'action not found'})

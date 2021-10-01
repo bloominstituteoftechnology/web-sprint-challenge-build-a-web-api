@@ -28,20 +28,21 @@ router.post('/', validateAction,(req, res, next) => {
 });
 
 //  [PUT] /api/actions/:id
-// Returns the updated action as the body of the response.
-// If there is no action with the given id it responds with a status code 404.
-// If the request body is missing any of the required fields it responds with a status code 400.
 router.put('/:id', validateActionId, validateAction, (req, res, next) => {
     Actions.update(req.params.id, req.body)
-        .then(resp => {
-            console.log("tacos!", resp)
+        .then(updatedAction => {
+            res.status(200).json(updatedAction);
         })
         .catch(next)
 })
 
 //  [DELETE] /api/actions/:id
-// Returns no response body.
-// If there is no action with the given id it responds with a status code 404.
-router.delete('/:id', (req, res) => {})
+router.delete('/:id', validateActionId, (req, res, next) => {
+    Actions.remove(req.params.id)
+        .then(() => {
+            res.status(200).json(req.action);
+        })
+        .catch(next);
+})
 
 module.exports = router;
