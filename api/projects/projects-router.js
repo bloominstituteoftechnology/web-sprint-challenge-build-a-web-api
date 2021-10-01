@@ -1,5 +1,8 @@
 const express = require("express");
 const Projects = require('./projects-model');
+const{
+    validateProjectId 
+} = require('./projects-middleware');
 
 
 const router = express.Router();
@@ -122,21 +125,13 @@ router.put('/:id', async(req, res)=>{
 //**delete requests**//
 //first request: Returns no response body. If there is no project with the given id it responds with a status code 404.
 
-router.delete('/:id', async (req,res)=>{
+router.delete('/:id', validateProjectId, async (req,res,next)=>{
     try{
-        const projectFromId = await Projects.get(req.params.id);
-        if(!projectFromId){
-            res.status(404).json({message: "No project exists with this ID"})
-        }
-        else{
-            await Projects.remove(req.params.id)
-        }
-        
+        await Projects.remove(req.params.id)
+        res.end()
     }
     catch(err){
-        res.status(500).json({
-            message: "There was an issue accessing the server with your information" 
-        }) 
+        next(err)
     }
 })
 //**delete requests**//
