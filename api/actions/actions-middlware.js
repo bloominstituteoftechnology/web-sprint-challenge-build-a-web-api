@@ -1,4 +1,3 @@
-// add middlewares here related to actions
 const Action = require('./actions-model');
 const Post = require('../projects/projects-model');
 const yup = require('yup');

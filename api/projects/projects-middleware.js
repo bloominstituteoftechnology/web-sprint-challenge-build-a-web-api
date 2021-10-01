@@ -3,9 +3,7 @@ const yup = require('yup');
 const checkId = async (req, res, next) => {
     try {
         const id = req.params.id;
-
         const found = await get(id);
-
         if (!found) {
             next({ message: "sorry that that id doesn't exist'" });
         } else {
