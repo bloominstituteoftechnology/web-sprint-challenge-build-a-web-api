@@ -19,7 +19,21 @@ async function checkActionId(req, res, next) {
   };
 };
 
+function validAction(req, res, next) {
+  const { project_id, description, notes } = req.body;
+  if (!project_id || !description || !notes) {
+    res.status(400).json({
+      message: "Please provide name and description for the project"
+    });
+  } else {
+    req.body
+    next();
+  };
+};
+
+
 
 module.exports = {
-  checkActionId
+  checkActionId,
+  validAction
 };

@@ -1,5 +1,5 @@
 const express = require("express");
-const { checkActionId } = require("./actions-middlware")
+const { checkActionId, validAction } = require("./actions-middlware")
 const Action = require("./actions-model")
 
 const router = express.Router();
@@ -14,6 +14,14 @@ router.get("/", (req, res, next) => {
 
 router.get("/:id", checkActionId, (req, res) => {
   res.status(200).json(req.action)
+});
+
+router.post("/", validAction, (req, res, next) => {
+  Action.insert(req.body)
+    .then(() => {
+      res.status(201).json(req.body)
+    })
+    .catch(next)
 });
 
 
