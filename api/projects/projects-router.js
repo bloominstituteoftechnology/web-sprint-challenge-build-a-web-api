@@ -1,5 +1,8 @@
 const express = require("express");
-const { checkProjectId, validProject } = require("./projects-middleware")
+const { 
+  checkProjectId, 
+  validProject, 
+  checkCompleted } = require("./projects-middleware")
 const Project = require("./projects-model")
 
 const router = express.Router();
@@ -26,16 +29,12 @@ router.post('/', validProject, (req, res, next) => {
 
 router.put('/:id', checkProjectId, validProject, (req, res, next) => {
   const { id } = req.params;
-  Project.update(id, {
-    name: req.name, 
-    description: req.description, 
-    completed: req.completed 
-  })
+  Project.update(id, req.body)
     .then(() => {
-      return Project.getById(id)
+      return Project.get(id)
     })
-    .then(updatedProject => {
-      res.json(updatedProject)
+    .then(() => {
+      res.status(200).json(req.body)
     })
     .catch(next)
 });

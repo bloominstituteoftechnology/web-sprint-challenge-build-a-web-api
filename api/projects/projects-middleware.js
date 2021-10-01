@@ -31,8 +31,21 @@ function validProject(req, res, next) {
   };
 };
 
+function checkCompleted(req, res, next) {
+  const { completed } = req.body;
+  if (!completed) {
+    res.status(400).json({
+      message: "Is it completed?"
+    });
+  } else {
+    req.body.completed
+    next();
+  };
+};
+
 
 module.exports = {
   checkProjectId,
-  validProject
+  validProject,
+  checkCompleted
 };
