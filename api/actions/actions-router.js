@@ -3,6 +3,7 @@ const express = require('express');
 const Action = require('./actions-model');
 const router = express.Router()
 
+const { checkId } = require('./actions-middlware');
 
 
 router.get('/', async (req, res, next) => {
@@ -16,8 +17,8 @@ router.get('/', async (req, res, next) => {
 })
 
 
-router.get('/:id', (req, res) => {
-
+router.get('/:id', checkId, (req, res) => {
+    res.status(200).json(req.found)
 })
 
 router.post('/', (req, res) => {
