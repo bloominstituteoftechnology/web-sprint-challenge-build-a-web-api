@@ -1,7 +1,6 @@
 const express = require('express')
 const { validateAction, validateActionId } = require('./actions-middleware')
 const Action = require('../actions/actions-model')
-const Project = require('../projects/projects-model')
 
 const router = express.Router()
 
@@ -30,8 +29,39 @@ router.post('/', validateAction, (req, res, next) => {
 })
 
 //[PUT] api/actions/:id
+router.put('/:id', validateActionId, validateAction, (req, res, next) => {
+    const { id } = req.params
+    Action.update(id, req.body)
+        .then(()=> {
+            return Action.get(id)
+        })
+        .then(updated => {
+            res.json(updated)
+        })
+        .catch(next)
+})
+
 
 //[DELETE] api/actions/:id
+router.delete('/:id', async (req, res) => {
+    try {
+        const deleted = await Action.get(req.params.id)
+        if (!deleted) {
+            res.status(404).json({
+                message: "The action does not exist"
+            })
+        } else {
+            await Action.remove(req.params.id)
+            res.json(deleted)
+        }
+    } catch (err) {
+        res.status(500).json({
+            message: 'The action could not be removed',
+            err:err
+        })
+    }
+
+})
 
 
 module.exports = router

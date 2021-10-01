@@ -29,11 +29,14 @@ router.post('/', validateProject, (req, res, next) => {
 })
 
 //[PUT] api/projects/:id
-router.put('/:id', validateProject, validateProjectId,  (req, res, next) => {
+router.put('/:id', validateProject, validateProjectId, (req, res, next) => {
     const { id } = req.params
     Project.update(id, req.body)
+        .then(() => {
+            return Project.get(id)
+        })
         .then(updated => {
-            res.status(200).json(updated)
+            res.json(updated)
         })
         .catch(next)
 })
@@ -61,13 +64,12 @@ router.delete('/:id', async (req, res) => {
 
 //[GET] api/projects/:id/actions
 router.get('/:id/actions', validateProjectId, (req, res, next) => {
-    const { id } = req.params
-    Project.getProjectActions(id)
-        .then(actions => {
-            res.status(200).json(actions[actions])
-        })
-        .catch(next)
-})
+       Project.getProjectActions(req.params.id)
+       .then((action) => {
+        console.log(action)
+       })
+       .catch(next)
+  });
 
 // Catch-All Error Function
 router.use((err, req, res, next) => { //eslint-disable-line
