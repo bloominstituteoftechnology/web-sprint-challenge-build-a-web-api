@@ -19,13 +19,17 @@ router.get('/', (req, res, next) => {
 })
 
 //[GET] api/projects/:id
-router.get('/:id',validateProjectId, (req, res, next) => {
-   
-
+router.get('/:id', validateProjectId, (req, res) => {
+   res.status(200).json(req.project)  
 })
 
 //[POST] api/projects
-router.post('/', (req, res) => {
+router.post('/', validateProject, (req, res, next) => {
+    Project.insert(req.body)
+    .then(newProject => {
+        res.status(201).json(newProject)
+    })
+    .catch(next)
 
 })
 

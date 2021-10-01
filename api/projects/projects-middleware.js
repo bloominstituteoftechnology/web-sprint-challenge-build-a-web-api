@@ -10,6 +10,7 @@
             })
         } else {
             req.project = project
+            console.log('HERE:', project)
             next()
         }
     } catch(err) {
