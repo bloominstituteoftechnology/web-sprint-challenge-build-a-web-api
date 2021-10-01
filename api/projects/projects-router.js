@@ -18,7 +18,6 @@ router.get('/:id', checkId, (req, res) => {
 })
 
 router.post('/', validateProject, async (req, res) => {
-
     const newProject = await Project.insert(req.body)
     res.status(201).json(newProject)
 
