@@ -81,5 +81,19 @@ actionRouter.put('/:id', validateActionsId, async (req, res)=>{
 })
 //**put request**/
 
+//**delete requests**//
+//first request: Returns no response body. If there is no action with the given id it responds with a status code 404.
+
+actionRouter.delete('/:id', validateActionsId, async (req,res,next)=>{
+    try{
+        await Actions.remove(req.params.id)
+        res.end()
+    }
+    catch(err){
+        next(err)
+    }
+})
+//**delete requests**//
+
 
 module.exports = actionRouter;
