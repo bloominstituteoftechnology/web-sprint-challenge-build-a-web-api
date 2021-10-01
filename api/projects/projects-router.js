@@ -1,4 +1,3 @@
-// Write your "projects" router here!
 const Project = require('./projects-model');
 const express = require('express');
 

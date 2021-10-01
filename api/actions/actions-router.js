@@ -27,7 +27,7 @@ router.post('/', validateAction, async (req, res) => {
     res.status(201).json(actionA)
 })
 
-router.put('/:id', validateAction, async (req, res) => {
+router.put('/:id', checkId, validateAction, async (req, res) => {
 
 
     const actionA = await Action.update(req.params.id, req.body)
