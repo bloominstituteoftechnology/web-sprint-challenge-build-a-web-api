@@ -146,8 +146,22 @@ We have provided test data for all the resources.
 
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
-1. The core features of Node.js and Express and why they are useful.
-1. Understand and explain the use of Middleware.
-1. The basic principles of the REST architectural style.
-1. Understand and explain the use of Express Routers.
-1. Describe tooling used to manually test the correctness of an API.
+1. The core features of Node.js and Express and why they are useful. 
+--Node.js is written in javascript so it allows those that are already fluent in javascript for frontend to be able to switch between frontend and backend. A single stack reduces the amount of frameworks and languages a programmer needs to switch between
+--Express is a minimalist framework in node that allows easy creation of apis while not deviating from the Node.js backbone
+
+2. Understand and explain the use of Middleware.
+--Allows for checks or actions to occur before the main body of a function happens. This is good for validation or any other action that should be ran before the main body of the function to be ran.
+
+3. The basic principles of the REST architectural style.
+-Uniform interface, a dev that knows one of your apis should be able to take a similar approach to another one of your apis
+-Client-server indepedence: clients and servers should be able to evolve independently.Standard practice
+-Stateless: client is responsible for state of the application
+-Cacheable: Caching brings performance improvement for the client-side and better scope for scalability for a server because the load has been reduced.
+-Layered System: Components are only allowed to see their immediate layers.
+
+4. Understand and explain the use of Express Routers.
+--Routers reduce monolithic code bases. Makes the code much easier to read and maintain when reduced to smaller sections.
+
+5. Describe tooling used to manually test the correctness of an API.
+--Postman is a common tool for manually testing apis. It calls the api through a user-friendly interface and shows you the server response code and response dat.
