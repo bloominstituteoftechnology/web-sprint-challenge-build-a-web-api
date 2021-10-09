@@ -1,6 +1,7 @@
 # Mac files
 .DS_Store
-
+#ENV files
+*.env
 # VSCode settings
 .vscode/
 
