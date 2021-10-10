@@ -61,8 +61,4 @@ actionRouter.delete('/:id', validateActionsId, async (req, res, next) => {
     }
 })
 
-router.use((err, req, res, next) => {
-    res.status(err.status || 500).json({message: err.message, customMessage: err.message})
-})
-
 module.exports = actionRouter
