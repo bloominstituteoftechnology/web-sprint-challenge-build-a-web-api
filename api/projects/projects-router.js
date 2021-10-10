@@ -35,18 +35,19 @@ router.post('/', async (req, res) => {
 })
 
 router.put('/:id', validateProjectId, validateProject (req, res, next => {
-    Projects.update(req.paramas.id, {
-        name: req.name,
-        description: req.description,
-        completed: req.completed
-    })
-    .then(() => {
-        return Projects.get(req.params.id)
-    })
-    .then(project => {
+    const {name, description, completed} = req.body
+    if(!name || !description, !completed){
+        res.status(400).json({message: 'The project with that ID does not exist'})
+    }else{
+        Projects.update(req.params.id, req.body)
+        .then(() => {
+            return Projects.get(req.params.id)
+        })
+        .then(project => {
         res.json(project)
     })
-    .catch(next)
+        .catch(next)
+    }
 }))
 
 router.delete('/:id', validateProjectId, async (req, res, next) => {
