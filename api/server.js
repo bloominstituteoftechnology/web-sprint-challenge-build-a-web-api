@@ -1,5 +1,7 @@
 const express = require('express');
 const server = express();
+const helmet = require('helmet')
+const cors = require('cors')
 const actionsRouter = require('./actions/actions-router')
 const projectsRouter = require('./projects/projects-router')
 
@@ -18,6 +20,8 @@ const errHandling = (err, req, res, next) => {
 }
 
 server.use(express.json())
+server.use(helmet())
+server.use(cors())
 server.use('/api/actions', logger, actionsRouter)
 server.use('/api/projects', logger, projectsRouter)
 

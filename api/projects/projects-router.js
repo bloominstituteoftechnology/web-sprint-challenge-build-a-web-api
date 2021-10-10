@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.put('/:id', validateProjectId, validateProject, (req, res, next => {
+router.put('/:id', validateProjectId, validateProject (req, res, next => {
     Projects.update(req.paramas.id, {
         name: req.name,
         description: req.description,
