@@ -36,7 +36,6 @@ A _"resetdb"_ script exists that allows you to reset the database to its origina
 - [ ] Install _nodemon_ as a development dependency that would not be used in production.
 
 #### Environment Variables
-
 - [ ] Bring the port number from the `process.env` variable, falling back to `5000` if `process.env.PORT` is undefined **!!!**
 
 #### Endpoints
