@@ -1,64 +1,63 @@
 // Write your "actions" router here!
 const express = require('express')
-const Actions = require('./actions-model')
-const {validateActionsId} = require('./actions-middlware')
-const actionRouter = express.Router()
+const Action = require('./actions-model')
+const {validateActionId, validateAction} = require('./actions-middlware')
+const router = express.Router()
 
-actionRouter.get('/', async (req, res) => {
+router.get('/', async (req, res) => {
     try{
         const actions = await Actions.get()
         res.status(200).json(actions)
     }catch(err){
-        res.status(500).json({message: 'There was an issue accessing the server'})
+        next(err)
     }
 })
 
-actionRouter.get('/id:', validateActionsId, async (req, res, next) => {
+router.get('/id:', validateActionId, async (req, res, next) => {
     try{
-        const id = req.params.id
-        const actionFormId = await Actions.get(id)
-        res.status(200).json(actionFormId)
+        res.json(req.action)
     }catch(err){
         next(err)
     }
 })
 
-actionRouter.post('/', async (req, res) => {
+router.post('/', async (req, res) => {
     try{
-        const {project_id, description, notes, completed} = req.body
-        if(!project_id || !description || !notes || typeof completed === 'undefined'){
-            res.status(400).json({message: 'We need all information'})
-        }else{
-            const newAction = await Actions.insert(req.body)
-            res.status(201).json(newAction)
-        }
-    }catch(err){
-        res.status(500).json({message: 'There was an issue accessing the server'})
-    }
-})
-
-actionRouter.put('/:id', validateActionsId, async (req, res) => {
-    try{
-        const id = req.params.id
-        const {project_id, description, notes, completed} = req.body
-        if(!project_id || !description || !notes || typeof completed === 'undefined'){
-            res.status(400).json({message: 'We need all information'})
-        }else{
-            const updatedAction = await Actions.update(id, req.body)
-            res.status(201).json(updatedAction)
-        }
-    }catch(err){
-        res.status(500).json({message: 'There was an issue accessing the server'})
-    }
-})
-
-actionRouter.delete('/:id', validateActionsId, async (req, res, next) => {
-    try{
-        await Actions.remove(req.params.id)
-        res.end()
+        const newAction = await Action.insert({
+            project_id: req.project_id,
+            description: req.description,
+            notes: req.notes,
+            completed: req.completed
+        })
+        res.status(201).json(newAction)
     }catch(err){
         next(err)
     }
 })
 
-module.exports = actionRouter
+router.put('/:id', validateActionId, validateAction, async (req, res) => {
+    Action.update(req.params.id, {
+        project_id: req.project_id,
+        description: req.description,
+        notes: req.notes,
+        completed: req.completed
+    })
+    .then(() => {
+        return Action.get(req.params.id)
+    })
+    .then(action => {
+        res.json(action)
+    })
+    .catch(next)
+})
+
+router.delete('/:id', validateActionId, async (req, res, next) => {
+    try{
+        await Action.remove(req.params.id)
+        res.json(res.Action)
+    }catch(err){
+        next(err)
+    }
+})
+
+module.exports = router
