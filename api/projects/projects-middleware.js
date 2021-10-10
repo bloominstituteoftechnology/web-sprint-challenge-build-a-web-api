@@ -1,45 +1,18 @@
 // add middlewares here related to projects
-const Project = require('../projects/projects-model')
+const Projects = require('./projects-model')
 
 async function validateProjectId (req, res, next){
     try{
-        const project = await Project.get(req.params.id)
+        const project = await Projects.get(req.params.id)
         if(!project){
-            res.status(404).json({message: 'project not found'})
+            res.status(404).json({message: 'No project can be found with that ID'})
         }else{
             req.project = project
             next()
         }
     }catch(err){
-        next(err)
+        res.status(500).json({message: 'Having trouble accessing the database'})
     }
 }
 
-function validateProject (req, res, next){
-    const {name, description} = req.body
-    if(!name || !name.trim() || !description || !description.trim()){
-        res.status(400).json({message: 'missing required field'})
-    }else{
-        req.name = name.trim()
-        req.description = description.trim()
-        next()
-    }
-}
-
-function validateProjectWithCompleted (req, res, next){
-    const {name, description, completed} = req.body
-    if(!name || !name.trim() || !description || !description.trim() || !completed){
-        res.status(400).json({message: 'missing required field'})
-    }else{
-        req.name = name.trim()
-        req.description = description.trim()
-        req.completed = completed
-        next()
-    }
-}
-
-module.exports = {
-    validateProjectId,
-    validateProject,
-    validateProjectWithCompleted
-}
+module.exports = {validateProjectId}

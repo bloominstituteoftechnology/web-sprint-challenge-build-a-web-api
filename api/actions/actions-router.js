@@ -1,45 +1,61 @@
 // Write your "actions" router here!
 const express = require('express')
-const Action = require('./actions-model')
-const Project = require('../projects/projects-model')
-const {validateActionId, validateAction} = require('./actions-middlware')
-const router = express.Router()
+const Actions = require('./actions-model')
+const {validateActionsId} = require('./actions-middlware')
+const actionRouter = express.Router()
 
-router.get('/', (req, res, next) => {
-    Action.get()
-    .then(actions => {
-        res.status(200).json(actions)
-    })
-    .catch(next)
-})
-
-router.get('/id:', validateActionId, (req, res) => {
-    res.json(req.action)
-})
-
-router.post('/', validateAction, (req, res, next) => {
-    Action.insert(req.body)
-    .then(newAction => {
-        res.status(201).json(newAction)
-    })
-    .catch(next)
-})
-
-router.put('/:id', validateActionId, validateAction, (req, res, next) => {
-    Action.update(req.params.id, req.body)
-    .then(() => {
-        return Action.get(req.params.id)
-    })
-    .then(action => {
-        res.json(action)
-    })
-    .catch(next)
-})
-
-router.delete('/:id', validateActionId, async (req, res, next) => {
+actionRouter.get('/', async (req, res) => {
     try{
-        await Action.remove(req.params.id)
-        res.json(req.action)
+        const actions = await Actions.get()
+        res.status(200).json(actions)
+    }catch(err){
+        res.status(500).json({message: 'There was an issue accessing the server'})
+    }
+})
+
+actionRouter.get('/id:', validateActionsId, async (req, res, next) => {
+    try{
+        const id = req.params.id
+        const actionFormId = await Actions.get(id)
+        res.status(200).json(actionFormId)
+    }catch(err){
+        next(err)
+    }
+})
+
+actionRouter.post('/', async (req, res) => {
+    try{
+        const {project_id, description, notes, completed} = req.body
+        if(!project_id || !description || !notes || typeof completed === 'undefined'){
+            res.status(400).json({message: 'We need all information'})
+        }else{
+            const newAction = await Actions.insert(req.body)
+            res.status(201).json(newAction)
+        }
+    }catch(err){
+        res.status(500).json({message: 'There was an issue accessing the server'})
+    }
+})
+
+actionRouter.put('/:id', validateActionsId, async (req, res) => {
+    try{
+        const id = req.params.id
+        const {project_id, description, notes, completed} = req.body
+        if(!project_id || !description || !notes || typeof completed === 'undefined'){
+            res.status(400).json({message: 'We need all information'})
+        }else{
+            const updatedAction = await Actions.update(id, req.body)
+            res.status(201).json(updatedAction)
+        }
+    }catch(err){
+        res.status(500).json({message: 'There was an issue accessing the server'})
+    }
+})
+
+actionRouter.delete('/:id', validateActionsId, async (req, res, next) => {
+    try{
+        await Actions.remove(req.params.id)
+        res.end()
     }catch(err){
         next(err)
     }
@@ -49,4 +65,4 @@ router.use((err, req, res, next) => {
     res.status(err.status || 500).json({message: err.message, customMessage: err.message})
 })
 
-module.exports = router
+module.exports = actionRouter
