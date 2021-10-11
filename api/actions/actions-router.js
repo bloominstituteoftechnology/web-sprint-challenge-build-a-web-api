@@ -29,14 +29,14 @@ router.get('/:id', (req, res) => {
             }
         })
         .catch((err) => {
-        res.status(500).json({ message: 'Actions get id error' });
+        res.status(500).json({ message: 'error' });
         });
 });
 
 router.post('/', (req, res) => {
     if (!req.body.description || !req.body.notes || !req.body.project_id) {
         res.status(400).json({
-        message: 'Notes and description and associated project id are required',
+        message: 'Notes and description required'
     });
     } else {
         Actions.insert(req.body)
@@ -44,7 +44,7 @@ router.post('/', (req, res) => {
             res.status(201).json(newAction);
         })
         .catch((err) => {
-            res.status(500).json({ message: 'Actions post error' });
+            res.status(500).json({ message: 'error' });
         });
     }
 });
@@ -53,13 +53,13 @@ router.delete('/:id', (req, res) => {
     Actions.remove(req.params.id)
         .then((deletedAction) => {
             if (!deletedAction) {
-            res.status(404).json({ message: 'The action with the specified id does not exist' });
+            res.status(404).json({ message: 'The action with this id does not exist' });
             } else {
                 res.status(200).json();
             }
         })
         .catch((err) => {
-            res.status(500).json({ message: 'Actions delete error' });
+            res.status(500).json({ message: 'error' });
         });
 });
 

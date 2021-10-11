@@ -68,7 +68,7 @@ router.put('/:id', (req, res) => {
             res.status(200).json(updatedProject);
         })
         .catch(() => {
-            res.status(500).json({ message: 'Put error' });
+            res.status(500).json({ message: 'error' });
         });
     }
 });
@@ -78,14 +78,14 @@ router.delete('/:id', (req, res) => {
         .then((deletedProject) => {
             if (!deletedProject) {
             res.status(404).json({
-                message: 'The project with the specified id does not exist',
+                message: 'The project with this id does not exist',
             });
             } else {
             res.status(200).json();
             }
         })
         .catch(() => {
-            res.status(500).json({ message: 'Delete error' });
+            res.status(500).json({ message: 'error' });
         });
     });
 
@@ -94,7 +94,7 @@ router.get('/:id/actions', (req, res) => {
         .then((actions) => {
             if (!actions) {
             res.status(404).json({
-            message: 'The project with the specified id does not exist',
+            message: 'The project with this id does not exist',
         });
             } else {
             Projects.getProjectActions(req.params.id).then((actions) => {
@@ -103,7 +103,7 @@ router.get('/:id/actions', (req, res) => {
         }
         })
         .catch(() => {
-        res.status(500).json({ message: 'Get actions error' });
+        res.status(500).json({ message: 'error' });
     });
 });
 
