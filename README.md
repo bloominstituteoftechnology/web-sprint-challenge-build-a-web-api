@@ -88,7 +88,7 @@ Inside `api/actions/actions-router.js` build endpoints for performing CRUD opera
 
 ### Database Schemas
 
-The description of the structure and extra information about each _resource_ stored in the included database (`./data/lambda.db3`) is listed below.
+The description of the structure and extra information about each _resource_ stored in the included database (`./data/database.db3`) is listed below.
 
 #### Projects
 
