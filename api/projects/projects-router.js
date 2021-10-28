@@ -3,7 +3,8 @@ const express = require('express');
 
 const {
     handleError,
-    validateID
+    validateID,
+    validatePost
 } = require('./projects-middleware')
 
 const Projects = require('../projects/projects-model');
@@ -26,12 +27,40 @@ router.get('/:id', validateID, (req, res, next) => {
 })
 
 //[POST] /api/projects
+router.post('/', validatePost, (req, res, next) => {
+    Projects.insert(req.body)
+        .then(project => {
+            res.status(201).json(project)
+        })
+        .catch(next)
+})
 
 //[PUT] /api/projects/:id
+router.put('/:id', validatePost, validateID, (req, res, next) => {
+    Projects.update(req.params.id, req.body)
+      .then(hub => {
+        res.status(200).json(hub);
+      })
+      .catch(next);
+  });
 
 //[DELETE] /api/projects/:id
+router.delete('/:id', validateID, (req, res, next) => {
+    Projects.remove(req.params.id)
+      .then(() => {
+        res.status(200);
+      })
+      .catch(next);
+  });
 
 //[GET] /api/projects/:id/actions
+router.get('/:id/actions', validateID, (req, res, next) => {
+    Projects.getProjectActions(req.params.id)
+        .then(actions => {
+            res.status.json(actions);
+        })
+        .catch(next);
+})
 
 router.use(handleError);
 

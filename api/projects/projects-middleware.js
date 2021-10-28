@@ -20,7 +20,19 @@ function validateID (req, res, next) {
     .catch(next)
 }
 
+function validatePost (req, res, next) {
+  const { name, description } = req.body
+  if (!name) {
+    next({ status: 400, message: 'Missing name'})
+  } else if (!description) {
+    next({ status: 400, message: 'Missing description'})
+  } else {
+    next()
+  }
+}
+
 module.exports = {
     handleError,
-    validateID
+    validateID,
+    validatePost
 }
