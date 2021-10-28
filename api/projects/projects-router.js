@@ -5,15 +5,14 @@ const {
     handleError,
     validateID,
     validatePost
-} = require('./projects-middleware')
+} = require('./projects-middleware');
 
-const Projects = require('../projects/projects-model');
+const Projects = require('./projects-model');
 
 const router = express.Router();
 
 //[GET] /api/projects
 router.get('/', (req, res, next) => {
-    // RETURN AN ARRAY WITH ALL THE USERS
     Projects.get()
       .then(projects => {
         res.status(200).json(projects)
@@ -38,8 +37,8 @@ router.post('/', validatePost, (req, res, next) => {
 //[PUT] /api/projects/:id
 router.put('/:id', validatePost, validateID, (req, res, next) => {
     Projects.update(req.params.id, req.body)
-      .then(hub => {
-        res.status(200).json(hub);
+      .then(project => {
+        res.status(200).json(project);
       })
       .catch(next);
   });
