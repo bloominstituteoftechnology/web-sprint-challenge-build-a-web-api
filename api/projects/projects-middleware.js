@@ -15,7 +15,7 @@ function handleError(err, req, res, next) {
 
 async function actionIdChecker(req, res, next) {
     try{
-        const action = await Projects.get(req.params.id)
+        const action = await Projects.get(req.params.id || req.body.project_id)
         if(!action) {
             next ({
                 status: 404,

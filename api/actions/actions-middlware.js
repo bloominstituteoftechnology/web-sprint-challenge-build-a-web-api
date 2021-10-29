@@ -1,4 +1,5 @@
 const Actions = require('./actions-model')
+const { actSchema } = require("./../schemas")
 
 function handleError(err, req, res, next) {
     res.status(err.status || 500).json({
@@ -21,7 +22,21 @@ async function checkActionId(req, res, next) {
     }
 }
 
+async function checkCompleted(req, res, next) {
+    try {
+        const validate = await actSchema.validate(req.body, {
+            strict: false,
+            stripUnknown: true,
+        })
+        req.body = validate
+        next()
+    } catch (err) {
+        next({ status: 400, message: err.message })
+    }
+}
+
 module.exports = {
     handleError,
     checkActionId,
+    checkCompleted,
 }

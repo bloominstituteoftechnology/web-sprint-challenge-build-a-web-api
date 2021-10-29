@@ -60,7 +60,7 @@ router.delete("/:id", actionIdChecker, async (req, res, next) => {
     }
 })
 
-router.get(':id/actions', actionIdChecker, async (req, res, next) => {
+router.get('/:id/actions', actionIdChecker, async (req, res, next) => {
     try {
         const projects = await Projects.getProjectActions(req.params.id)
         res.status(200).json(projects)

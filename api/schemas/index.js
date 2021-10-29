@@ -13,6 +13,23 @@ const actionSchema = yup.object().shape({
     .boolean()
 })
 
+const actSchema = yup.object().shape({
+    project_id: yup
+    .number()
+    .required(),
+    description: yup
+    .string()
+    .trim()
+    .max(128, 'cannot be longer than 128 chars')
+    .required('description is required'),
+    notes: yup
+    .string()
+    .trim()
+    .required('notes are required'),
+    completed: yup.boolean()
+})
+
 module.exports = {
     actionSchema,
+    actSchema
 }
