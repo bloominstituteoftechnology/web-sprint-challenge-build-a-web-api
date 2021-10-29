@@ -1,7 +1,7 @@
 // Write your "projects" router here!
 const express = require("express");
 const Project = require("./projects-model");
-const { validateId } = require("./projects-middleware");
+const { validateId, validateNewProject } = require("./projects-middleware");
 const router = express.Router();
 
 //{name:___, description:____, completed:____}
@@ -23,15 +23,13 @@ router.get("/:id", validateId, async (req, res, next) => {
   }
 });
 
-// - [ ] `[POST] /api/projects`
-//   - Returns the newly created project as the body of the response.
-//   - If the request body is missing any of the required fields it responds with a status code 400.
-router.post("/", async (req, res, next) => {
+router.post("/", validateNewProject, async (req, res, next) => {
   try {
+    const newProject = await Project.insert(req.newProject);
+    res.status(201).json({ ...newProject });
   } catch (err) {
     next(err);
   }
-  res.status(201).json({ message: `[POST] /api/projects/` });
 });
 
 // - [ ] `[PUT] /api/projects/:id`

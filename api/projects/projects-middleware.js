@@ -14,4 +14,17 @@ async function validateId(req, res, next) {
   }
 }
 
-module.exports = { validateId };
+function validateNewProject(req, res, next) {
+  //{name:___, description:____, completed:____}
+  const { name, description, completed } = req.body;
+  if (!name || name === "" || !description || description === "") {
+    res
+      .status(400)
+      .json({ message: "missing required fileds : name, description" });
+  } else {
+    req.newProject = { name, description, completed };
+    next();
+  }
+}
+
+module.exports = { validateId, validateNewProject };
