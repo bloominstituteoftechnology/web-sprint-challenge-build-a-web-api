@@ -73,7 +73,6 @@ router.put(
 //   - If there is no action with the given `id` it responds with a status code 404.
 router.delete("/:id", validateId, async (req, res, next) => {
   try {
-    throw new Error("error");
     const numberOfDeletedItem = await Action.remove(req.params.id);
     res.status(201).json(`deleted ${numberOfDeletedItem} action`);
   } catch (err) {
