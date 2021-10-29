@@ -13,4 +13,20 @@ router.get('/', async(req, res, next) => {
     }
 })
 
+router.get('/:id', async(req, res, next) => {
+    const { id } = req.params
+    try {
+        const project = await Projects.get(Number(id))
+        if(!project) {
+            res.status(404).json({
+                message: "Project Not Found"
+            })
+        } else {
+            res.status(200).json(project)
+        }
+    } catch (err) {
+        next(err)
+    }
+})
+
 module.exports = router
