@@ -1,6 +1,6 @@
 const Action = require("./actions-model");
 const Project = require("../projects/projects-model");
-// add middlewares here related to actions
+
 async function validateId(req, res, next) {
   console.log("---------validateId middleware");
   const { id } = req.params;
