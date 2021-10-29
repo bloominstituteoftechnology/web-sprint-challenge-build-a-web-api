@@ -1,5 +1,10 @@
-const express = require('express');
+const express = require("express");
 const server = express();
+server.use(express.json());
+
+server.get("/", (req, res) => {
+  res.status(200).json({ message: "Hello world" });
+});
 
 // Configure your server here
 // Build your actions router in /api/actions/actions-router.js
