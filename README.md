@@ -65,26 +65,26 @@ Inside `api/projects/projects-router.js` build the following endpoints:
 
 Inside `api/actions/actions-router.js` build endpoints for performing CRUD operations on _actions_:
 
-- [ ] `[GET] /api/actions`
+- [x] `[GET] /api/actions`
   - Returns an array of actions (or an empty array) as the body of the response.
-- [ ] `[GET] /api/actions/:id`
+- [x] `[GET] /api/actions/:id`
   - Returns an action with the given `id` as the body of the response.
   - If there is no action with the given `id` it responds with a status code 404.
-- [ ] `[POST] /api/actions`
+- [x] `[POST] /api/actions`
   - Returns the newly created action as the body of the response.
   - If the request body is missing any of the required fields it responds with a status code 400.
   - When adding an action make sure the `project_id` provided belongs to an existing `project`.
-- [ ] `[PUT] /api/actions/:id`
+- [x] `[PUT] /api/actions/:id`
   - Returns the updated action as the body of the response.
   - If there is no action with the given `id` it responds with a status code 404.
   - If the request body is missing any of the required fields it responds with a status code 400.
-- [ ] `[DELETE] /api/actions/:id`
+- [x] `[DELETE] /api/actions/:id`
   - Returns no response body.
   - If there is no action with the given `id` it responds with a status code 404.
 
 #### Middleware functions
 
-- [ ] Write at least two middleware functions for this API, and consume them in the proper places of your code.
+- [x] Write at least two middleware functions for this API, and consume them in the proper places of your code.
 
 ### Database Schemas
 
@@ -147,7 +147,18 @@ We have provided test data for all the resources.
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+    Node.js allows the use of javascript on client and server side, and with javascript comes many useful features like npm and asynchronousity. Npm gives access to a huge variety of of libraries, and asynchronous code gives us flexibility by allowing us to run other code after something else is executed and has data returned.
+    
+    Express is a node.js framework that makes builiding web applications utilizing node easier and faster. Express gives us the use of middleware, routing, and creating REST api servers.
+
 1. Understand and explain the use of Middleware.
+    Middleware gives us access to the request object being sent to the server container the client's data and the data they are requiesting and the response object it sends back. Middleware gives us the chance to alter the response before the web server gets the chance to respond.
+
 1. The basic principles of the REST architectural style.
+    Representational State Transfer defines rules for creating web services. It allows the slient server to make changes to web resources using http.
+
 1. Understand and explain the use of Express Routers.
+    Routers handle how an app responds to a clients request to an endpoint and HTTP request.
+
 1. Describe tooling used to manually test the correctness of an API.
+    Tools (such as Postman) allow us to mock up requests to the web server from our local machine. It allows up to simulate how the server will respond to to a user.
