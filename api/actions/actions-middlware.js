@@ -50,6 +50,6 @@ async function validateProject(req, res, next) {
 
 module.exports = {
   validateId,
-  validateAction: validateNewAction,
+  validateNewAction,
   validateProject,
 };
