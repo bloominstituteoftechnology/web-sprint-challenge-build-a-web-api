@@ -13,7 +13,7 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
   try {
     const actions = await Action.get();
-    res.status(200).json({ message: "successfully retrieve actions", actions });
+    res.status(200).json([...actions]);
   } catch (err) {
     next(err);
   }
@@ -61,7 +61,7 @@ router.put(
   async (req, res, next) => {
     try {
       const newAction = await Action.update(req.params.id, req.newAction);
-      res.status(201).json(newAction);
+      res.status(201).json(...newAction);
     } catch (err) {
       next(err);
     }

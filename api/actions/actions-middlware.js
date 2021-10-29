@@ -17,7 +17,7 @@ async function validateId(req, res, next) {
 
 async function validateNewAction(req, res, next) {
   console.log("---------validateAction middleware");
-  const { project_id, description, notes } = req.body;
+  const { project_id, description, notes, completed } = req.body;
 
   if (
     !project_id ||
@@ -31,7 +31,7 @@ async function validateNewAction(req, res, next) {
       message: "missing required field, project_id, description, or notes",
     });
   } else {
-    req.newAction = { project_id, description, notes };
+    req.newAction = { project_id, description, notes, completed };
     next();
   }
 }
