@@ -1,6 +1,6 @@
 const express = require('express')
 const Projects = require('./projects-model')
-const { actionIdChecker, validateAction, handleError } = require('./projects-middleware')
+const { handleError, actionIdChecker, validateAction } = require('./projects-middleware')
 const router = express.Router()
 
 router.get('/', async(req, res, next) => {
@@ -55,6 +55,15 @@ router.delete("/:id", actionIdChecker, async (req, res, next) => {
     try {
         await Projects.remove(req.params.id)
         res.status(200).send("Deleted Project")
+    } catch (err) {
+        next(err)
+    }
+})
+
+router.get(':id/actions', actionIdChecker, async (req, res, next) => {
+    try {
+        const projects = await Projects.getProjectActions(req.params.id)
+        res.status(200).json(projects)
     } catch (err) {
         next(err)
     }
