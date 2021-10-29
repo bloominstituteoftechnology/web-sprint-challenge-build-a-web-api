@@ -1,7 +1,7 @@
 // add middlewares here related to projects
 const Project = require("./projects-model");
 
-async function validateId(req, res, next) {
+async function validateProjectId(req, res, next) {
   const { id } = req.params;
   const project = await Project.get(id);
   if (!project) {
@@ -34,8 +34,8 @@ function validateExistingProject(req, res, next) {
     !name ||
     name === "" ||
     !description ||
-    description === "" ||
-    !completed
+    description === ""
+    // || !completed
   ) {
     res.status(400).json({
       message: "missing required fields : name, description, completed",
@@ -46,4 +46,8 @@ function validateExistingProject(req, res, next) {
   }
 }
 
-module.exports = { validateId, validateNewProject, validateExistingProject };
+module.exports = {
+  validateProjectId,
+  validateNewProject,
+  validateExistingProject,
+};
