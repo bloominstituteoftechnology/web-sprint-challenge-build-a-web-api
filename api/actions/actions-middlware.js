@@ -2,7 +2,6 @@ const Action = require("./actions-model");
 const Project = require("../projects/projects-model");
 
 async function validateId(req, res, next) {
-  console.log("---------validateId middleware");
   const { id } = req.params;
   const action = await Action.get(id);
   if (!action) {
@@ -16,7 +15,6 @@ async function validateId(req, res, next) {
 }
 
 async function validateNewAction(req, res, next) {
-  console.log("---------validateAction middleware");
   const { project_id, description, notes, completed } = req.body;
 
   if (
