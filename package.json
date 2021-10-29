@@ -18,7 +18,8 @@
         "helmet": "4.6.0",
         "knex": "0.95.11",
         "nodemon": "^2.0.14",
-        "sqlite3": "5.0.2"
+        "sqlite3": "5.0.2",
+        "yup": "^0.32.11"
     },
     "devDependencies": {
         "cross-env": "7.0.3",
