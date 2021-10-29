@@ -30,12 +30,19 @@ async function validateAction(req, res, next) {
     res.status(400).json({
       message: "missing required field, project_id, description, or notes",
     });
-  } else if ((await Project.get(project_id)) !== null) {
+  } else {
+    req.action = { project_id, description, notes };
+    next();
+  }
+}
+
+async function validateProject(req, res, next) {
+  const { project_id } = req.body;
+  if ((await Project.get(project_id)) !== null) {
     res.status(404).json({
       message: "project_id not found",
     });
   } else {
-    req.action = { project_id, description, notes };
     next();
   }
 }
