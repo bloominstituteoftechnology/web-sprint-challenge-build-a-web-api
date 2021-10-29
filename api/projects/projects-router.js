@@ -1,6 +1,10 @@
 const express = require('express')
 const Projects = require('./projects-model')
-const { handleError, actionIdChecker, validateAction } = require('./projects-middleware')
+const { 
+    handleError, 
+    actionIdChecker, 
+    validateAction 
+} = require('./projects-middleware')
 const router = express.Router()
 
 router.get('/', async(req, res, next) => {

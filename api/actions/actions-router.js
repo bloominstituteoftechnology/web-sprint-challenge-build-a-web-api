@@ -1,6 +1,10 @@
 const express = require('express')
 const Actions = require('./actions-model')
-const { handleError, checkActionId, checkCompleted } = require('./actions-middlware')
+const { 
+    handleError, 
+    checkActionId, 
+    checkCompleted 
+} = require('./actions-middlware')
 const { actionIdChecker } = require('../projects/projects-middleware')
 const router = express.Router()
 

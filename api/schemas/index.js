@@ -20,7 +20,7 @@ const actSchema = yup.object().shape({
     description: yup
     .string()
     .trim()
-    .max(128, 'cannot be longer than 128 chars')
+    .max(100, 'cannot be longer than 100 chars')
     .required('description is required'),
     notes: yup
     .string()
