@@ -72,8 +72,8 @@ router.delete("/:id", validateProjectId, async (req, res, next) => {
 //   - If there is no project with the given `id` it responds with a status code 404.
 router.get("/:id/actions", validateProjectId, async (req, res, next) => {
   try {
-    const actions = await Action.get();
-    res.status(200).json([...actions]);
+    const actions = await Project.getProjectActions(req.params.id);
+    res.status(200).json(actions.length === 0 ? [] : [...actions]);
   } catch (err) {
     next(err);
   }
