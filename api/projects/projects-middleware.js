@@ -14,7 +14,6 @@ async function validateProjectId(req, res, next) {
 }
 
 function validateNewProject(req, res, next) {
-  //{name:___, description:____, completed:____}
   const { name, description, completed } = req.body;
   if (!name || name === "" || !description || description === "") {
     res
