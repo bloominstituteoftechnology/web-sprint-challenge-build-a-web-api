@@ -5,9 +5,7 @@ const { validateId } = require("./projects-middleware");
 const router = express.Router();
 
 //{name:___, description:____, completed:____}
-// - [ ] `[GET] /api/projects`
-//   - Returns an array of projects as the body of the response.
-//   - If there are no projects it responds with an empty array.
+
 router.get("/", async (req, res, next) => {
   try {
     const projects = await Project.get();
@@ -17,9 +15,6 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// - [ ] `[GET] /api/projects/:id`
-//   - Returns a project with the given `id` as the body of the response.
-//   - If there is no project with the given `id` it responds with a status code 404.
 router.get("/:id", validateId, async (req, res, next) => {
   try {
     res.status(200).json({ ...req.project });
