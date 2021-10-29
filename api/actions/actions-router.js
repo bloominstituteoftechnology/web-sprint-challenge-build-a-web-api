@@ -81,7 +81,8 @@ router.delete("/:id", validateId, async (req, res, next) => {
 });
 
 router.use((err, req, res, next) => {
-  res.status(err.status || 500).json({
+  res.status(500).json({
+    //   res.status(err.status || 500).json({
     custMessage: "Error Occured retrieving /api/actions path",
     message: err.message,
   });
