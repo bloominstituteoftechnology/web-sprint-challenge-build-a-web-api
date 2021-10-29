@@ -33,7 +33,6 @@ router.get('/:id', validateProjectId, (req, res, next) => {
     res.status(200).json(req.project)
 })
 
-
 router.post('/', (req, res) => {
    const newProject = req.body;
    if (newProject.name && newProject.description) {
@@ -55,7 +54,7 @@ router.post('/', (req, res) => {
 
 })
 
-router.put('/:id', validateProjectId, validateProject, async (req, res, next) => {
+router.put('/:id', validateProjectId, validateProject, async (req, res) => {
     const updatedProject = await Projects.update(req.params.id, req.body)
     res.status(200).json(updatedProject)
 })
