@@ -4,7 +4,8 @@ const express = require('express');
 const {
     handleError,
     validateID,
-    validatePost
+    validatePost,
+    validateUpdatedPost
 } = require('./projects-middleware');
 
 const Projects = require('./projects-model');
@@ -17,11 +18,11 @@ router.get('/', (req, res, next) => {
       .then(projects => {
         res.status(200).json(projects)
       })
-      .catch(next)
+      .catch(next);
   });
 
 //[GET] /api/projects/:id
-router.get('/:id', validateID, (req, res, next) => {
+router.get('/:id', validateID, (req, res) => {
     res.status(200).json(req.project)
 })
 
@@ -31,11 +32,11 @@ router.post('/', validatePost, (req, res, next) => {
         .then(project => {
             res.status(201).json(project)
         })
-        .catch(next)
+        .catch(err => next(err));
 })
 
 //[PUT] /api/projects/:id
-router.put('/:id', validatePost, validateID, (req, res, next) => {
+router.put('/:id', validateUpdatedPost, validateID, (req, res, next) => {
     Projects.update(req.params.id, req.body)
       .then(project => {
         res.status(200).json(project);
@@ -56,9 +57,9 @@ router.delete('/:id', validateID, (req, res, next) => {
 router.get('/:id/actions', validateID, (req, res, next) => {
     Projects.getProjectActions(req.params.id)
         .then(actions => {
-            res.status.json(actions);
+            res.status(200).send(actions);
         })
-        .catch(next);
+        .catch(err => next(err));
 })
 
 router.use(handleError);

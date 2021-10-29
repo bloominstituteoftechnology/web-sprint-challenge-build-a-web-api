@@ -15,26 +15,25 @@ const router = express.Router();
 router.get('/', (req, res, next) => {
     Actions.get()
       .then(actions => {
-        res.status(200).json(actions)
+        res.status(200).send(actions)
       })
       .catch(next)
   });
 
 //[GET] /api/actions/:id
-router.get('/:id', validateID, (req, res, next) => {
-    res.status(200).json(req.action)
+router.get('/:id', validateID, (req, res) => {
+    res.status(200).send(req.action)
 })
 
 //[POST] /api/actions
 router.post('/', validatePost, (req, res, next) => {
     const newAction = {
-        project_id: req.params.id,
-        description: req.body.description,
-        notes: req.body.notes
+      ...req.body,
+      project_id: req.params.id
     }
     Actions.insert(newAction)
         .then(action => {
-            res.status(201).json(action)
+            res.status(201).json(action);
         })
         .catch(next)
 })
@@ -45,7 +44,7 @@ router.put('/:id', validatePost, validateID, (req, res, next) => {
       .then(action => {
         res.status(200).json(action);
       })
-      .catch(next);
+      .catch(next)
   });
 
 //[DELETE] /api/actions/:id
