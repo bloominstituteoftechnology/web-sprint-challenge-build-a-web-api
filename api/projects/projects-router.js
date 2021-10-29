@@ -60,6 +60,14 @@ router.put('/:id', validateProjectId, validateProject, async (req, res, next) =>
     res.status(200).json(updatedProject)
 })
 
-router.use
+router.delete('/:id', validateProjectId, (req, res, next) => {
+    Projects.remove(req.params.id) 
+    .then(() => {
+        res.status(200).json({ message: "Your project was deleted"})
+    })
+    .catch(next);
+})
+
+router.use(handleError);
 
 module.exports = router;
