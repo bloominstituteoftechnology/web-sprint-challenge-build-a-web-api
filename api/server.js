@@ -4,10 +4,11 @@ const actionsRouter = require('./actions/actions-router')
 const projectsRouter = require('./projects/projects-router')
 const { logger, handleError } = require('./projects/projects-middleware')
 
+server.use(express.json())
 server.use('/api/actions', actionsRouter)
 server.use('/api/projects', logger, projectsRouter)
 
-server.use(express.json())
+
 
 server.use('*', (req, res, next) => {
     next({
@@ -16,6 +17,6 @@ server.use('*', (req, res, next) => {
     })
 })
 
-server.use(handleError)
+// server.use(handleError)
 
 module.exports = server;

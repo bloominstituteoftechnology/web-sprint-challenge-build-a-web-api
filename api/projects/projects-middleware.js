@@ -1,4 +1,5 @@
 const Projects = require('../projects/projects-model')
+const { actionSchema } = require("./../schemas")
 
 function logger(req, res, next) {
     console.log(`[${new Date().toISOString()}] ${req.method} request to ${req.url}`)
@@ -28,16 +29,16 @@ async function actionIdChecker(req, res, next) {
     }
 }
 
-function validateAction(req, res, next) {
-    const  { name, description } = req.body
-    if(name && name.trim() && description && description.trim()) {
-        req.project = req.body
-        next()
-    } else {
-        next({
-            status: 400,
-            message: "missing required fields"
+async function validateAction(req, res, next) {
+    try{
+        const validated = await actionSchema.validate(req.body, {
+            strict: false,
+            stripUnknown: true,
         })
+        req.body = validated
+        next()
+    } catch (err) {
+        next({ status: 400, message: err.message })
     }
 }
 
