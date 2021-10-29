@@ -147,7 +147,33 @@ We have provided test data for all the resources.
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+
+We use Node to write server code. Specifically, web services that communicate with clients using the JavaScript Object Notation (JSON) format for data interchange.Node.js uses the same programming language (JavaScript) and paradigm for both client and server. Using the same language, we minimize context switching and share code between the client and the server. Meanwhile Express is a framework that sits on top of Node.js, making it wasier to create web applications and services. Express is Simple, Unopinionated, Compatible with connecting Middleware. All packaged into clean, intuitive, and easy-to-use API.
+
 1. Understand and explain the use of Middleware.
+
+Middleware are functions used in connecting a bunch of isolated systems to interact and perform certain tasks. Typically all middlewares in nodejs/expressjs have access to request, response and next objects.
+To sum up, middleware functions can perform the following tasks : 
+
+- Execute any code.
+- Make changes to any part of the code.
+- Uses request/response objects to modify the request and response objects.
+-Call the next middleware which helps in attaching any number of middleware functions to get executed in the queue.
+
 1. The basic principles of the REST architectural style.
+
+REST is a generally agreed-upon set of principles and constraints. They are recommendations, not a standard. When designing a RESTful Eeb API, keep the following principles in mind:
+
+- Everything is a resource.
+- Each resource is accessible via a unique URI.
+- Resources can have multiple representations.
+- Communication happens over a stateless protocol (HTTP).
+- Resource management happens via HTTP methods.
+
 1. Understand and explain the use of Express Routers.
+
+An Express Router behaves like a mini Express application. It can have its own Routing and Middleware, bit it needs to exist inside an express application. Think of routers as a way of organizing Express application you write separate pieces that can later be composed together.
+
 1. Describe tooling used to manually test the correctness of an API.
+
+HTTPIE, POSTMAN, CURL are all used to manually test API endpoints.
