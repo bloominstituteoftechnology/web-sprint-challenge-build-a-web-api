@@ -61,7 +61,7 @@ router.put(
   async (req, res, next) => {
     try {
       const newAction = await Action.update(req.params.id, req.newAction);
-      res.status(201).json(...newAction);
+      res.status(201).json({ ...newAction });
     } catch (err) {
       next(err);
     }
@@ -81,8 +81,7 @@ router.delete("/:id", validateId, async (req, res, next) => {
 });
 
 router.use((err, req, res, next) => {
-  res.status(500).json({
-    //   res.status(err.status || 500).json({
+  res.status(err.status || 500).json({
     custMessage: "Error Occured retrieving /api/actions path",
     message: err.message,
   });
