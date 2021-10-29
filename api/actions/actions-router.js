@@ -24,7 +24,7 @@ router.get("/", async (req, res, next) => {
 //   - If there is no action with the given `id` it responds with a status code 404.
 router.get("/:id", validateId, async (req, res, next) => {
   try {
-    res.status(200).json({ action: req.action });
+    res.status(200).json({ ...req.action });
   } catch (err) {
     next(err);
   }
@@ -42,7 +42,7 @@ router.post(
   async (req, res, next) => {
     try {
       const newAction = await Action.insert(req.newAction);
-      res.status(201).json({ newAction });
+      res.status(201).json({ ...newAction });
     } catch (err) {
       next(err);
     }
