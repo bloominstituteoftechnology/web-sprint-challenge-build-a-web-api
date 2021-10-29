@@ -8,7 +8,8 @@ const router = express.Router();
 //   - Returns an array of projects as the body of the response.
 //   - If there are no projects it responds with an empty array.
 router.get("/", async (req, res) => {
-  res.status(200).json({ message: `[GET] /api/projects/` });
+  const projects = await Projects.get();
+  res.status(200).json({ projects });
 });
 
 // - [ ] `[GET] /api/projects/:id`
