@@ -15,7 +15,7 @@ async function validateId(req, res, next) {
   }
 }
 
-async function validateAction(req, res, next) {
+async function validateNewAction(req, res, next) {
   console.log("---------validateAction middleware");
   const { project_id, description, notes } = req.body;
 
@@ -31,7 +31,7 @@ async function validateAction(req, res, next) {
       message: "missing required field, project_id, description, or notes",
     });
   } else {
-    req.action = { project_id, description, notes };
+    req.newAction = { project_id, description, notes };
     next();
   }
 }
@@ -48,4 +48,8 @@ async function validateProject(req, res, next) {
   }
 }
 
-module.exports = { validateId, validateAction, validateProject };
+module.exports = {
+  validateId,
+  validateAction: validateNewAction,
+  validateProject,
+};
