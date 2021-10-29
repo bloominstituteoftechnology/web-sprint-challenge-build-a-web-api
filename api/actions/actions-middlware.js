@@ -1,7 +1,7 @@
 // add middlewares here related to actions
 const Actions = require('./actions-model')
 
-async function validateProjectId(req, res, next) {
+async function validateActionId(req, res, next) {
     try {
         const action = await Actions.get(req.params.id)
             if (action) {
@@ -18,5 +18,5 @@ async function validateProjectId(req, res, next) {
 }
 
 module.exports = {
-    validateProjectId,
+    validateActionId,
 }
