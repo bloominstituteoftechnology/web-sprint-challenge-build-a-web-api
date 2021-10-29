@@ -21,7 +21,7 @@ async function validateAction(req, res, next) {
 
   if (
     !project_id ||
-    typeof project_id === "number" ||
+    typeof project_id !== "number" ||
     !description ||
     description.trim() === "" ||
     !notes ||
@@ -38,7 +38,8 @@ async function validateAction(req, res, next) {
 
 async function validateProject(req, res, next) {
   const { project_id } = req.body;
-  if ((await Project.get(project_id)) !== null) {
+  const project = await Project.get(project_id);
+  if (!project) {
     res.status(404).json({
       message: "project_id not found",
     });
@@ -47,4 +48,4 @@ async function validateProject(req, res, next) {
   }
 }
 
-module.exports = { validateId, validateAction };
+module.exports = { validateId, validateAction, validateProject };
