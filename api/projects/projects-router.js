@@ -1,7 +1,11 @@
 // Write your "projects" router here!
 const express = require("express");
 const Project = require("./projects-model");
-const { validateId, validateNewProject } = require("./projects-middleware");
+const {
+  validateId,
+  validateNewProject,
+  validateExistingProject,
+} = require("./projects-middleware");
 const router = express.Router();
 
 //{name:___, description:____, completed:____}
@@ -32,17 +36,22 @@ router.post("/", validateNewProject, async (req, res, next) => {
   }
 });
 
-// - [ ] `[PUT] /api/projects/:id`
-//   - Returns the updated project as the body of the response.
-//   - If there is no project with the given `id` it responds with a status code 404.
-//   - If the request body is missing any of the required fields it responds with a status code 400.
-router.put("/:id", async (req, res, next) => {
-  try {
-  } catch (err) {
-    next(err);
+router.put(
+  "/:id",
+  validateId,
+  validateExistingProject,
+  async (req, res, next) => {
+    try {
+      const updatedProject = await Project.update(
+        req.params.id,
+        req.existingProject
+      );
+      res.status(201).json({ ...updatedProject });
+    } catch (err) {
+      next(err);
+    }
   }
-  res.status(201).json({ message: `[PUT] /api/projects/${req.params.id}` });
-});
+);
 
 // - [ ] `[DELETE] /api/projects/:id`
 //   - Returns no response body.
