@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "main": "index.js",
     "scripts": {
-        "test": "cross-env NODE_ENV=testing jest --watchAll --verbose --runInBand --silent",
+        "test": "cross-env NODE_ENV=testing jest --verbose --runInBand --silent",
         "resetdb": "knex migrate:rollback && knex migrate:latest && knex seed:run"
     },
     "repository": {
