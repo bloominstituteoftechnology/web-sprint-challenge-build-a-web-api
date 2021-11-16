@@ -8,7 +8,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/LambdaSchool/web-sprint-challenge-build-a-web-api"
+        "url": "git+https://github.com/BloomInstituteOfTechnology/web-sprint-challenge-build-a-web-api"
     },
     "dependencies": {
         "express": "4.17.1",

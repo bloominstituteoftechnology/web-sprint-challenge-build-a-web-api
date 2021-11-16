@@ -4,7 +4,7 @@ exports.seed = function (knex) {
     {
       project_id: 1,
       description: 'Fork and Clone Repository',
-      notes: 'Repo URL: https://github.com/LambdaSchool/node-api-challenge',
+      notes: 'Repo URL: https://github.com/BloomInstituteOfTechnology/node-api-challenge',
     },
     {
       project_id: 1,
