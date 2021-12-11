@@ -1,3 +1,5 @@
+const server = require("./api/server");
+
 /*
 play this: https://www.youtube.com/watch?v=d-diB65scQU
 
@@ -12,3 +14,9 @@ I need this code, but don't know where, perhaps should make some middleware, don
 
 Pull your server into this file and start it!
 */
+
+const port = 8500
+
+server.listen(port,() => {
+    console.log(`listening on port:${port}`)
+}) 
