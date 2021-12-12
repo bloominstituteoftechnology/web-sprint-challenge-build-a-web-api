@@ -40,19 +40,18 @@ router.post('/', (req, res) => {
     })
 })
 
-router.put('/:id', (req, res, next) => {
-    const {name, description, completed} = req.body
-    if(!name || !description || !completed){
-        res.status(400).json({message: 'update'})
+router.put('/:id', (req, res) => {
+    const {id} = req.params
+    if(!req.body.name || !req.body.description){
+        res.status(400).json({message: 'The project with the specified ID does not exist'})
     }else{
-        Projects.update(req.params.id, req.body)
-        .then(() => {
-            return Projects.get(req.params.id)
+        Projects.update(id, req.body)
+        .then(success => {
+            res.status(400).json(success)
         })
-        .then(project => {
-            res.json(project)
+        .catch(err => {
+            res.status(500).json({message: err.message})
         })
-        .catch(next)
     }
 })
 
