@@ -3,7 +3,7 @@ const Project = require('./projects-model')
 // 1
 async function theProjects(req, res, next) {
   try {
-    const project = await Project.get(req.params.id)
+    const project = await Project.get(req.params)
     if (!project) {
       return []
     } else {
@@ -34,7 +34,7 @@ async function validateProjectId(req, res, next) {
 // 3
 async function validateProject(req, res, next) {
   try {
-    const project = await Project.get(req.params.id)
+    const project = await Project.insert(req.params.id)
     const { name, description } = req.body;
     if (!name || !description) {
       res.status(400).json({
@@ -51,14 +51,14 @@ async function validateProject(req, res, next) {
 // 4
 async function updateProject(req, res, next) {
   try {
-    const project = await Project.update(req.params.id)
+    const project = await Project.update(req.params.id, req.params)
     const { name, description } = req.body;
     if (!project) {
       res.status(404).json({
         message: 'project not found'})
     } else if (!name || !description) {
       res.status(400).json({
-        message: 'missing required name field'})
+        message: 'missing required name or description field'})
     } else {
       req.project = project
       next()
