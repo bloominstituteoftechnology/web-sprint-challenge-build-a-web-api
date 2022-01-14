@@ -96,3 +96,12 @@ async function arrayOfActions(req, res, next) {
     next(err)
   }
 }
+
+module.exports = {
+  theProjects,
+  validateProjectId,
+  validateProject,
+  updateProject,
+  deleteProjects,
+  arrayOfActions
+}
