@@ -71,7 +71,7 @@ router.delete('/:id', (req, res) => {
         if (!id) {
           res.status(404).json({ message: 'you LIE!!'});
         } else {
-          res.status(200).json({ message: 'Terminated' });
+          res.status(200).json({ message: 'Terminated.' });
         }
     })
     .catch(error => {
