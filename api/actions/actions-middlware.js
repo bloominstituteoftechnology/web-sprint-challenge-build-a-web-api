@@ -1,87 +1,29 @@
-const Action = require('./actions-model')
-
-// 7
-async function theActions(req, res, next) {
+const Action = require('../actions/actions-model.js');
+const validateUserId = async (req, res, next) => {
   try {
-    const action = await Action.get(req.params)
-    return action;
-  } catch (err) {
-    next(err)
-  }
-}
-
-// 8
-async function validateActionId(req, res, next) {
-  try {
-    const action = await Action.get(req.params.id)
-    if (!action) {
-      res.status(404).json({
-        message: 'action not found'})
+    const { id } = req.params;
+    const user = await Action.get(id);
+    if (!user) { 
+      res.status(404).json({ message: `No one here with id: ${id}` }) 
     } else {
-      req.action = action
-      next()
+      req.user = user;
+        next();
     }
-  } catch (err) {
-    next(err)
   }
-}
-
-// 9
-async function validateAction(req, res, next) {
-  try {
-    const action = await Action.update(req.params.id, req.params)
-    const { project_id, description, notes } = req.body;
-    if (!action) {
-      res.status(404).json({
-        message: 'action not found'})
-    } else if (!project_id || !description || !notes) {
-      res.status(400).json({
-        message: 'missing required project_id, description or notes field'})
-    } else {
-      req.action = action
-      next()
-    }
-  } catch (err) {
-    next(err)
+  catch(error) {
+    res.status(500).json({ message: error.message });
   }
-}
+};
 
-// 10
-async function updateAction(req, res, next) {
-  try {
-    const action = await Action.update(req.params.id, req.params)
-    const { project_id, description, notes } = req.body;
-    if (!action) {
-      res.status(404).json({
-        message: 'action not found'})
-    } else if (!project_id || !description || !notes) {
-      res.status(400).json({
-        message: 'missing required project_id, description or notes field'})
-    } else {
-      req.action = action
-      next()
-    }
-  } catch (err) {
-    next(err)
-  }
-}
-
-async function deleteActions(req, res, next) {
-  try {
-    const action = await Action.remove(req.params.id)
-    if (!action) {
-      res.status(404).json({
-        message: 'action not found'})
-    } 
-  } catch (err) {
-    next(err)
+function validatePost(req, res, next) {
+  if (!req.body.text) {
+    res.status(400).json('Text is required');
+  } else {
+    next();
   }
 }
 
 module.exports = {
-  theActions,
-  validateActionId,
-  validateAction,
-  updateAction,
-  deleteActions
-}
+  validateUserId,
+  validatePost
+};

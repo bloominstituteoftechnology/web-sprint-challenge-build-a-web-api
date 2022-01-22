@@ -1,107 +1,40 @@
-const Project = require('./projects-model')
 
-// 1
-async function theProjects(req, res, next) {
-  try {
-    const project = await Project.get(req.params)
-    if (!project) {
-      return []
-    } else {
-      req.project = project
-      next()
-    }
-  } catch (err) {
-    next(err)
-  }
+const Project = require('./projects-model');
+
+async function validateId(req, res, next) {
+	try {
+		const { id } = req.params;
+		const project = await Project.get(id);
+		if (project) {
+			req.project = project;
+			next();
+		} else {
+			next({
+				status: 404,
+				message: 'yer trippin'
+			});
+		}
+	} catch (err) {
+		next(err);
+	}
 }
 
-//2
-async function validateProjectId(req, res, next) {
-  try {
-    const project = await Project.get(req.params.id)
-    if (!project) {
-      res.status(404).json({
-        message: 'project not found'})
-    } else {
-      req.project = project
-      next()
-    }
-  } catch (err) {
-    next(err)
-  }
-}
-
-// 3
 async function validateProject(req, res, next) {
-  try {
-    const project = await Project.insert(req.params.id)
-    const { name, description } = req.body;
-    if (!name || !description) {
-      res.status(400).json({
-        message: 'missing required name field'})
-    } else {
-      req.project = project
-      next()
-    }
-  } catch (err) {
-    next(err)
-  }
+	const { name, description, completed } = req.body;
+	if (!name || !name.trim()) {
+		res.status(400).json({
+			message: 'name is required'
+		});
+	} else if (!description || !description.trim()) {
+		res.status(400).json({
+			message: 'description is rewuared'
+		});
+	} else {
+		req.name = name.trim();
+		req.description = description.trim();
+		req.completed = completed;
+		next();
+	}
 }
 
-// 4
-async function updateProject(req, res, next) {
-  try {
-    const project = await Project.update(req.params.id, req.params)
-    const { name, description } = req.body;
-    if (!project) {
-      res.status(404).json({
-        message: 'project not found'})
-    } else if (!name || !description) {
-      res.status(400).json({
-        message: 'missing required name or description field'})
-    } else {
-      req.project = project
-      next()
-    }
-  } catch (err) {
-    next(err)
-  }
-}
-
-// 5
-async function deleteProjects(req, res, next) {
-  try {
-    const project = await Project.remove(req.params.id)
-    if (!project) {
-      res.status(404).json({
-        message: 'project not found'})
-    } 
-  } catch (err) {
-    next(err)
-  }
-}
-
-// 6
-async function arrayOfActions(req, res, next) {
-  try {
-    const project = await Project.getProjectActions(req.params.id)
-    if (!project) {
-      res.status(404).json({
-        message: 'project not found'})
-    } else {
-      req.project.actions = project
-      next()
-    }
-  } catch (err) {
-    next(err)
-  }
-}
-
-module.exports = {
-  theProjects,
-  validateProjectId,
-  validateProject,
-  updateProject,
-  deleteProjects,
-  arrayOfActions
-}
+module.exports = { validateId, validateProject };

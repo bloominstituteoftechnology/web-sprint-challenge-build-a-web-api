@@ -1,61 +1,82 @@
 const express = require('express');
-const {
-  theProjects,
-  validateProjectId,
-  validateProject,
-  updateProject,
-  deleteProjects,
-  arrayOfActions
-} = require('./projects-middleware');
-const Project = require('./projects-model');
-const Action = require('../actions/actions-model');
 const router = express.Router();
+const Project = require('./projects-model.js');
 
-router.get('/api/projects', theProjects,(req, res) => {
-  res.json(req.project)
-});
-
-router.get('/api/projects/:id', validateProjectId, (req, res, next) => {
-  Project.get()
-    .then(projects => {
-      res.json(projects)
+router.get('/', (req, res) => {
+  Project.get(req.params.id)
+    .then(project => {
+      res.status(200).json(project);
     })
-    .catch(next)
+    .catch(error => {
+      res.status(500).json({ message: error.message });
+    });
 });
 
-router.post('/api/projects', validateProject, (req, res, next) => {
-  Project.insert({ name: req.name, description: req.description })
-  .then()
-  .catch(next)
+router.get('/:id', (req, res) => {
+  const id = req.params.id;
+  Project.get(id)
+    .then(id => {
+      if (!id) {
+        res.status(404).json({ message: 'you lie!'});
+      } else {
+        res.status(200).json(id);
+      }
+    })
+    .catch(error => {
+      res.status(404).json(error);
+    });
 });
 
-router.put('/:id', updateProject, (req, res, next) => {
-  Project.update(req.params.id, { name: req.name, description: req.description })
-  .then(() => {
-    return Project.update(req.params.id)
-  })
-  .then(projects => {
-    res.json(projects)
-  })
-  .catch(next)
+router.get('/:id/actions', (req, res) => {
+  const { id } = req.params;
+  Project.getProjectActions(id)
+    .then(actions => {
+      res.status(200).json(actions);
+    })
+    .catch(error => {
+      res.status(500).json({ message: error.message });
+    });
 });
 
-router.delete('/:id', deleteProjects, async (req, res, next) => {
-  try {
-    await Project.remove(req.params.id)
-    res.json(res.project)
-  } catch (err) {
-    next(err)
-  }
+router.post('/', (req, res) => {
+  Project.insert(req.body)
+    .then(post => {
+      res.status(200).json(post);
+    })
+    .catch(error => {
+      res.status(400).json({ message: error.message });
+    });
 });
 
-router.get('/api/projects/:id/actions', arrayOfActions, async (req, res, next) => {
-  try {
-    const result = await Action.getProjectActions(req.params.id)
-    res.json(result)
-  } catch (err) {
-    next(err)
-  }
+router.put('/:id', (req, res) => {
+  const changes = req.body;
+  const { id } = req.params;
+  Project.update(id, changes)
+    .then((project) => {
+      if (!project.body.name || !project.body.description) {
+        return res.status(400).json({ message: 'sorry'});
+      } else {
+        res.status(200).json(project);
+      }
+    })
+    .catch(error => {
+      res.status(400).json({ message: error.message });
+    });
+});
+
+router.delete('/:id', (req, res) => {
+  const id = req.params.id;
+    Project.remove(id)
+      .then((id) => {
+        if (!id) {
+          res.status(404).json({ message: 'you LIE!!'});
+        } else {
+          res.status(200).json({ message: 'Terminated' });
+        }
+    })
+    .catch(error => {
+      res.status(404).json({ message: error.message });
+    });
 });
 
 module.exports = router;

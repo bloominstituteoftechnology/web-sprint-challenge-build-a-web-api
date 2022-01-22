@@ -1,50 +1,58 @@
 const express = require('express');
-const {
-  theActions,
-  validateActionId,
-  validateAction,
-  updateAction,
-  deleteActions
-} = require('./actions-model');
-const Action = require('./actions-model');
+const { validateUserId } = require('./actions-middlware.js');
 const router = express.Router();
+const Action = require('./actions-model.js');
 
-router.get('/api/actions', theActions, (req, res) => {
-  res.json(req.project)
-});
-
-router.get('/api/action/:id', validateActionId, (req, res, next) => {
-  Action.get()
+router.get('/', (req, res) => { 
+  Action.get(req.params.id)
     .then(actions => {
-      res.json(actions)
+      res.status(200).json(actions)
     })
-    .catch(next)
+    .catch(error => {
+      res.status(500).json({ message: error.message });
+    }); 
 });
 
-router.post('/api/actions', validateAction, (req, res, next) => {
-  Action.insert({ project_id: req.project_id, description: req.description, notes: req.notes })
-  .then()
-  .catch(next)
+router.get('/:id', validateUserId, (req, res) => {
+  Action.get(req.params.id)
+    .then(actionId => {
+      res.status(200).json(actionId);
+    })
+    .catch(() => {
+      res.status(404).json({ message: 'BEAT IT!' });
+    });
 });
 
-router.put('/:api/actions/:id', updateAction, (req, res, next) => {
-  Action.update(req.params.id, { project_id: req.project_id, description: req.description, notes: req.notes })
-  .then(() => {
-    return Action.update(req.params.id)
-  })
-  .then(actions => {
-    res.json(actions)
-  })
-  .catch(next)
+router.put('/:id', (req, res) => {
+  const changes = req.body;
+  const { id } = req.params;
+  Action.update(id, changes)
+    .then(project => {
+      res.status(201).json(project);
+    })
+    .catch(error => {
+      res.status(400).json({ message: error.message });
+    });
 });
 
-router.delete('/api/actions/:id', deleteActions, async (req, res, next) => {
-  try {
-    await Action.remove(req.params.id)
-    res.json(res.action)
-  } catch (err) {
-    next(err)
-  }
+router.post('/', (req, res) => {
+  Action.insert(req.body)
+    .then(post => {
+      res.status(201).json(post);
+    })
+    .catch(error => {
+      res.status(400).json({ message: error.message });
+    });
+});
+
+router.delete('/:id', (req, res) => {
+  Action.remove(req.params.id)
+    .then(() => {
+      res.status(200).json({ message: "It's over!" });
+    })
+    .catch(() => {
+      res.status(404).json({ message: 'nope' });
+    });
 });
 
 module.exports = router;
