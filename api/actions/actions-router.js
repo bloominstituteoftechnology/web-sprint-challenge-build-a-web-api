@@ -19,7 +19,7 @@ router.get('/:id', validateUserId, (req, res) => {
       res.status(200).json(actionId);
     })
     .catch(() => {
-      res.status(404).json({ message: 'BEAT IT!' });
+      res.status(404).json({ message: 'Beat It!' });
     });
 });
 
