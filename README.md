@@ -19,7 +19,7 @@ In meeting the minimum viable product (MVP) specifications listed below, your pr
 ### Task 1: Project Set Up
 
 - [ ] Run `npm install` to install your dependencies.
-- [ ] Initialize the database executing `npm run resetdb`.
+- [ ] Initialize the database of the project executing `npm run resetdb`.
 - [ ] Run tests locally executing `npm test`.
 
 ### Task 2: Project Requirements (MVP)
