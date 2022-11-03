@@ -16,7 +16,7 @@
 
 ### Introduction
 
-You will build an API that has Create, Read, Update and Delete (CRUD) functionality two resources called `projects` and `actions`.
+You will build an API that has Create, Read, Update and Delete (CRUD) functionality for two resources called `projects` and `actions`.
 
 ### Task 1: Build NPM Scripts
 
